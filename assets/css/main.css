@@ -473,7 +473,7 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 .place-row .num{font-size:1.9rem;color:var(--brass)}
 .light .place-row{border-color:var(--line-dark)}
 .light .place-row .num{color:var(--fir)}
-.light .photo-cap{color:rgba(244,244,242,.92)}
+.light .photo-cap{color:rgb(255 255 255);z-index:1}
 .svc-tag{color:var(--stone-2)}
 .cmp .win{color:var(--stone-2);font-weight:600;box-shadow:inset 2px 0 0 var(--brass)}
 .light .cmp .win{color:var(--ink);box-shadow:inset 2px 0 0 var(--fir)}
