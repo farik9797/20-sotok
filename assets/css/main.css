@@ -59,7 +59,7 @@ input,select,textarea{font:inherit;color:inherit}
 .num-md{font-size:clamp(2rem,3vw,3rem)}
 .h1{font-family:var(--font-display);font-weight:300;letter-spacing:-.03em;line-height:1.04;font-size:clamp(2.3rem,4.5vw,4.5rem);text-wrap:balance;margin:0}
 .h2{font-family:var(--font-display);font-weight:300;letter-spacing:-.025em;line-height:1.06;font-size:clamp(2rem,3.9vw,3.75rem);text-wrap:balance;margin:0}
-.h3{font-family:var(--font-display);font-weight:500;letter-spacing:-.015em;line-height:1.2;font-size:clamp(1.25rem,1.7vw,1.55rem);text-wrap:balance;margin:0}
+.h3{font-family:var(--font-display);font-weight:500;letter-spacing:0;line-height:1.2;font-size:clamp(1.25rem,1.7vw,1.55rem);text-wrap:balance;margin:0}
 .h4{font-family:var(--font-display);font-weight:500;line-height:1.25;font-size:1.1rem;margin:0}
 .lead{font-size:clamp(1.05rem,1.35vw,1.3rem);line-height:1.55;max-width:62ch}
 .prose{max-width:66ch}
@@ -377,3 +377,8 @@ blockquote footer{font-size:.85rem;color:var(--muted);margin-top:14px}
 .quiz .dl dt,.light .dl dt{color:var(--muted-dark)}
 .post-meta span{display:inline-flex;align-items:center;gap:6px}
 .post-meta .ic{width:15px;height:15px}
+
+/* ---------- полировка по чек-листу premium-web-design ---------- */
+.case,.eq,.svc{transition:transform .45s var(--ease),border-color .25s}
+.case:hover,.eq:hover,.svc:hover{transform:translateY(-3px)}
+@media(prefers-reduced-motion:reduce){.case:hover,.eq:hover,.svc:hover{transform:none}}

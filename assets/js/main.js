@@ -87,6 +87,22 @@
     input.isComplete = () => input.value.replace(/\D/g, '').length === 12;
   };
 
+  /* ---- первый экран: содержимое гаснет и уходит вверх по мере прокрутки ---- */
+  const heroBlock = document.querySelector('.hero, .hero-sub');
+  const heroInner = heroBlock && heroBlock.querySelector('.hero-inner');
+  if (heroInner && !reduce) {
+    let ticking = false;
+    const fade = () => {
+      ticking = false;
+      const range = heroBlock.offsetHeight * 0.7 || 1;
+      const p = Math.min(1, Math.max(0, window.scrollY / range));
+      heroInner.style.opacity = String(1 - p);
+      heroInner.style.transform = p ? 'translateY(' + (-48 * p).toFixed(1) + 'px)' : '';
+    };
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(fade); } }, { passive: true });
+    fade();
+  }
+
   /* ---- появление блоков (GSAP + ScrollTrigger) ---- */
   if (!reduce && window.gsap && window.ScrollTrigger) {
     gsap.registerPlugin(ScrollTrigger);
