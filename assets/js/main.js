@@ -104,6 +104,41 @@
     fade();
   }
 
+
+  /* ---- кнопка «наверх» ---- */
+  const toTop = document.createElement('button');
+  toTop.type = 'button'; toTop.className = 'to-top'; toTop.setAttribute('aria-label', 'Наверх');
+  toTop.innerHTML = '<svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg>';
+  document.body.appendChild(toTop);
+  const onTop = () => toTop.classList.toggle('is-visible', window.scrollY > 600);
+  onTop();
+  window.addEventListener('scroll', onTop, { passive: true });
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
+
+  /* ---- фирменный курсор: латунная точка и кольцо, только для мыши ---- */
+  if (window.matchMedia('(pointer: fine)').matches && !reduce && window.gsap) {
+    const html = document.documentElement;
+    html.classList.add('has-cursor');
+    const dot = document.createElement('div'); dot.className = 'cursor-dot';
+    const ring = document.createElement('div'); ring.className = 'cursor-ring';
+    const label = document.createElement('span'); label.className = 'cursor-label'; ring.appendChild(label);
+    document.body.append(dot, ring);
+    const xD = gsap.quickTo(dot, 'x', { duration: 0.08, ease: 'power3' }), yD = gsap.quickTo(dot, 'y', { duration: 0.08, ease: 'power3' });
+    const xR = gsap.quickTo(ring, 'x', { duration: 0.32, ease: 'power3' }), yR = gsap.quickTo(ring, 'y', { duration: 0.32, ease: 'power3' });
+    window.addEventListener('pointermove', (e) => { xD(e.clientX); yD(e.clientY); xR(e.clientX); yR(e.clientY); html.classList.add('cursor-visible'); }, { passive: true });
+    document.addEventListener('mouseleave', () => html.classList.remove('cursor-visible'));
+    document.addEventListener('mouseover', (e) => {
+      const t = e.target.closest('[data-cursor-label]');
+      const i = e.target.closest('a,button,label,[role=button],input[type=range],.opt');
+      const txt = e.target.closest('input:not([type=range]),textarea,select');
+      ring.classList.toggle('is-label', !!t); label.textContent = t ? t.dataset.cursorLabel : '';
+      ring.classList.toggle('is-active', !!i && !t);
+      html.classList.toggle('cursor-text', !!txt);
+    });
+    document.addEventListener('pointerdown', () => ring.classList.add('is-down'));
+    document.addEventListener('pointerup', () => ring.classList.remove('is-down'));
+  }
+
   /* ---- появление блоков (GSAP + ScrollTrigger) ---- */
   if (!reduce && window.gsap && window.ScrollTrigger) {
     gsap.registerPlugin(ScrollTrigger);
@@ -119,6 +154,31 @@
         y: 34, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.1,
         scrollTrigger: { trigger: el, start: 'top 86%', once: true }
       });
+    });
+    // прогресс прокрутки — тонкая латунная линия сверху
+    const bar = document.createElement('div'); bar.className = 'scroll-progress'; document.body.appendChild(bar);
+    gsap.to(bar, { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.3 } });
+    // параллакс фотографий
+    document.querySelectorAll('[data-parallax]').forEach((el) => {
+      const s = parseFloat(el.dataset.parallax) || 7;
+      gsap.fromTo(el, { yPercent: -s }, { yPercent: s, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+    // крупные номера секций слегка «въезжают» слева
+    document.querySelectorAll('.section-index .num').forEach((el) => {
+      gsap.fromTo(el, { x: -28, opacity: 0.25 }, { x: 0, opacity: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 55%', scrub: 0.5 } });
+    });
+    // счётчики цифр (только целые числа без диапазонов)
+    document.querySelectorAll('.spec-val, .stat .num').forEach((el) => {
+      const node = Array.from(el.childNodes).find((n) => n.nodeType === 3 && /\d/.test(n.nodeValue));
+      const m = node && node.nodeValue.match(/^(\s*)(\d+)(?![\d,.\u2013-])(.*)$/);
+      if (!m) return;
+      const obj = { v: 0 };
+      gsap.to(obj, { v: +m[2], duration: 1.4, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true }, onUpdate() { node.nodeValue = m[1] + Math.round(obj.v) + m[3]; } });
+    });
+    // линия шагов «прорисовывается» по мере прокрутки
+    document.querySelectorAll('.steps').forEach((wrap) => {
+      const line = wrap.querySelector('.step-line');
+      if (line) gsap.fromTo(line, { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: wrap, start: 'top 75%', end: 'bottom 60%', scrub: 0.4 } });
     });
   }
 })();
