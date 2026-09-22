@@ -7,3 +7,6 @@ password.md
 
 # playwright mcp output
 .playwright-mcp/
+
+# React-версия сайта живёт в отдельном репозитории
+app/

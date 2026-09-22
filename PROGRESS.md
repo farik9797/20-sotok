@@ -3,7 +3,9 @@
 > Рабочая память между сессиями. Читать в начале сессии, обновлять по ходу.
 
 ## Статус
-Готов первый статический макет сайта по брифу (7 страниц). Проверен в браузере на 1440px и 375px. Ожидает обратной связи заказчика.
+Две версии сайта:
+1. Статический макет (корень репозитория `20-sotok`, GitHub Pages) — согласован, дополнен реальными контактами, фото руководителя и видео.
+2. React-версия по ТЗ в папке `app/` (отдельный репозиторий `20sotok`, свой GitHub Pages) — рабочий сайт: роутинг на 7 страниц, квиз, инфографика, реальные фото объектов со старого сайта.
 
 ## Что сделано
 - Дизайн-система по брифу (стиль SEED Studio): фон `#2A2F35`, светлые секции `#EAE6DF`/`#F4F4F2`, акценты `#2B4236` (хвойный) и `#B8860B` (латунь). Шрифты Manrope (дисплейный, тонкие крупные номера блоков) + Golos Text (текст), оба с кириллицей.
@@ -14,12 +16,21 @@
 - Анимации: GSAP + ScrollTrigger (появление блоков, оркестровка первого экрана), `prefers-reduced-motion` учтён.
 
 ## Ссылки
+- React-версия: репозиторий https://github.com/farik9797/20sotok, сайт https://farik9797.github.io/20sotok/ (деплой через GitHub Actions при push в `main`), локально `cd app && npm run dev` → http://localhost:5173/20sotok/
 - Репозиторий: https://github.com/farik9797/20-sotok (ветка `main`)
 - Сайт (GitHub Pages с корня `main`): https://farik9797.github.io/20-sotok/
 - Артефакт Claude (приватный): https://claude.ai/artifact/C86nFxBV29QAv6BmqJHRFN
 - Деплой: любой push в `main` пересобирает Pages автоматически.
 
-## Стек и структура
+## React-версия (app/)
+- Vite 8 + React 19 + TypeScript 6, Tailwind CSS 4, shadcn/ui (dialog, sheet, button), Magic UI marquee, Motion 13, react-router 8. Папка `app/` исключена из родительского git через `.gitignore`, у неё свой репозиторий.
+- Контент: `app/src/data/content.ts` (тексты из ТЗ + факты со старого сайта: 300+ дворов, форматы плитки с ценами, контакты), `app/src/data/infographics.ts` (SVG-схемы).
+- Страницы: `/`, `/uslugi/:slug` (plitka, gazon, poliv, drenazh), `/proekty`, `/blog`, 404. SPA-роутинг на Pages через копию `dist/404.html`.
+- Фирменный интерактив: «лазерный нивелир» в первом экране (`LaserLevel.tsx`), на тач-устройствах автоскан, при reduced-motion выключен.
+- Медиа: фото объектов и логотип со старого сайта (логотип перекрашен под палитру: `logo-cream.svg`, `logo-dark.svg`), видео и постер из статического макета, портрет руководителя.
+- Проверки: `npm run lint` (oxlint), `npm run build`; визуально проверено в Playwright и встроенном браузере на 1440 и 390 px.
+
+## Стек и структура (статический макет)
 - HTML + Tailwind (Play CDN) + `assets/css/main.css` (токены и компоненты) + `assets/js/main.js` (навигация, reveal, маска телефона, слайдер до/после, фильтр кейсов).
 - Локальный просмотр: `.claude/launch.json` → конфиг `site` (python http.server, порт 8020) или просто `python3 -m http.server 8020`.
 - Итоговые HTML — источник правды. Генератор страниц (Python, header/footer/quiz общие) лежал в scratchpad сессии; при правках редактировать HTML напрямую.
