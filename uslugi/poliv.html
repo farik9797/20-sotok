@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Автоматический полив Hunter / Rain Bird в Минске — проект без слепых зон | «20 соток»</title>
+<meta name="description" content="Проектирование и монтаж автополива Hunter и Rain Bird без слепых зон. Датчики погоды, управление со смартфона, ландшафтное освещение в одной траншее.">
+<meta name="theme-color" content="#2A2F35">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&family=Golos+Text:wght@400;500;600&display=swap">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{ink:{DEFAULT:'#2A2F35',2:'#23272C',3:'#343A41'},stone:{DEFAULT:'#EAE6DF',2:'#F4F4F2'},fir:{DEFAULT:'#2B4236',2:'#365243'},brass:{DEFAULT:'#B8860B',2:'#CFA02A'}},fontFamily:{display:['Manrope','system-ui','sans-serif'],body:['"Golos Text"','system-ui','sans-serif']}}}}</script>
+<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body class="grain">
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-arrow-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 19l-7-7l7-7m7 7H5"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"/></symbol><symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h10v10M7 17L17 7"/></symbol><symbol id="i-badge-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77a4 4 0 0 1 6.74 0a4 4 0 0 1 4.78 4.78a4 4 0 0 1 0 6.74a4 4 0 0 1-4.77 4.78a4 4 0 0 1-6.75 0a4 4 0 0 1-4.78-4.77a4 4 0 0 1 0-6.76"/><path d="m16 9l-5.5 5.5L8 12"/></g></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M8 2v3m8-3v3"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/></g></symbol><symbol id="i-camera" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/><circle cx="12" cy="13" r="3"/></g></symbol><symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6"/></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18l6-6l-6-6"/></symbol><symbol id="i-circle-dot" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="12" r="10"/></g></symbol><symbol id="i-clipboard-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14l2 2l4-4"/></g></symbol><symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></g></symbol><symbol id="i-cloud-rain" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242M16 14v6m-8-6v6m4-4v6"/></symbol><symbol id="i-droplets" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 16.3c2.2 0 4-1.83 4-4.05c0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05"/><path d="M12.56 6.6A11 11 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></g></symbol><symbol id="i-eye-off" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575a1 1 0 0 1 0 .696a10.8 10.8 0 0 1-1.444 2.49m-6.41-.679a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151a1 1 0 0 1 0-.696a10.75 10.75 0 0 1 4.446-5.143M2 2l20 20"/></g></symbol><symbol id="i-file-check-2" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"/><path d="M14 2v4a2 2 0 0 0 2 2h4M3 15l2 2l4-4"/></g></symbol><symbol id="i-file-pen-line" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14.364 13.634a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506l4.013-4.009a1 1 0 0 0-3.004-3.004zm.123-5.776A1 1 0 0 1 14 7V2"/><path d="M20 19.645V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l2.516 2.516M8 18h1"/></g></symbol><symbol id="i-hammer" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m15 12l-9.373 9.373a1 1 0 0 1-3.001-3L12 9m6 6l4-4"/><path d="m21.5 11.5l-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"/></g></symbol><symbol id="i-layers" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></g></symbol><symbol id="i-layout-grid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></g></symbol><symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></g></symbol><symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m22 7l-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect width="20" height="16" x="2" y="4" rx="2"/></g></symbol><symbol id="i-map" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0zm.894.211v15M9 3.236v15"/></symbol><symbol id="i-map-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></g></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5h16M4 12h16M4 19h16"/></symbol><symbol id="i-mouse-pointer-click" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 4.1L12 6M5.1 8l-2.9-.8M6 12l-1.9 2M7.2 2.2L8 5.1m1.037 4.59a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233a14 14 0 0 0 6.392 6.384"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></symbol><symbol id="i-quote" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2a1 1 0 0 1 1 1v1a2 2 0 0 1-2 2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1a6 6 0 0 0 6-6V5a2 2 0 0 0-2-2zM5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2a1 1 0 0 1 1 1v1a2 2 0 0 1-2 2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1a6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></symbol><symbol id="i-ruler" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Zm-6.8-2.8l2-2m-5-1l2-2m-5-1l2-2m7 11l2-2"/></symbol><symbol id="i-scan-line" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7V5a2 2 0 0 1 2-2h2m10 0h2a2 2 0 0 1 2 2v2m0 10v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2m4-5h10"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11zm7.318-19.539l-10.94 10.939"/></symbol><symbol id="i-shield-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12l2 2l4-4"/></g></symbol><symbol id="i-shovel" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21.56 4.56a1.5 1.5 0 0 1 0 2.122l-.47.47a3 3 0 0 1-4.212-.03a3 3 0 0 1 0-4.243l.44-.44a1.5 1.5 0 0 1 2.121 0zM3 22a1 1 0 0 1-1-1v-3.586a1 1 0 0 1 .293-.707l3.355-3.355a1.205 1.205 0 0 1 1.704 0l3.296 3.296a1.205 1.205 0 0 1 0 1.704l-3.355 3.355a1 1 0 0 1-.707.293zm6-7l7.879-7.878"/></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></g></symbol><symbol id="i-sprout" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4a4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3M4 9a5 5 0 0 1 8 4a5 5 0 0 1-8-4m1 12h14"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></g></symbol><symbol id="i-thermometer-sun" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v2m0 4a4 4 0 0 0-1.645 7.647M2 12h2m16 2.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0zM4.93 4.93l1.41 1.41m0 11.32l-1.41 1.41"/></symbol><symbol id="i-timer" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10 2h4m-2 12l3-3"/><circle cx="12" cy="14" r="8"/></g></symbol><symbol id="i-video" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m16 13l5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect width="14" height="12" x="2" y="6" rx="2"/></g></symbol><symbol id="i-waves" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2c2.5 0 2.5-2 5-2c1.3 0 1.9.5 2.5 1M2 12c.6.5 1.2 1 2.5 1c2.5 0 2.5-2 5-2c2.6 0 2.4 2 5 2c2.5 0 2.5-2 5-2c1.3 0 1.9.5 2.5 1M2 18c.6.5 1.2 1 2.5 1c2.5 0 2.5-2 5-2c2.6 0 2.4 2 5 2c2.5 0 2.5-2 5-2c1.3 0 1.9.5 2.5 1"/></symbol><symbol id="i-wrench" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></symbol><symbol id="i-si-telegram" viewBox="0 0 24 24"><path fill="currentColor" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></symbol><symbol id="i-si-viber" viewBox="0 0 24 24"><path fill="currentColor" d="M11.4 0C9.473.028 5.333.344 3.02 2.467 1.302 4.187.696 6.7.633 9.817.57 12.933.488 18.776 6.12 20.36h.003l-.004 2.416s-.037.977.61 1.177c.777.242 1.234-.5 1.98-1.302.407-.44.972-1.084 1.397-1.58 3.85.326 6.812-.416 7.15-.525.776-.252 5.176-.816 5.892-6.657.74-6.02-.36-9.83-2.34-11.546-.596-.55-3.006-2.3-8.375-2.323 0 0-.395-.025-1.037-.017zm.058 1.693c.545-.004.88.017.88.017 4.542.02 6.717 1.388 7.222 1.846 1.675 1.435 2.53 4.868 1.906 9.897v.002c-.604 4.878-4.174 5.184-4.832 5.395-.28.09-2.882.737-6.153.524 0 0-2.436 2.94-3.197 3.704-.12.12-.26.167-.352.144-.13-.033-.166-.188-.165-.414l.02-4.018c-4.762-1.32-4.485-6.292-4.43-8.895.054-2.604.543-4.738 1.996-6.173 1.96-1.773 5.474-2.018 7.11-2.03zm.38 2.602c-.167 0-.303.135-.304.302 0 .167.133.303.3.305 1.624.01 2.946.537 4.028 1.592 1.073 1.046 1.62 2.468 1.633 4.334.002.167.14.3.307.3.166-.002.3-.138.3-.304-.014-1.984-.618-3.596-1.816-4.764-1.19-1.16-2.692-1.753-4.447-1.765zm-3.96.695c-.19-.032-.4.005-.616.117l-.01.002c-.43.247-.816.562-1.146.932-.002.004-.006.004-.008.008-.267.323-.42.638-.46.948-.008.046-.01.093-.007.14 0 .136.022.27.065.4l.013.01c.135.48.473 1.276 1.205 2.604.42.768.903 1.5 1.446 2.186.27.344.56.673.87.984l.132.132c.31.308.64.6.984.87.686.543 1.418 1.027 2.186 1.447 1.328.733 2.126 1.07 2.604 1.206l.01.014c.13.042.265.064.402.063.046.002.092 0 .138-.008.31-.036.627-.19.948-.46.004 0 .003-.002.008-.005.37-.33.683-.72.93-1.148l.003-.01c.225-.432.15-.842-.18-1.12-.004 0-.698-.58-1.037-.83-.36-.255-.73-.492-1.113-.71-.51-.285-1.032-.106-1.248.174l-.447.564c-.23.283-.657.246-.657.246-3.12-.796-3.955-3.955-3.955-3.955s-.037-.426.248-.656l.563-.448c.277-.215.456-.737.17-1.248-.217-.383-.454-.756-.71-1.115-.25-.34-.826-1.033-.83-1.035-.137-.165-.31-.265-.502-.297zm4.49.88c-.158.002-.29.124-.3.282-.01.167.115.312.282.324 1.16.085 2.017.466 2.645 1.15.63.688.93 1.524.906 2.57-.002.168.13.306.3.31.166.003.305-.13.31-.297.025-1.175-.334-2.193-1.067-2.994-.74-.81-1.777-1.253-3.05-1.346h-.024zm.463 1.63c-.16.002-.29.127-.3.287-.008.167.12.31.288.32.523.028.875.175 1.113.422.24.245.388.62.416 1.164.01.167.15.295.318.287.167-.008.295-.15.287-.317-.03-.644-.215-1.178-.58-1.557-.367-.378-.893-.574-1.52-.607h-.018z"/></symbol><symbol id="i-si-instagram" viewBox="0 0 24 24"><path fill="currentColor" d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></symbol></svg>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="../index.html" class="logo" aria-label="20 соток — на главную">
+      <span class="logo-mark" aria-hidden="true"></span>
+      <span class="logo-text"><span class="logo-num">20 соток</span><span class="logo-word">инженерное благоустройство</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Основная навигация">
+      <a href="../index.html#uslugi" class="is-active">Услуги</a>
+      <a href="../proekty.html">Проекты</a>
+      <a href="../blog.html">Полезно знать</a>
+      <a href="../index.html#o-kompanii">О компании</a>
+      <a href="../index.html#kontakty">Контакты</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:+375290000000" class="nav-phone">+375 (29) 000-00-00</a>
+      <button type="button" class="btn btn-brass" data-quiz-open>Рассчитать бюджет</button>
+    </div>
+    <button type="button" class="nav-burger" data-menu-open aria-label="Открыть меню" aria-expanded="false"><svg class="ic " aria-hidden="true"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+<div class="mobile-menu" aria-hidden="true">
+  <div class="flex items-center justify-between" style="height:84px">
+    <a href="../index.html" class="logo"><span class="logo-mark" aria-hidden="true"></span><span class="logo-text"><span class="logo-num">20 соток</span><span class="logo-word">инженерное благоустройство</span></span></a>
+    <button type="button" class="nav-burger" data-menu-close aria-label="Закрыть меню"><svg class="ic " aria-hidden="true"><use href="#i-x"/></svg></button>
+  </div>
+  <nav class="flex flex-col mt-6" aria-label="Мобильная навигация">
+    <a class="big" href="../index.html#uslugi">Услуги</a>
+    <a class="big" href="../proekty.html">Проекты</a>
+    <a class="big" href="../blog.html">Полезно знать</a>
+    <a class="big" href="../index.html#o-kompanii">О компании</a>
+    <a class="big" href="../index.html#kontakty">Контакты</a>
+  </nav>
+  <div class="mt-auto pt-8 grid gap-4">
+    <a href="tel:+375290000000" class="nav-phone" style="font-size:1.4rem">+375 (29) 000-00-00</a>
+    <div class="flex gap-3 flex-wrap">
+      <a class="msg-btn" href="https://t.me/20sotok_by" target="_blank" rel="noopener"><svg class="ic " aria-hidden="true"><use href="#i-si-telegram"/></svg> Telegram</a>
+      <a class="msg-btn" href="viber://chat?number=%2B375290000000"><svg class="ic " aria-hidden="true"><use href="#i-si-viber"/></svg> Viber</a>
+    </div>
+    <button type="button" class="btn btn-brass btn-lg" data-quiz-open>Рассчитать бюджет проекта <svg class="ic " aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+  </div>
+</div>
+
+<section class="hero-sub">
+  <div class="hero-media"><img src="../assets/img/svc-irrigation.jpg" alt="" aria-hidden="true"></div>
+  <div class="hero-shade"></div>
+  <div class="wrap hero-inner">
+    <div class="eyebrow mb-6" data-hero-seq>Услуга 03 · Полив · Свет</div>
+    <h1 class="h1 lg:max-w-[20ch]" data-hero-seq>Автоматический полив и ландшафтное освещение</h1>
+    <div class="grid gap-8 lg:grid-cols-12 mt-10 items-end">
+      <p class="lead muted lg:col-span-7" data-hero-seq>Проектируем зоны полива без слепых пятен, ставим оборудование Hunter и Rain Bird с датчиками погоды и управлением со смартфона. Освещение прокладываем в той же траншее — одной командой.</p>
+      <div class="lg:col-span-5 flex flex-wrap gap-3 lg:justify-end" data-hero-seq>
+        <a href="#raschet" class="btn btn-brass btn-lg w-full sm:w-auto">Рассчитать бюджет за 1 минуту <svg class="ic " aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        <a href="../proekty.html" class="btn btn-ghost btn-lg w-full sm:w-auto">Проекты</a>
+      </div>
+    </div>
+    <div class="spec-strip mt-12" data-hero-seq><div class="spec"><div class="spec-val">0</div><div class="spec-lbl">слепых зон: перекрытие head-to-head в каждом проекте</div></div><div class="spec"><div class="spec-val">100 <b>%</b></div><div class="spec-lbl">управление со смартфона: Hunter Hydrawise / Rain Bird LNK</div></div><div class="spec"><div class="spec-val">−30 <b>%</b></div><div class="spec-lbl">воды за сезон при работе датчика погоды</div></div><div class="spec"><div class="spec-val">12 <b>В</b></div><div class="spec-lbl">безопасное ландшафтное освещение в одной траншее с поливом</div></div></div>
+  </div>
+</section>
+
+<section class="section" id="sostav">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div><div class="section-index"><span class="num">01</span><span class="eyebrow">Что входит</span></div><h2 class="h2">Полив, который не нужно включать, и свет, который не нужно выключать</h2></div>
+      <p class="lead muted">Система должна быть автономной: контроллер знает погоду, вы видите всё в приложении, а сервис перед зимой — по календарю.</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 hairline-b" data-reveal="stagger"><div class="incl"><div class="num">01</div><div><h3 class="h4">Проект зон полива</h3><p>Гидравлический расчёт, подбор форсунок, перекрытие head-to-head. План согласуем до начала работ.</p></div></div><div class="incl"><div class="num">02</div><div><h3 class="h4">Оборудование Hunter / Rain Bird</h3><p>Роторы PGP и MP Rotator для газона, капельные линии для изгородей и цветников, электромагнитные клапаны в боксах.</p></div></div><div class="incl"><div class="num">03</div><div><h3 class="h4">Контроллер с Wi-Fi и датчик погоды</h3><p>Hunter Hydrawise или Rain Bird LNK: график корректируется по прогнозу, управление — со смартфона из любой точки.</p></div></div><div class="incl"><div class="num">04</div><div><h3 class="h4">Монтаж до газона и мощения</h3><p>Гильзы под дорожками и парковкой, трассы на глубине 30–40 см. Все работы — до укладки рулона.</p></div></div><div class="incl"><div class="num">05</div><div><h3 class="h4">Ландшафтное освещение 12 В</h3><p>Подсветка дорожек, деревьев, фасада. Низковольтная система, трансформатор, астрономический таймер.</p></div></div><div class="incl"><div class="num">06</div><div><h3 class="h4">Пусконаладка и зимняя консервация</h3><p>Настройка каждой зоны, обучение в приложении, продувка компрессором перед зимой.</p></div></div></div>
+  </div>
+</section>
+
+<section class="section sheet" id="inzheneriya">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div><div class="section-index"><span class="num">02</span><span class="eyebrow">Инженерия</span></div><h2 class="h2">Проектирование без слепых зон: как это выглядит на плане</h2></div>
+      <p class="lead muted">Дождеватель, поставленный «на глаз», поливает круг вокруг себя. Всё, что между кругами, сохнет. В проекте радиус каждой форсунки достигает соседней.</p>
+    </div>
+    <div class="grid gap-8 lg:grid-cols-12 items-start" data-reveal>
+      <div class="lg:col-span-8 infog-frame infog-scroll"><svg class="infog" viewBox="0 0 900 400" role="img" aria-label="План полива: расстановка на глаз со слепой зоной и проект с перекрытием head-to-head"><defs>
+<pattern id="p-plate" width="34" height="44" patternUnits="userSpaceOnUse"><rect width="34" height="44" fill="#EAE6DF"/><rect x="32" width="2" height="44" fill="rgba(42,47,53,.28)"/></pattern>
+<pattern id="p-gravel" width="16" height="14" patternUnits="userSpaceOnUse"><rect width="16" height="14" fill="rgba(244,244,242,.07)"/><circle cx="4" cy="4" r="2.4" fill="rgba(244,244,242,.32)"/><circle cx="12" cy="10" r="1.8" fill="rgba(244,244,242,.24)"/></pattern>
+<pattern id="p-sand" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="rgba(244,244,242,.05)"/><circle cx="2" cy="2" r=".9" fill="rgba(244,244,242,.35)"/><circle cx="6" cy="6" r=".9" fill="rgba(244,244,242,.25)"/></pattern>
+<pattern id="p-soil" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="12" fill="rgba(35,39,44,.8)"/><rect width="1" height="12" fill="rgba(244,244,242,.16)"/></pattern>
+<pattern id="p-turf" width="6" height="22" patternUnits="userSpaceOnUse"><rect width="6" height="22" fill="#2B4236"/><rect x="2.5" y="7" width="1" height="15" fill="rgba(244,244,242,.22)"/></pattern>
+<pattern id="p-topsoil" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="rgba(184,134,11,.16)"/><circle cx="3" cy="3" r="1" fill="rgba(184,134,11,.5)"/><circle cx="8" cy="7" r=".8" fill="rgba(184,134,11,.4)"/></pattern>
+<pattern id="p-mesh" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="none"/><rect width="6" height="1" fill="#CFA02A"/><rect width="1" height="6" fill="#CFA02A"/></pattern>
+<pattern id="p-blind" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="rgba(184,134,11,.08)"/><rect width="2" height="10" fill="rgba(184,134,11,.5)"/></pattern>
+<clipPath id="cpA"><rect x="40" y="96" width="380" height="260"/></clipPath><clipPath id="cpB"><rect x="480" y="96" width="380" height="260"/></clipPath></defs><text x="40" y="52" class="cap">«На глаз» — 4 дождевателя по углам</text><text x="40" y="74" class="lbl-s">радиус не достаёт до центра: слепая зона, ручной полив из шланга</text><rect x="40" y="96" width="380" height="260" fill="url(#p-blind)" stroke="rgba(244,244,242,.4)"/><circle cx="40" cy="96" r="170" fill="rgba(43,66,54,.62)" stroke="rgba(244,244,242,.38)" clip-path="url(#cpA)"/><circle cx="420" cy="96" r="170" fill="rgba(43,66,54,.62)" stroke="rgba(244,244,242,.38)" clip-path="url(#cpA)"/><circle cx="40" cy="356" r="170" fill="rgba(43,66,54,.62)" stroke="rgba(244,244,242,.38)" clip-path="url(#cpA)"/><circle cx="420" cy="356" r="170" fill="rgba(43,66,54,.62)" stroke="rgba(244,244,242,.38)" clip-path="url(#cpA)"/><circle cx="40" cy="96" r="6" fill="#CFA02A" stroke="#2A2F35" stroke-width="2"/><circle cx="420" cy="96" r="6" fill="#CFA02A" stroke="#2A2F35" stroke-width="2"/><circle cx="40" cy="356" r="6" fill="#CFA02A" stroke="#2A2F35" stroke-width="2"/><circle cx="420" cy="356" r="6" fill="#CFA02A" stroke="#2A2F35" stroke-width="2"/><text x="230" y="222" class="lbl t-brass" text-anchor="middle">слепая зона</text><text x="230" y="240" class="lbl-s" text-anchor="middle">≈ 20 % газона без воды</text><text x="40" y="382" class="lbl-s">план газона 19 × 13 м</text><text x="480" y="52" class="cap">Проект «20 соток» — перекрытие head-to-head</text><text x="480" y="74" class="lbl-s">радиус каждой форсунки достигает соседней: 100 % покрытия, роторы Hunter PGP / MP Rotator</text><rect x="480" y="96" width="380" height="260" fill="rgba(244,244,242,.04)" stroke="rgba(244,244,242,.4)"/><circle cx="480" cy="96" r="200" fill="rgba(43,66,54,.55)" stroke="rgba(244,244,242,.38)" clip-path="url(#cpB)"/><circle cx="670" cy="96" r="200" fill="rgba(43,66,54,.55)" stroke="rgba(244,244,242,.38)" clip-path="url(#cpB)"/><circle cx="860" cy="96" r="200" fill="rgba(43,66,54,.55)" stroke="rgba(244,244,242,.38)" clip-path="url(#cpB)"/><circle cx="480" cy="356" r="200" fill="rgba(43,66,54,.55)" stroke="rgba(244,244,242,.38)" clip-path="url(#cpB)"/><circle cx="670" cy="356" r="200" fill="rgba(43,66,54,.55)" stroke="rgba(244,244,242,.38)" clip-path="url(#cpB)"/><circle cx="860" cy="356" r="200" fill="rgba(43,66,54,.55)" stroke="rgba(244,244,242,.38)" clip-path="url(#cpB)"/><circle cx="480" cy="96" r="6" fill="#CFA02A" stroke="#2A2F35" stroke-width="2"/><circle cx="670" cy="96" r="6" fill="#CFA02A" stroke="#2A2F35" stroke-width="2"/><circle cx="860" cy="96" r="6" fill="#CFA02A" stroke="#2A2F35" stroke-width="2"/><circle cx="480" cy="356" r="6" fill="#CFA02A" stroke="#2A2F35" stroke-width="2"/><circle cx="670" cy="356" r="6" fill="#CFA02A" stroke="#2A2F35" stroke-width="2"/><circle cx="860" cy="356" r="6" fill="#CFA02A" stroke="#2A2F35" stroke-width="2"/><line x1="486" y1="96" x2="664" y2="96" stroke="#CFA02A" stroke-dasharray="4 4"/><text x="575" y="88" class="lbl-s t-brass" text-anchor="middle">шаг = радиус</text><text x="670" y="230" class="lbl" text-anchor="middle">0 слепых зон</text><text x="670" y="248" class="lbl-s" text-anchor="middle">6 роторов · 2 зоны · датчик погоды</text><text x="480" y="382" class="lbl-s">план газона 19 × 13 м</text></svg></div>
+      <ul class="lg:col-span-4 legend lg:pl-4"><li><span class="badge-num">1</span><span>Латунная точка — дождеватель (ротор или спрей). Зелёная область — зона орошения, штриховка — слепая зона.</span></li><li><span class="badge-num">2</span><span>Перекрытие head-to-head: шаг между дождевателями равен радиусу, поэтому каждая точка газона получает воду минимум от двух форсунок.</span></li><li><span class="badge-num">3</span><span>Разные зоны — разное давление и время: газон, изгороди и цветники поливаются по своим программам.</span></li><li><span class="badge-num">4</span><span>Датчик погоды и контроллер с Wi-Fi корректируют график по прогнозу и отменяют полив в дождь.</span></li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="section light" id="expert">
+  <div class="wrap">
+    <div class="grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <div class="section-index"><span class="num">03</span><span class="eyebrow">Экспертный блок</span></div>
+        <h2 class="h2">Hunter и Rain Bird: чем отличаются системы и почему датчик погоды обязателен</h2>
+        <p class="mt-6 text-[.85rem]" style="color:var(--muted-dark)"><svg class="ic " aria-hidden="true"><use href="#i-file-pen-line"/></svg> Блок редактируется в админке сайта: статьи, фото, схемы дополняются по мере накопления кейсов.</p>
+        <div class="photo mt-8" style="aspect-ratio:4/3"><img src="../assets/img/lighting.jpg" alt="Ландшафтное освещение дома и сада вечером" loading="lazy"><div class="photo-cap"><span>Полив и освещение · Колодищи</span></div></div>
+      </div>
+      <div class="lg:col-span-7 lg:pl-8 prose" style="font-size:1.05rem" data-reveal><p>Мы работаем с двумя производителями — Hunter и Rain Bird. Оба — американские, оба десятилетиями стоят на гольф-полях и частных участках, и по надёжности между ними нет разницы, которая имела бы значение для заказчика. Разница — в экосистеме управления и в том, что удобнее конкретно вам.</p>
+<p><b>Hunter Hydrawise</b> — контроллер с Wi-Fi и приложением, которое показывает каждую зону, историю поливов и прогноз. Расход воды виден по дням. <b>Rain Bird LNK WiFi</b> — похожая логика, чуть проще интерфейс, отлично интегрируется с роторами Rain Bird серии 5000.</p>
+<p><b>Датчик погоды — не опция.</b> Без него контроллер поливает по расписанию: и в дождь, и в жару одинаково. Датчик дождя и температуры отменяет полив, когда вода не нужна, и добавляет циклы в засуху. По нашим объектам это экономит около трети воды за сезон и, главное, не заливает газон.</p>
+<p><b>Управление со смартфона</b> — это не про «поиграть с приложением». Это уведомление о разрыве трубы, возможность отложить полив на время вечеринки и доступ к системе для нашего сервисного инженера без вашего присутствия.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section sheet">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div><div class="section-index"><span class="num">04</span><span class="eyebrow">Оборудование</span></div><h2 class="h2">Что стоит на объекте</h2></div>
+      <p class="lead muted">Только оригинальные компоненты с гарантией производителя. Никаких «аналогов» в скрытых частях системы.</p>
+    </div>
+    <div data-reveal><div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4"><div class="eq"><svg class="ic ic-lg ic-brass" aria-hidden="true"><use href="#i-circle-dot"/></svg><h3 class="h4 mt-5">Роторы Hunter PGP / MP Rotator</h3><p>Для газона: равномерная струя, регулируемый сектор и радиус, стойкость к песку.</p></div><div class="eq"><svg class="ic ic-lg ic-brass" aria-hidden="true"><use href="#i-droplets"/></svg><h3 class="h4 mt-5">Капельные линии</h3><p>Для живых изгородей, цветников и деревьев: вода к корням, без переувлажнения листвы.</p></div><div class="eq"><svg class="ic ic-lg ic-brass" aria-hidden="true"><use href="#i-smartphone"/></svg><h3 class="h4 mt-5">Контроллер с Wi-Fi</h3><p>Hunter Hydrawise / Rain Bird LNK: приложение, история, уведомления, доступ для сервиса.</p></div><div class="eq"><svg class="ic ic-lg ic-brass" aria-hidden="true"><use href="#i-thermometer-sun"/></svg><h3 class="h4 mt-5">Датчик погоды</h3><p>Отмена полива в дождь и при заморозках, корректировка по температуре и прогнозу.</p></div></div></div>
+  </div>
+</section>
+
+<section class="section sheet" id="raschet">
+  <div class="wrap">
+    <div class="grid gap-12 lg:grid-cols-12 items-start">
+      <div class="lg:col-span-4" data-reveal>
+        <div class="lg:sticky lg:top-28">
+          <div class="section-index"><span class="num">05</span><span class="eyebrow">Расчёт</span></div>
+          <h2 class="h2">Предварительный бюджет — за 1 минуту</h2>
+          <p class="muted mt-6">Три вопроса. Ответ — цифры и примеры похожих объектов в Telegram или Viber. Выезд инженера на участок платный, стоимость засчитывается в смету.</p>
+        </div>
+      </div>
+      <div class="lg:col-span-8" data-reveal><div class="quiz quiz-mount" data-preselect="irrigation"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="proekty">
+  <div class="wrap">
+    <div class="section-head wide" data-reveal>
+      <div><div class="section-index"><span class="num">06</span><span class="eyebrow">Проекты</span></div><h2 class="h2">Объекты, где мы делали полив</h2></div>
+      <div class="lg:justify-self-end"><a class="btn btn-ghost" href="../proekty.html">Все инженерные кейсы <svg class="ic " aria-hidden="true"><use href="#i-arrow-right"/></svg></a></div>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5" data-reveal="stagger">
+<a class="case" href="../proekty.html#tarasovo-12" data-tags="paving lawn irrigation drainage">
+  <div class="photo"><img src="../assets/img/case-1.jpg" alt="Парковка на три автомобиля и участок под ключ — Тарасово" loading="lazy"><div class="photo-cap"><span>Тарасово</span><span>2025</span></div></div>
+  <div class="case-body">
+    <div class="case-meta"><span><svg class="ic " aria-hidden="true"><use href="#i-map-pin"/></svg>Тарасово</span><span><svg class="ic " aria-hidden="true"><use href="#i-layout-grid"/></svg>12 соток</span><span><svg class="ic " aria-hidden="true"><use href="#i-calendar"/></svg>2025</span></div>
+    <h3 class="h3 mt-3">Парковка на три автомобиля и участок под ключ</h3>
+    <div class="tags"><span class="tag">Мощение</span><span class="tag">Газон</span><span class="tag">Полив</span><span class="tag">Дренаж</span></div>
+  </div>
+</a>
+<a class="case" href="../proekty.html#kolodishchi-9" data-tags="lawn irrigation lighting">
+  <div class="photo"><img src="../assets/img/case-2.jpg" alt="Газон, полив и освещение вокруг террасы — Колодищи" loading="lazy"><div class="photo-cap"><span>Колодищи</span><span>2024</span></div></div>
+  <div class="case-body">
+    <div class="case-meta"><span><svg class="ic " aria-hidden="true"><use href="#i-map-pin"/></svg>Колодищи</span><span><svg class="ic " aria-hidden="true"><use href="#i-layout-grid"/></svg>9 соток</span><span><svg class="ic " aria-hidden="true"><use href="#i-calendar"/></svg>2024</span></div>
+    <h3 class="h3 mt-3">Газон, полив и освещение вокруг террасы</h3>
+    <div class="tags"><span class="tag">Газон</span><span class="tag">Полив</span><span class="tag">Освещение</span></div>
+  </div>
+</a>
+<a class="case" href="../proekty.html#maryalivo-22" data-tags="paving lawn irrigation drainage lighting">
+  <div class="photo"><img src="../assets/img/case-5.jpg" alt="Комплексное благоустройство большого участка — Марьяливо" loading="lazy"><div class="photo-cap"><span>Марьяливо</span><span>2023</span></div></div>
+  <div class="case-body">
+    <div class="case-meta"><span><svg class="ic " aria-hidden="true"><use href="#i-map-pin"/></svg>Марьяливо</span><span><svg class="ic " aria-hidden="true"><use href="#i-layout-grid"/></svg>22 сотки</span><span><svg class="ic " aria-hidden="true"><use href="#i-calendar"/></svg>2023</span></div>
+    <h3 class="h3 mt-3">Комплексное благоустройство большого участка</h3>
+    <div class="tags"><span class="tag">Мощение</span><span class="tag">Газон</span><span class="tag">Полив</span><span class="tag">Дренаж</span><span class="tag">Освещение</span></div>
+  </div>
+</a></div>
+  </div>
+</section>
+
+<footer class="footer" id="kontakty">
+  <div class="wrap section-tight">
+    <div class="grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <a href="../index.html" class="logo"><span class="logo-mark" aria-hidden="true"></span><span class="logo-text"><span class="logo-num">20 соток</span><span class="logo-word">инженерное благоустройство</span></span></a>
+        <p class="muted mt-6 text-[.95rem]" style="max-width:38ch">Студия инженерного благоустройства. Комплексное благоустройство придомовых территорий, ландшафтная инженерия и дорожное строительство премиум-класса.</p>
+        <p class="muted mt-4 text-[.9rem] flex items-start gap-2"><svg class="ic " aria-hidden="true"><use href="#i-map-pin"/></svg><span>Минск и Минский район: Тарасово, Колодищи, Раубичи, Валерьяново, Марьяливо</span></p>
+      </div>
+      <div class="lg:col-span-2">
+        <h5>Услуги</h5>
+        <ul>
+          <li><a href="../uslugi/plitka.html">Тротуарная плитка и мощение</a></li>
+          <li><a href="../uslugi/gazon.html">Премиальные газоны</a></li>
+          <li><a href="../uslugi/poliv.html">Автополив и освещение</a></li>
+          <li><a href="../uslugi/drenazh.html">Дренаж и ливнёвка</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <h5>Компания</h5>
+        <ul>
+          <li><a href="../proekty.html">Наши проекты</a></li>
+          <li><a href="../blog.html">Полезно знать</a></li>
+          <li><a href="../index.html#o-kompanii">Руководитель</a></li>
+          <li><a href="https://instagram.com/20sotok.by" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-4">
+        <h5>Связаться</h5>
+        <a href="tel:+375290000000" class="font-display text-2xl font-light tracking-tight">+375 (29) 000-00-00</a>
+        <p class="muted mt-2 text-[.9rem]">Ежедневно 9:00–20:00 · <a href="mailto:info@20sotok.by" class="underline decoration-brass/60 underline-offset-4">info@20sotok.by</a></p>
+        <div class="flex gap-3 flex-wrap mt-6">
+          <a class="msg-btn" href="https://t.me/20sotok_by" target="_blank" rel="noopener"><svg class="ic " aria-hidden="true"><use href="#i-si-telegram"/></svg> Написать в Telegram</a>
+          <a class="msg-btn" href="viber://chat?number=%2B375290000000"><svg class="ic " aria-hidden="true"><use href="#i-si-viber"/></svg> Написать в Viber</a>
+        </div>
+        <p class="muted mt-6 text-[.9rem]">Выезд инженера на объект — платная консультация. При заключении договора её стоимость засчитывается в итоговую смету.</p>
+      </div>
+    </div>
+    <div class="hairline mt-14 pt-8 flex flex-wrap gap-x-10 gap-y-3 justify-between legal">
+      <div>ИП Денисов Евгений Игоревич · УНП 193435021<br>Офис: г. Минск, ул. Примерная, 1, оф. 1 <span class="opacity-60">(адрес уточняется)</span></div>
+      <div>© 2026 Студия инженерного благоустройства «20 соток» · <a href="#" class="underline underline-offset-4">Политика конфиденциальности</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="quiz-modal" role="dialog" aria-modal="true" aria-label="Калькулятор бюджета проекта">
+  <div class="quiz-modal-bg" data-quiz-close></div>
+  <div class="quiz-modal-panel"><div class="quiz quiz-mount" data-preselect="irrigation"></div></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/quiz.js"></script>
+</body>
+</html>
