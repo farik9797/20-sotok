@@ -432,7 +432,7 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 .mobile-menu{overflow-y:auto}
 @media(max-width:1023px){.nav-inner{gap:12px}}
 @media(max-width:479px){.logo-word{display:none}.logo-mark{width:30px;height:30px}.logo{gap:10px}}
-.fir-plate{padding:clamp(22px,2.6vw,34px)}
+.fir-plate{background:var(--fir);padding:clamp(22px,2.6vw,34px);border:1px solid rgba(244,244,242,.1)}
 .fir-plate .lead{color:var(--stone-2);max-width:none}
 .svc-fir{background:var(--fir);border-color:rgba(244,244,242,.12)}
 .svc-fir .svc-body p,.svc-fir .svc-body .num{color:var(--stone)}
