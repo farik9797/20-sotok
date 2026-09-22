@@ -13,6 +13,12 @@
 - Иконки: Lucide + Simple Icons, инлайн-спрайт в каждой странице (не рисованы вручную).
 - Анимации: GSAP + ScrollTrigger (появление блоков, оркестровка первого экрана), `prefers-reduced-motion` учтён.
 
+## Ссылки
+- Репозиторий: https://github.com/farik9797/20-sotok (ветка `main`)
+- Сайт (GitHub Pages с корня `main`): https://farik9797.github.io/20-sotok/
+- Артефакт Claude (приватный): https://claude.ai/artifact/C86nFxBV29QAv6BmqJHRFN
+- Деплой: любой push в `main` пересобирает Pages автоматически.
+
 ## Стек и структура
 - HTML + Tailwind (Play CDN) + `assets/css/main.css` (токены и компоненты) + `assets/js/main.js` (навигация, reveal, маска телефона, слайдер до/после, фильтр кейсов).
 - Локальный просмотр: `.claude/launch.json` → конфиг `site` (python http.server, порт 8020) или просто `python3 -m http.server 8020`.
