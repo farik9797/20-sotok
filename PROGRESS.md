@@ -25,7 +25,8 @@
 ## React-версия (app/)
 - Vite 8 + React 19 + TypeScript 6, Tailwind CSS 4, shadcn/ui (dialog, sheet, button), Magic UI marquee, Motion 13, react-router 8. Папка `app/` исключена из родительского git через `.gitignore`, у неё свой репозиторий.
 - Контент: `app/src/data/content.ts` (тексты из ТЗ + факты со старого сайта: 300+ дворов, форматы плитки с ценами, контакты), `app/src/data/infographics.ts` (SVG-схемы).
-- Страницы: `/`, `/uslugi/:slug` (plitka, gazon, poliv, drenazh), `/proekty`, `/blog`, 404. SPA-роутинг на Pages через копию `dist/404.html`.
+- Страницы: `/`, `/uslugi/:slug` (plitka, gazon, poliv, drenazh), `/proekty`, `/blog`, 404. Все маршруты пререндерятся при сборке (`src/entry-server.tsx` + `scripts/prerender.mjs`): готовый HTML с title/description/OG/canonical на каждой странице, клиент гидрирует (`hydrateRoot`). Неизвестные адреса — `dist/404.html` как SPA-оболочка.
+- Reveal-анимации: до конца гидратации класс `html.prerender` держит блоки видимыми (CSS), затем снимается из `PrerenderGate` в Layout.
 - Фирменный интерактив: «лазерный нивелир» в первом экране (`LaserLevel.tsx`), на тач-устройствах автоскан, при reduced-motion выключен.
 - Медиа: фото объектов и логотип со старого сайта (логотип перекрашен под палитру: `logo-cream.svg`, `logo-dark.svg`), видео и постер из статического макета, портрет руководителя.
 - Проверки: `npm run lint` (oxlint), `npm run build`; визуально проверено в Playwright и встроенном браузере на 1440 и 390 px.
@@ -45,6 +46,7 @@
 ## Следующие шаги
 - Показать макет заказчику, собрать правки по структуре и тону.
 - Страница отдельного кейса и страница статьи (сейчас только списки).
+- В React-версии: подключить квиз к CRM/Telegram-боту, при появлении username Telegram заменить ссылку по номеру.
 - Подключение квиза к CRM/Telegram-боту, Instagram-виджет, форма согласия на обработку ПД.
 - Перевод в WordPress/ACF по плейбуку `~/.claude/playbooks/wordpress-acf.md` после согласования.
 
