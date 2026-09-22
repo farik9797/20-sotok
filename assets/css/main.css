@@ -123,7 +123,7 @@ input,select,textarea{font:inherit;color:inherit}
 .hero-media{position:absolute;inset:0;z-index:-2}
 .hero-media video,.hero-media img{width:100%;height:100%;object-fit:cover;filter:brightness(.82) saturate(.9)}
 .hero-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(42,47,53,.5) 0%,rgba(42,47,53,.3) 35%,rgba(42,47,53,.8) 75%,var(--ink) 100%)}
-.hero-shade::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(42,47,53,.9) 0%,rgba(42,47,53,.62) 45%,rgba(42,47,53,0) 78%)}
+.hero-shade::after{content:"";position:absolute;inset:0}
 .kenburns{animation:kenburns 22s var(--ease) infinite alternate;transform-origin:60% 40%}
 @keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.07)}}
 .hero-inner{padding-top:120px;padding-bottom:clamp(32px,4vw,56px)}
