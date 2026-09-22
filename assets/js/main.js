@@ -38,7 +38,8 @@
     document.body.classList.remove('modal-open');
   };
   document.querySelectorAll('[data-quiz-open]').forEach((b) => b.addEventListener('click', openQuiz));
-  modal && modal.querySelectorAll('[data-quiz-close]').forEach((b) => b.addEventListener('click', closeQuiz));
+  // кнопка закрытия появляется после монтирования квиза, поэтому слушаем клики на всей модалке
+  modal && modal.addEventListener('click', (e) => { if (e.target.closest('[data-quiz-close]')) closeQuiz(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeQuiz(); setMenu(false); } });
 
   /* ---- слайдер «до/после» ---- */

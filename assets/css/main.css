@@ -61,7 +61,7 @@ input,select,textarea{font:inherit;color:inherit}
 .h2{font-family:var(--font-display);font-weight:300;letter-spacing:-.025em;line-height:1.06;font-size:clamp(2rem,3.9vw,3.75rem);text-wrap:balance;margin:0}
 .h3{font-family:var(--font-display);font-weight:500;letter-spacing:0;line-height:1.2;font-size:clamp(1.25rem,1.7vw,1.55rem);text-wrap:balance;margin:0}
 .h4{font-family:var(--font-display);font-weight:500;line-height:1.25;font-size:1.1rem;margin:0}
-.lead{font-size:clamp(1.05rem,1.35vw,1.3rem);line-height:1.55;max-width:62ch}
+.lead{font-size:clamp(1.05rem,1.35vw,1.3rem);line-height:1.55;max-width:50ch}
 .prose{max-width:66ch}
 .prose p{margin:0 0 1.1em}
 .prose p:last-child{margin-bottom:0}
@@ -199,7 +199,7 @@ input,select,textarea{font:inherit;color:inherit}
 .footer ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:.95rem}
 .footer li a{color:rgba(244,244,242,.8);transition:color .2s}
 .footer li a:hover{color:var(--stone-2)}
-.msg-btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 18px;border:1px solid var(--line);border-radius:2px;font-weight:500;font-size:.92rem;transition:border-color .2s,background-color .2s}
+.msg-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 18px;border:1px solid var(--line);border-radius:2px;font-weight:500;font-size:.92rem;transition:border-color .2s,background-color .2s}
 .msg-btn:hover{border-color:rgba(244,244,242,.5);background:rgba(244,244,242,.04)}
 .msg-btn .ic{width:20px;height:20px}
 .legal{font-size:.8rem;color:var(--muted);line-height:1.6}
