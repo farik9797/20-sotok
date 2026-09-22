@@ -15,7 +15,7 @@
   --line:rgba(244,244,242,.14);
   --line-faint:rgba(244,244,242,.045);
   --line-dark:rgba(42,47,53,.16);
-  --muted:rgba(244,244,242,.62);
+  --muted:#E4E1DA;
   --muted-dark:rgba(42,47,53,.64);
   --btn-ink:#1B1F24;
   --font-display:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -148,7 +148,7 @@ input,select,textarea{font:inherit;color:inherit}
 /* ---------- карточки преимуществ ---------- */
 .feature{padding:34px 28px 38px;border-top:1px solid var(--line);position:relative;transition:background-color .3s var(--ease)}
 .feature:hover{background:rgba(244,244,242,.03)}
-.feature .num{font-size:2.6rem;color:var(--muted);margin-bottom:38px}
+.feature .num{font-size:2.6rem;color:var(--brass);margin-bottom:38px}
 .feature .h3{margin:18px 0 12px}
 .feature p{margin:0;color:var(--muted);font-size:.98rem}
 @media(min-width:768px){.feature{border-left:1px solid var(--line)}.feature:first-child{border-left:0}}
@@ -179,7 +179,7 @@ input,select,textarea{font:inherit;color:inherit}
 
 /* ---------- шаги ---------- */
 .step{display:grid;grid-template-columns:72px 1fr;gap:24px;padding:30px 0;border-top:1px solid var(--line)}
-.step .num{font-size:2.6rem;color:var(--muted)}
+.step .num{font-size:2.6rem;color:var(--brass)}
 .step p{margin:8px 0 0;color:var(--muted);font-size:.98rem;max-width:60ch}
 .step-note{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font-size:.85rem;color:var(--brass)}
 
@@ -201,7 +201,7 @@ input,select,textarea{font:inherit;color:inherit}
 .footer li a:hover{color:var(--stone-2)}
 .msg-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 18px;border:1px solid var(--line);border-radius:2px;font-weight:500;font-size:.92rem;transition:border-color .2s,background-color .2s}
 .msg-btn:hover{border-color:rgba(244,244,242,.5);background:rgba(244,244,242,.04)}
-.msg-btn .ic{width:20px;height:20px}
+.msg-btn .ic{width:20px;height:20px;color:var(--brass)}
 .legal{font-size:.8rem;color:var(--muted);line-height:1.6}
 
 /* ---------- квиз ---------- */
@@ -342,7 +342,7 @@ blockquote footer{font-size:.85rem;color:var(--muted);margin-top:14px}
 .light .infog .t-brass{fill:var(--brass)}
 .badge-num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--brass);color:var(--btn-ink);font-size:12px;font-weight:600;flex:none}
 .incl{padding:26px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:56px 1fr;gap:16px}
-.incl .num{font-size:1.9rem;color:var(--muted)}
+.incl .num{font-size:1.9rem;color:var(--brass)}
 .incl p{margin:6px 0 0;color:var(--muted);font-size:.95rem}
 .eq{border:1px solid var(--line);padding:26px 24px 28px;transition:border-color .25s}
 .eq:hover{border-color:rgba(244,244,242,.4)}
@@ -419,3 +419,25 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 .to-top:hover{background:var(--brass);border-color:var(--brass);color:var(--btn-ink)}
 .to-top .ic{width:20px;height:20px;rotate:180deg}
 @media(max-width:767px){.to-top{width:46px;height:46px}}
+
+/* ---------- правки 22.09: мобильная шапка, хвойные акценты ---------- */
+.nav-mobile{display:flex;align-items:center;gap:6px}
+@media(min-width:1024px){.nav .nav-mobile{display:none}}
+.nav-icon{display:inline-grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:2px;color:var(--brass);transition:border-color .2s,background-color .2s,color .2s}
+.nav-icon .ic{width:19px;height:19px}
+.nav-icon:hover{border-color:var(--brass)}
+.nav-icon-call{background:var(--brass);border-color:var(--brass);color:var(--btn-ink)}
+.nav-icon-call:hover{background:var(--brass-2)}
+.nav-mobile .nav-burger{width:42px;height:42px}
+.mobile-menu{overflow-y:auto}
+@media(max-width:1023px){.nav-inner{gap:12px}}
+@media(max-width:479px){.logo-word{display:none}.logo-mark{width:30px;height:30px}.logo{gap:10px}}
+.fir-plate{background:var(--fir);padding:clamp(22px,2.6vw,34px);border:1px solid rgba(244,244,242,.1)}
+.fir-plate .lead{color:var(--stone-2);max-width:none}
+.svc-fir{background:var(--fir);border-color:rgba(244,244,242,.12)}
+.svc-fir .svc-body p,.svc-fir .svc-body .num{color:var(--stone)}
+.svc-fir .svc-tag{background:rgba(43,66,54,.8)}
+.cta-fir{background:var(--fir);color:var(--stone-2)}
+.cta-fir .cta-band{background:none;border-color:rgba(244,244,242,.2)}
+.cta-fir .muted{color:var(--stone)}
+.mobile-menu{padding-top:0}
