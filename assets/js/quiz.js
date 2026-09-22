@@ -91,6 +91,8 @@
   function mount(root, idx) {
     const id = 'q' + idx;
     root.innerHTML = template(id, root.dataset.preselect);
+    // крестик закрытия нужен только в модальном окне, во встроенном блоке его убираем
+    if (!root.closest('.quiz-modal')) root.querySelector('.quiz-close').remove();
     const form = root.querySelector('form');
     const steps = Array.from(root.querySelectorAll('.quiz-step'));
     const bar = root.querySelector('[data-bar]');
