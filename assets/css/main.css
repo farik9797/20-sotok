@@ -16,7 +16,7 @@
   --line-faint:rgba(244,244,242,.045);
   --line-dark:rgba(42,47,53,.16);
   --muted:#E4E1DA;
-  --muted-dark:rgba(42,47,53,.64);
+  --muted-dark:rgba(42,47,53,.8);
   --btn-ink:#1B1F24;
   --font-display:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
   --font-body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -449,3 +449,31 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
   .svc-body > div:nth-child(2){grid-column:1 / -1;grid-row:2}
   .svc-body p{max-width:none}
 }
+
+/* ---------- контраст и ритм в духе SEED (WCAG AA) ---------- */
+/* рубрики: текст читаемого цвета, латунь — только тонкая линия */
+.eyebrow{font-size:12px;font-weight:600;color:var(--stone)}
+.eyebrow::before{background:var(--brass);opacity:1}
+.light .eyebrow,.quiz .eyebrow{color:var(--fir)}
+.cta-fir .eyebrow{color:var(--stone)}
+.monogram{font-size:2.6rem;color:var(--brass)}
+.light .monogram{color:var(--fir)}
+/* второй светлый тон: чередование #F4F4F2 / #EAE6DF, как белый / тонированный у SEED */
+.light-2{background:var(--stone-2)}
+.light .svc{background:var(--stone);border-color:var(--line-dark);color:var(--ink)}
+.light .svc-body p{color:var(--muted-dark)}
+.light .svc-body .num{color:var(--muted-dark)}
+.light .svc-arrow{border-color:var(--line-dark)}
+.light .svc-fir{background:var(--fir);border-color:var(--fir);color:var(--stone-2)}
+.light .svc-fir .svc-body p,.light .svc-fir .svc-body .num{color:var(--stone)}
+.light .svc-fir .svc-arrow{border-color:rgba(244,244,242,.28)}
+.light .incl .num{color:var(--fir)}
+.light .incl p{color:var(--muted-dark)}
+.place-row{display:grid;grid-template-columns:56px 1fr;gap:16px;align-items:baseline;padding:24px 0;border-top:1px solid var(--line)}
+.place-row .num{font-size:1.9rem;color:var(--brass)}
+.light .place-row{border-color:var(--line-dark)}
+.light .place-row .num{color:var(--fir)}
+.light .photo-cap{color:rgba(244,244,242,.92)}
+.svc-tag{color:var(--stone-2)}
+.cmp .win{color:var(--stone-2);font-weight:600;box-shadow:inset 2px 0 0 var(--brass)}
+.light .cmp .win{color:var(--ink);box-shadow:inset 2px 0 0 var(--fir)}
