@@ -26,7 +26,7 @@
 
 ## Заглушки, которые нужно заменить на данные заказчика
 - Телефон `+375 (29) 000-00-00`, ссылки Telegram `t.me/20sotok_by`, Viber, Instagram `instagram.com/20sotok.by`, email `info@20sotok.by`, адрес офиса — в шапке, мобильном меню и футере всех страниц.
-- Видео-фон первого экрана: положить `assets/video/hero.mp4` (сейчас постер `assets/img/hero.jpg`).
+- Видео-фон первого экрана: реальный ролик из Google Flow (Veo), `assets/video/hero.mp4` (10 с, 1080p, 5 МБ), постер `assets/img/hero.jpg` — кадр из него. Исходник 12 МБ лежал в ~/Downloads/hero.mp4.
 - Все фото в `assets/img/` — стоковые плейсхолдеры (Unsplash/loremflickr); по брифу нужны реальные фото объектов.
 - Фото руководителя (блок 04 главной) — реальное, `assets/img/director.webp` (студийный портрет 2:3 от заказчика).
 - Кейсы на `proekty.html` и статьи в `blog.html` — примерное наполнение.
