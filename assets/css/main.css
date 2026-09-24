@@ -620,3 +620,8 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
   .hero .lead{font-size:1rem}
   .hero-inner{padding-top:104px;padding-bottom:28px}
 }
+/* подвал на телефоне: логотип крупнее и по центру */
+@media(max-width:767px){
+  .footer .logo{display:flex;justify-content:center;width:100%}
+  .footer .logo-full{height:46px}
+}
