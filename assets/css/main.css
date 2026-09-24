@@ -614,3 +614,9 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 .btn-ghost-dark:hover{border-color:rgba(42,47,53,.55);background:rgba(42,47,53,.04)}
 [data-theme="light"] .btn-ghost-dark{background:var(--fir);border-color:var(--fir);color:#fff}
 [data-theme="light"] .btn-ghost-dark:hover{background:var(--fir-2);border-color:var(--fir-2)}
+/* первый экран главной на телефоне: заголовок компактнее, чтобы экран не был перегружен */
+@media(max-width:767px){
+  .hero .h1{font-size:clamp(1.95rem,7.4vw,2.6rem)}
+  .hero .lead{font-size:1rem}
+  .hero-inner{padding-top:104px;padding-bottom:28px}
+}
