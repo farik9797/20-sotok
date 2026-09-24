@@ -594,3 +594,18 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
     }
   }
 }
+
+/* светлая тема: латунь на кнопках темнее, чтобы белый текст проходил по контрасту */
+[data-theme="light"]{--brass-btn:#976E09;--brass-btn-2:#7E5C07}
+@supports (color: color(display-p3 1 1 1)){
+  @media (color-gamut: p3){
+    [data-theme="light"]{
+      --brass-btn:color(display-p3 .5829 .4317 .0356);
+      --brass-btn-2:color(display-p3 .4865 .3611 .0277);
+    }
+  }
+}
+[data-theme="light"] .btn-brass{background:var(--brass-btn)}
+[data-theme="light"] .btn-brass:hover{background:var(--brass-btn-2)}
+[data-theme="light"] .nav-icon-call{background:var(--brass-btn);border-color:var(--brass-btn)}
+[data-theme="light"] .nav-icon-call:hover{background:var(--brass-btn-2);border-color:var(--brass-btn-2)}
