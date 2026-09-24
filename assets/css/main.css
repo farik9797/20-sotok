@@ -548,7 +548,7 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 [data-theme="light"] .theme-toggle .ic-moon{display:block}
 [data-theme="light"] .theme-toggle{border-color:var(--line-dark);color:var(--fir)}
 [data-theme="light"] .theme-toggle:hover{border-color:var(--fir)}
-.nav-cta .theme-toggle{width:44px;height:44px}
+.nav-cta .theme-toggle{width:52px;height:52px}
 /* латунь на светлом фоне не дотягивает до нормы — крупные цифры делаем хвойными */
 .light .feature .num,.light .step .num,
 [data-theme="light"] .feature .num,[data-theme="light"] .step .num{color:var(--fir)}
