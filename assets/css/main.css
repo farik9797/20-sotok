@@ -575,3 +575,11 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 [data-theme="light"] .quiz-close:hover{background:var(--fir-2)}
 /* на первом экране и хвойных плашках прозрачные кнопки остаются прозрачными */
 [data-theme="light"] .hero .btn-ghost,[data-theme="light"] .hero-sub .btn-ghost,[data-theme="light"] .cta-fir .btn-ghost{background:none;border-color:rgb(255 255 255)}
+
+/* мобильное меню: спокойнее и просторнее */
+.mobile-menu a.big{font-size:clamp(1.6rem,6.4vw,2.6rem);font-weight:300;padding-block:18px}
+.mobile-menu .btn-brass{background:none;border:1px solid var(--brass);color:var(--stone-2);min-height:52px;padding-inline:1.6em;font-size:.98rem}
+.mobile-menu .btn-brass:hover{background:rgba(184,134,11,.14);border-color:var(--brass-2)}
+.mobile-menu .btn-brass .ic{color:var(--brass)}
+[data-theme="light"] .mobile-menu .btn-brass{background:var(--fir);border-color:var(--fir);color:#fff}
+[data-theme="light"] .mobile-menu .btn-brass .ic{color:#fff}
