@@ -638,7 +638,6 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
   .hero-main .eyebrow{margin-bottom:0}
   .hero-main .h1{margin:0}
   .hero-main > .grid{margin-top:0;gap:clamp(16px,2.6vh,26px)}
-  .hero .spec-strip{margin-top:0}
 }
 /* шапка на телефоне: надпись «20 соток» возвращается, кнопки чуть компактнее */
 @media(max-width:559px){
@@ -647,3 +646,9 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
   .nav-mobile{gap:5px}
   .nav-mobile .nav-icon,.nav-mobile .nav-burger{width:38px;height:38px}
 }
+
+/* показатели отдельным блоком под первым экраном */
+.specs{padding-block:clamp(26px,3.4vw,44px)}
+.specs .spec-strip{border-top:0}
+.specs .spec{border-bottom:1px solid var(--line)}
+@media(min-width:768px){.specs .spec{border-bottom:0}}
