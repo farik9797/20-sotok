@@ -554,7 +554,7 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 [data-theme="light"] .feature .num,[data-theme="light"] .step .num{color:var(--fir)}
 [data-theme="light"] .hero .step .num,[data-theme="light"] .cta-fir .step .num{color:var(--brass)}
 /* на узких экранах в шапке остаётся только знак — иначе надпись налезает на кнопки */
-@media(max-width:559px){
+@media(max-width:379px){
   .nav .logo-full,.mobile-menu .logo-full{display:none}
   .nav .logo,.mobile-menu .logo{width:32px;height:32px;background:url(../logo/logo-mark.svg) center/contain no-repeat}
 }
@@ -628,4 +628,22 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
   .footer .grid > div:first-child p{margin-inline:auto}
   .footer .grid > div:first-child p.flex{display:block}
   .footer .grid > div:first-child p.flex .ic{display:inline-block;vertical-align:-4px;margin-right:6px}
+}
+
+/* первый экран главной на телефоне: ровно высота экрана, показатели уходят под фолд */
+@media(max-width:767px){
+  .hero{min-height:100svh;justify-content:flex-start}
+  .hero-inner{padding-top:0;padding-bottom:32px}
+  .hero-main{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;gap:clamp(18px,3.2vh,30px);padding:96px 0 40px}
+  .hero-main .eyebrow{margin-bottom:0}
+  .hero-main .h1{margin:0}
+  .hero-main > .grid{margin-top:0;gap:clamp(16px,2.6vh,26px)}
+  .hero .spec-strip{margin-top:0}
+}
+/* шапка на телефоне: надпись «20 соток» возвращается, кнопки чуть компактнее */
+@media(max-width:559px){
+  .nav .logo-full,.mobile-menu .logo-full{height:26px}
+  .nav .logo,.mobile-menu .logo{gap:8px}
+  .nav-mobile{gap:5px}
+  .nav-mobile .nav-icon,.nav-mobile .nav-burger{width:38px;height:38px}
 }
