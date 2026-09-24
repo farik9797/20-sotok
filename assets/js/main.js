@@ -2,6 +2,29 @@
 (function () {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---- переключатель темы: тёмная по умолчанию, выбор запоминается ---- */
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  const applyTheme = (t) => {
+    const light = t === 'light';
+    document.documentElement.toggleAttribute('data-theme', false);
+    if (light) document.documentElement.setAttribute('data-theme', 'light');
+    else document.documentElement.removeAttribute('data-theme');
+    if (themeMeta) themeMeta.setAttribute('content', light ? '#F4F4F2' : '#2A2F35');
+    document.querySelectorAll('[data-theme-toggle]').forEach((b) => {
+      b.setAttribute('aria-pressed', String(light));
+      b.setAttribute('aria-label', light ? 'Включить тёмную тему' : 'Включить светлую тему');
+    });
+  };
+  let savedTheme = null;
+  try { savedTheme = localStorage.getItem('theme'); } catch (e) {}
+  applyTheme(savedTheme === 'light' ? 'light' : 'dark');
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('[data-theme-toggle]')) return;
+    const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    try { localStorage.setItem('theme', next); } catch (err) {}
+  });
+
   /* ---- навигация: фон при скролле ---- */
   const nav = document.querySelector('.nav');
   const onScroll = () => nav && nav.classList.toggle('is-scrolled', window.scrollY > 40);
