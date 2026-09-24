@@ -97,24 +97,26 @@ input,select,textarea{font:inherit;color:inherit}
 .nav{position:fixed;inset-inline:0;top:0;z-index:50;transition:background-color .35s var(--ease),border-color .35s var(--ease),backdrop-filter .35s}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:84px}
 .nav.is-scrolled{background:rgba(42,47,53,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.nav-links{display:none;gap:36px;font-size:.92rem;font-weight:500}
+.nav-links{display:none;gap:clamp(20px,1.9vw,36px);font-size:.92rem;font-weight:500}
 .nav-links a{position:relative;padding-block:6px;white-space:nowrap;color:rgba(244,244,242,.78);transition:color .2s}
 .nav-links a:hover,.nav-links a.is-active{color:var(--stone-2)}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--brass);transition:width .25s var(--ease)}
 .nav-links a:hover::after,.nav-links a.is-active::after{width:100%}
 .nav-cta{display:none;align-items:center;gap:22px}
-@media(min-width:1024px){.nav-links{display:flex}.nav-cta{display:flex}.nav-burger{display:none}}
+@media(min-width:1200px){.nav-links{display:flex}.nav-cta{display:flex}.nav-burger{display:none}}
 .nav-phone{font-family:var(--font-display);font-weight:500;font-size:.95rem;letter-spacing:.01em;white-space:nowrap}
+@media(max-width:1359px){.nav-cta .nav-phone{display:none}}
 .nav-burger{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--line);border-radius:2px}
-@media(min-width:1024px){.nav .nav-burger{display:none}}
+@media(min-width:1200px){.nav .nav-burger{display:none}}
 .logo{display:inline-flex;align-items:center;gap:12px;font-family:var(--font-display);line-height:1}
 .logo-mark{width:34px;height:34px;flex:none;background:url(../logo/logo-mark.svg) center/contain no-repeat}
 .logo-text{display:flex;flex-direction:column;gap:2px}
 .logo-num{display:block;height:20px;width:auto;align-self:flex-start}
-.logo-word{font-family:var(--font-body);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.logo-word{font-family:var(--font-body);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:500;white-space:nowrap}
 .mobile-menu{position:fixed;inset:0;z-index:55;background:var(--ink);display:flex;flex-direction:column;padding:24px clamp(20px,4vw,56px);transform:translateY(-100%);transition:transform .45s var(--ease);visibility:hidden}
 .mobile-menu.is-open{transform:none;visibility:visible}
 .mobile-menu a.big{font-family:var(--font-display);font-weight:300;font-size:clamp(2rem,8vw,3.2rem);letter-spacing:-.02em;line-height:1.1;padding-block:10px;border-bottom:1px solid var(--line)}
+.mobile-menu a.big.is-active{color:var(--brass)}
 
 /* ---------- hero ---------- */
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate}
@@ -420,7 +422,7 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 
 /* ---------- правки 22.09: мобильная шапка, хвойные акценты ---------- */
 .nav-mobile{display:flex;align-items:center;gap:6px}
-@media(min-width:1024px){.nav .nav-mobile{display:none}}
+@media(min-width:1200px){.nav .nav-mobile{display:none}}
 .nav-icon{display:inline-grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:2px;color:var(--brass);transition:border-color .2s,background-color .2s,color .2s}
 .nav-icon .ic{width:19px;height:19px}
 .nav-icon:hover{border-color:var(--brass)}
