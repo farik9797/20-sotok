@@ -609,3 +609,8 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 [data-theme="light"] .btn-brass:hover{background:var(--brass-btn-2)}
 [data-theme="light"] .nav-icon-call{background:var(--brass-btn);border-color:var(--brass-btn)}
 [data-theme="light"] .nav-icon-call:hover{background:var(--brass-btn-2);border-color:var(--brass-btn-2)}
+/* кнопка-контур на светлой секции: раньше у класса не было своих стилей */
+.btn-ghost-dark{border:1px solid var(--line-dark);color:var(--ink)}
+.btn-ghost-dark:hover{border-color:rgba(42,47,53,.55);background:rgba(42,47,53,.04)}
+[data-theme="light"] .btn-ghost-dark{background:var(--fir);border-color:var(--fir);color:#fff}
+[data-theme="light"] .btn-ghost-dark:hover{background:var(--fir-2);border-color:var(--fir-2)}
