@@ -583,3 +583,14 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 .mobile-menu .btn-brass .ic{color:var(--brass)}
 [data-theme="light"] .mobile-menu .btn-brass{background:var(--fir);border-color:var(--fir);color:#fff}
 [data-theme="light"] .mobile-menu .btn-brass .ic{color:#fff}
+
+/* латунь на экранах с широким охватом (P3): та же светлота, больше насыщенности —
+   на sRGB-мониторах цвет остаётся прежним #B8860B */
+@supports (color: color(display-p3 1 1 1)){
+  @media (color-gamut: p3){
+    :root{
+      --brass:color(display-p3 .7103 .5259 .0439);
+      --brass-2:color(display-p3 .8013 .6283 .1619);
+    }
+  }
+}
