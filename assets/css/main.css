@@ -558,3 +558,20 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
   .nav .logo-full,.mobile-menu .logo-full{display:none}
   .nav .logo,.mobile-menu .logo{width:32px;height:32px;background:url(../logo/logo-mark.svg) center/contain no-repeat}
 }
+
+/* кнопки в светлой теме: белый текст, поэтому под ним всегда заливка */
+[data-theme="light"] .btn,[data-theme="light"] .msg-btn,[data-theme="light"] .filter button{color:#fff}
+[data-theme="light"] .btn-ghost{background:var(--fir);border-color:var(--fir)}
+[data-theme="light"] .btn-ghost:hover{background:var(--fir-2);border-color:var(--fir-2)}
+[data-theme="light"] .msg-btn{background:var(--fir);border-color:var(--fir)}
+[data-theme="light"] .msg-btn:hover{background:var(--fir-2);border-color:var(--fir-2)}
+[data-theme="light"] .msg-btn .ic{color:#fff}
+[data-theme="light"] .filter button{background:var(--fir);border-color:var(--fir)}
+[data-theme="light"] .filter button.is-active,[data-theme="light"] .filter button:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+[data-theme="light"] .nav-icon,[data-theme="light"] .nav-burger,[data-theme="light"] .theme-toggle{background:var(--fir);border-color:var(--fir);color:#fff}
+[data-theme="light"] .theme-toggle:hover,[data-theme="light"] .nav-icon:hover{background:var(--fir-2);border-color:var(--fir-2)}
+[data-theme="light"] .nav-icon-call{background:var(--brass);border-color:var(--brass);color:#fff}
+[data-theme="light"] .quiz-close{border-color:var(--fir);background:var(--fir);color:#fff}
+[data-theme="light"] .quiz-close:hover{background:var(--fir-2)}
+/* на первом экране и хвойных плашках прозрачные кнопки остаются прозрачными */
+[data-theme="light"] .hero .btn-ghost,[data-theme="light"] .hero-sub .btn-ghost,[data-theme="light"] .cta-fir .btn-ghost{background:none;border-color:rgb(255 255 255)}
