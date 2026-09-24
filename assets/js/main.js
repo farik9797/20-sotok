@@ -126,7 +126,10 @@
     const xD = gsap.quickTo(dot, 'x', { duration: 0.08, ease: 'power3' }), yD = gsap.quickTo(dot, 'y', { duration: 0.08, ease: 'power3' });
     const xR = gsap.quickTo(ring, 'x', { duration: 0.32, ease: 'power3' }), yR = gsap.quickTo(ring, 'y', { duration: 0.32, ease: 'power3' });
     window.addEventListener('pointermove', (e) => { xD(e.clientX); yD(e.clientY); xR(e.clientX); yR(e.clientY); html.classList.add('cursor-visible'); }, { passive: true });
-    document.addEventListener('mouseleave', () => html.classList.remove('cursor-visible'));
+    const hideCursor = () => html.classList.remove('cursor-visible');
+    document.addEventListener('mouseleave', hideCursor);
+    window.addEventListener('blur', hideCursor);
+    document.addEventListener('visibilitychange', () => { if (document.hidden) hideCursor(); });
     document.addEventListener('mouseover', (e) => {
       const t = e.target.closest('[data-cursor-label]');
       const i = e.target.closest('a,button,label,[role=button],input[type=range],.opt');
