@@ -652,3 +652,7 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 .specs .spec-strip{border-top:0}
 .specs .spec{border-bottom:1px solid var(--line)}
 @media(min-width:768px){.specs .spec{border-bottom:0}}
+
+/* показатели: на компьютере внутри первого экрана, как раньше; на телефоне — отдельным блоком */
+@media(max-width:767px){.hero-specs{display:none}}
+@media(min-width:768px){.specs{display:none}}
