@@ -677,3 +677,4 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
   .swipe::-webkit-scrollbar{display:none}
   .swipe.swipe > *{flex:0 0 82%;scroll-snap-align:start}
 }
+@media(max-width:767px){.swipe.swipe-sm > *{flex:0 0 46%}}
