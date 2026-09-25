@@ -635,7 +635,7 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
   .hero{min-height:100svh;justify-content:flex-start}
   .hero-inner{padding-top:0;padding-bottom:32px}
   .hero-main{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;gap:clamp(18px,3.2vh,30px);padding:96px 0 40px}
-  .hero-main .eyebrow{margin-bottom:0}
+  .hero-main .eyebrow{margin-bottom:auto}
   .hero-main .h1{margin:0}
   .hero-main > .grid{margin-top:0;gap:clamp(16px,2.6vh,26px)}
 }
