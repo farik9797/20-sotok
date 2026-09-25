@@ -658,3 +658,13 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 /* показатели: на компьютере внутри первого экрана, как раньше; на телефоне — отдельным блоком */
 @media(max-width:767px){.hero-specs{display:none}}
 @media(min-width:768px){.specs{display:none}}
+
+/* первый экран внутренних страниц на телефоне — тоже ровно в высоту экрана */
+@media(max-width:767px){
+  .hero-sub{min-height:100svh;justify-content:flex-start}
+  .hero-sub .hero-inner{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;gap:clamp(18px,3.2vh,30px);padding-block:96px 40px}
+  .hero-sub .hero-inner > .eyebrow{margin-bottom:auto}
+  .hero-sub .h1{font-size:clamp(1.95rem,7.4vw,2.6rem);margin:0}
+  .hero-sub .lead{font-size:1rem}
+  .hero-sub .hero-inner > .grid{margin-top:0;gap:clamp(16px,2.6vh,26px)}
+}
