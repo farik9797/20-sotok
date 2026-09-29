@@ -74,7 +74,12 @@
           <input id="${id}-phone" name="${id}-phone" type="tel" inputmode="tel" placeholder="+375 (__) ___-__-__" required>
           <span class="field-err">Введите номер полностью: +375 (__) ___-__-__</span>
         </div>
-        <p class="consent mt-4">Нажимая кнопку, вы соглашаетесь с <a class="link" href="${ROOT}politika.html" target="_blank" rel="noopener">обработкой персональных данных</a>. Без спама: один расчёт и примеры объектов.</p>
+        <label class="opt consent-opt mt-4" for="${id}-consent">
+          <input id="${id}-consent" name="${id}-consent" type="checkbox">
+          <span class="box">${ic('check')}</span>
+          <span class="consent">Согласен на <a class="link" href="${ROOT}politika.html" target="_blank" rel="noopener">обработку персональных данных</a>. Без спама: один расчёт и примеры объектов.</span>
+        </label>
+        <span class="field-err consent-err">Отметьте согласие, чтобы отправить заявку</span>
         <div class="quiz-foot"><button type="button" class="quiz-back" data-back>${ic('arrow-left')} Назад</button><button type="submit" class="btn btn-brass btn-lg">Получить расчёт ${ic('send')}</button></div>
       </section>
       <!-- финал -->
@@ -117,7 +122,13 @@
         if (inp.type === 'radio') root.querySelectorAll(`input[name="${inp.name}"]`).forEach((r) => r.closest('.opt').classList.toggle('is-checked', r.checked));
         else inp.closest('.opt').classList.toggle('is-checked', inp.checked);
       };
-      inp.addEventListener('change', sync);
+      inp.addEventListener('change', () => {
+        sync();
+        if (inp.type === 'checkbox' && inp.closest('.consent-opt')) {
+          inp.closest('.opt').classList.remove('is-error');
+          inp.closest('.quiz-step').classList.remove('is-consent-error');
+        }
+      });
       sync();
     });
 
@@ -146,7 +157,12 @@
       e.preventDefault();
       const ok = phone.isComplete ? phone.isComplete() : phone.value.length > 0;
       phone.closest('.field').classList.toggle('is-error', !ok);
+      const consent = root.querySelector(`#${id}-consent`);
+      const agreed = consent.checked;
+      consent.closest('.quiz-step').classList.toggle('is-consent-error', !agreed);
+      consent.closest('.opt').classList.toggle('is-error', !agreed);
       if (!ok) { phone.focus(); return; }
+      if (!agreed) { consent.focus(); return; }
       const msg = root.querySelector(`input[name="${id}-msg"]:checked`).value;
       root.querySelector('[data-msg-name]').textContent = msg;
       const area = root.querySelector(`input[name="${id}-area"]:checked`).value;

@@ -690,3 +690,10 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 @media(min-width:1024px){.cookie-bar{left:auto;max-width:720px}}
 [data-theme="light"] .cookie-bar{background:var(--stone);border-color:var(--line)}
 @media(max-width:639px){.cookie-bar{padding:14px 16px}.cookie-bar .btn{width:100%}}
+/* согласие на обработку данных в квизе */
+.opt.consent-opt{min-height:0;padding:14px 16px;align-items:flex-start;gap:12px;background:rgba(244,244,242,.35)}
+.opt.consent-opt .box{margin-top:2px}
+.opt.consent-opt .consent{margin:0;font-size:.85rem}
+.opt.is-error{border-color:#9B3B2E}
+.consent-err{margin-top:8px}
+.quiz-step.is-consent-error .consent-err{display:block}
