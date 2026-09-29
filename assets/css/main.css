@@ -124,7 +124,7 @@ input,select,textarea{font:inherit;color:inherit}
 .kenburns{animation:kenburns 22s var(--ease) infinite alternate;transform-origin:60% 40%}
 @keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.07)}}
 .hero-inner{padding-top:120px;padding-bottom:clamp(32px,4vw,56px)}
-.hero-sub{position:relative;min-height:62vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate}
+.hero-sub{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate}
 .spec-strip{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line)}
 .spec{padding:18px 22px 18px 0;border-bottom:1px solid var(--line)}
 .spec-val{font-family:var(--font-display);font-weight:200;font-size:clamp(1.9rem,3vw,2.6rem);letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
