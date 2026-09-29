@@ -25,6 +25,29 @@
     try { localStorage.setItem('theme', next); } catch (err) {}
   });
 
+  /* ---- уведомление о данных, которые хранит браузер ---- */
+  (function cookieNotice() {
+    let hidden = null;
+    try { hidden = localStorage.getItem('cookie-notice'); } catch (e) { hidden = 'skip'; }
+    if (hidden) return;
+    const root = location.pathname.includes('/uslugi/') ? '../' : '';
+    const bar = document.createElement('div');
+    bar.className = 'cookie-bar';
+    bar.setAttribute('role', 'region');
+    bar.setAttribute('aria-label', 'Уведомление об использовании данных браузера');
+    bar.innerHTML = '<p>Сайт сохраняет в браузере только технические настройки — выбранную тему и то, что вы закрыли это уведомление. ' +
+      'Рекламных и аналитических куки здесь нет. Подробнее — в <a class="link" href="' + root + 'politika.html">политике конфиденциальности</a>.</p>' +
+      '<button type="button" class="btn btn-brass" data-cookie-ok>Понятно</button>';
+    document.body.appendChild(bar);
+    requestAnimationFrame(() => bar.classList.add('is-open'));
+    bar.addEventListener('click', (e) => {
+      if (!e.target.closest('[data-cookie-ok]')) return;
+      bar.classList.remove('is-open');
+      try { localStorage.setItem('cookie-notice', 'hidden'); } catch (err) {}
+      setTimeout(() => bar.remove(), 300);
+    });
+  })();
+
   /* ---- навигация: фон при скролле ---- */
   const nav = document.querySelector('.nav');
   const onScroll = () => nav && nav.classList.toggle('is-scrolled', window.scrollY > 40);

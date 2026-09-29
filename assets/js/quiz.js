@@ -1,6 +1,7 @@
 /* 20 соток — интерактивный квиз (калькулятор бюджета).
    Монтируется в каждый элемент .quiz-mount. Шаги переключаются без перезагрузки. */
 (function () {
+  const ROOT = location.pathname.includes('/uslugi/') ? '../' : '';
   const AREAS = [
     { v: 'до 10 соток', s: 'компактный участок' },
     { v: '10–15 соток', s: 'типовой коттеджный' },
@@ -73,7 +74,7 @@
           <input id="${id}-phone" name="${id}-phone" type="tel" inputmode="tel" placeholder="+375 (__) ___-__-__" required>
           <span class="field-err">Введите номер полностью: +375 (__) ___-__-__</span>
         </div>
-        <p class="consent mt-4">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных. Без спама: один расчёт и примеры объектов.</p>
+        <p class="consent mt-4">Нажимая кнопку, вы соглашаетесь с <a class="link" href="${ROOT}politika.html" target="_blank" rel="noopener">обработкой персональных данных</a>. Без спама: один расчёт и примеры объектов.</p>
         <div class="quiz-foot"><button type="button" class="quiz-back" data-back>${ic('arrow-left')} Назад</button><button type="submit" class="btn btn-brass btn-lg">Получить расчёт ${ic('send')}</button></div>
       </section>
       <!-- финал -->

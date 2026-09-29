@@ -678,3 +678,15 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
   .swipe.swipe > *{flex:0 0 82%;scroll-snap-align:start}
 }
 @media(max-width:767px){.swipe.swipe-sm > *{flex:0 0 46%}}
+
+/* ---------- уведомление о данных браузера ---------- */
+.cookie-bar{position:fixed;left:clamp(12px,2vw,24px);right:clamp(12px,2vw,24px);bottom:clamp(12px,2vw,24px);z-index:65;
+  display:none;gap:16px 24px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  background:var(--ink-2);border:1px solid var(--line);padding:16px clamp(16px,2vw,24px);
+  box-shadow:0 18px 50px rgba(0,0,0,.35);animation:qfade .4s var(--ease)}
+.cookie-bar.is-open{display:flex}
+.cookie-bar p{margin:0;font-size:.9rem;color:var(--muted);max-width:78ch;line-height:1.5}
+.cookie-bar .btn{min-height:44px;padding-inline:1.4em;font-size:.9rem}
+@media(min-width:1024px){.cookie-bar{left:auto;max-width:720px}}
+[data-theme="light"] .cookie-bar{background:var(--stone);border-color:var(--line)}
+@media(max-width:639px){.cookie-bar{padding:14px 16px}.cookie-bar .btn{width:100%}}
