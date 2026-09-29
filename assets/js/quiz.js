@@ -12,7 +12,7 @@
     { k: 'irrigation', v: 'Автоматический полив' },
     { k: 'drainage', v: 'Скрытый дренаж и ливнёвка' }
   ];
-  const PLACES = ['Тарасово', 'Колодищи', 'Раубичи', 'Валерьяново', 'Марьяливо'];
+  const PLACES = ['Минск', 'Минский район'];
 
   const ic = (n, cls) => `<svg class="ic ${cls || ''}"><use href="#i-${n}"/></svg>`;
 
@@ -53,7 +53,7 @@
         <h3 class="quiz-q">В каком населённом пункте или направлении находится объект?</h3>
         <div class="field">
           <label for="${id}-place">Населённый пункт</label>
-          <input id="${id}-place" name="${id}-place" type="text" placeholder="Например, Тарасово или Колодищи" list="${id}-places" autocomplete="off">
+          <input id="${id}-place" name="${id}-place" type="text" placeholder="Например, Минский район, Юхновка" list="${id}-places" autocomplete="off">
           <datalist id="${id}-places">${PLACES.map((p) => `<option value="${p}">`).join('')}</datalist>
           <span class="field-err">Укажите населённый пункт или направление</span>
         </div>
@@ -81,7 +81,7 @@
         <div class="quiz-done">
           ${ic('badge-check')}
           <h3 class="quiz-q mt-4">Заявка принята</h3>
-          <p class="prose" style="color:var(--muted-dark)">Расчёт и примеры похожих объектов отправим в <b data-msg-name>Telegram</b> в течение рабочего дня. Если понадобится выезд инженера на участок, консультация платная, но её стоимость засчитывается в итоговую смету при заключении договора.</p>
+          <p class="prose" style="color:var(--muted-dark)">Расчёт и примеры похожих объектов отправим в <b data-msg-name>Telegram</b> в течение рабочего дня. Если понадобится выезд инженера на участок, он бесплатный при заказе комплекса работ.</p>
           <dl class="dl mt-6" style="font-size:.9rem" data-summary></dl>
         </div>
       </section>
