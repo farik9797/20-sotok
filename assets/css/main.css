@@ -703,7 +703,9 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
   margin-inline:calc(-1 * clamp(20px,4vw,56px));padding-inline:clamp(20px,4vw,56px);
   scroll-padding-inline:clamp(20px,4vw,56px);-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .rail::-webkit-scrollbar{display:none}
-.rail > *{flex:0 0 min(420px,82%);scroll-snap-align:start}
+.rail > *{flex:0 0 82%;scroll-snap-align:start}
+@media(min-width:768px){.rail > *{flex:0 0 calc((100% - 32px) / 2.5)}}
+@media(min-width:1200px){.rail > *{flex:0 0 calc((100% - 48px) / 3.5)}}
 .review{display:flex;flex-direction:column;gap:14px;padding:clamp(22px,2.4vw,30px);border:1px solid var(--line);background:var(--ink-2)}
 .review p{margin:0;font-size:.97rem;line-height:1.6;color:var(--muted)}
 .review footer{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);display:grid;gap:3px}
