@@ -697,3 +697,18 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 .opt.is-error{border-color:#9B3B2E}
 .consent-err{margin-top:8px}
 .quiz-step.is-consent-error .consent-err{display:block}
+
+/* ---------- отзывы ---------- */
+.rail{display:flex;gap:16px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;
+  margin-inline:calc(-1 * clamp(20px,4vw,56px));padding-inline:clamp(20px,4vw,56px);
+  scroll-padding-inline:clamp(20px,4vw,56px);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.rail > *{flex:0 0 min(420px,82%);scroll-snap-align:start}
+.review{display:flex;flex-direction:column;gap:14px;padding:clamp(22px,2.4vw,30px);border:1px solid var(--line);background:var(--ink-2)}
+.review p{margin:0;font-size:.97rem;line-height:1.6;color:var(--muted)}
+.review footer{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);display:grid;gap:3px}
+.review .name{font-family:var(--font-display);font-weight:500}
+.review .work{font-size:.82rem;color:var(--muted)}
+.light .review,[data-theme="light"] .review{background:var(--stone-2);border-color:var(--line-dark)}
+.light .review p,[data-theme="light"] .review p,.light .review .work,[data-theme="light"] .review .work{color:var(--muted-dark)}
+.light .review footer,[data-theme="light"] .review footer{border-color:var(--line-dark)}
