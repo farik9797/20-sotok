@@ -48,6 +48,27 @@
     });
   })();
 
+  /* ---- слайдеры: курсор-хват и перетаскивание мышью ---- */
+  document.querySelectorAll('.rail, .swipe').forEach((rail) => {
+    if (!rail.dataset.cursorLabel) rail.dataset.cursorLabel = 'Листайте';
+    let down = false, moved = 0, startX = 0, startScroll = 0;
+    rail.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || rail.scrollWidth <= rail.clientWidth + 4) return;
+      down = true; moved = 0; startX = e.clientX; startScroll = rail.scrollLeft;
+      rail.classList.add('is-drag');
+    });
+    rail.addEventListener('pointermove', (e) => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 3) { moved = Math.abs(dx); rail.setPointerCapture(e.pointerId); }
+      rail.scrollLeft = startScroll - dx;
+    });
+    const stop = () => { down = false; rail.classList.remove('is-drag'); setTimeout(() => { moved = 0; }, 0); };
+    rail.addEventListener('pointerup', stop);
+    rail.addEventListener('pointercancel', stop);
+    rail.addEventListener('click', (e) => { if (moved > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
+  });
+
   /* ---- навигация: фон при скролле ---- */
   const nav = document.querySelector('.nav');
   const onScroll = () => nav && nav.classList.toggle('is-scrolled', window.scrollY > 40);

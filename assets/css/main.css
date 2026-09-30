@@ -714,3 +714,8 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 .light .review,[data-theme="light"] .review{background:var(--stone-2);border-color:var(--line-dark)}
 .light .review p,[data-theme="light"] .review p,.light .review .work,[data-theme="light"] .review .work{color:var(--muted-dark)}
 .light .review footer,[data-theme="light"] .review footer{border-color:var(--line-dark)}
+/* слайдеры: курсор-хват там, где фирменный курсор выключен */
+.rail,.swipe{cursor:grab}
+.rail.is-drag,.swipe.is-drag{cursor:grabbing;scroll-snap-type:none}
+.rail.is-drag *,.swipe.is-drag *{pointer-events:none}
+@media(pointer:coarse){.rail,.swipe{cursor:auto}}
