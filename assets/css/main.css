@@ -68,6 +68,8 @@ input,select,textarea{font:inherit;color:inherit}
 .prose ul{padding-left:1.2em;margin:0 0 1.1em}
 .prose li{margin-bottom:.4em}
 .tnum{font-variant-numeric:tabular-nums}
+br.sm-only{display:none}
+@media(max-width:767px){br.sm-only{display:inline}}
 
 /* ---------- кнопки ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;min-height:52px;padding:.7em 1.6em;border-radius:2px;font-weight:500;font-size:.95rem;letter-spacing:.01em;line-height:1.25;text-align:center;transition:background-color .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease),transform .2s var(--ease);cursor:pointer}
