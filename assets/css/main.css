@@ -68,6 +68,10 @@ input,select,textarea{font:inherit;color:inherit}
 .prose ul{padding-left:1.2em;margin:0 0 1.1em}
 .prose li{margin-bottom:.4em}
 .tnum{font-variant-numeric:tabular-nums}
+.quote-lead{border-left:2px solid var(--brass);padding-left:clamp(18px,2vw,28px);margin:0}
+.quote-lead > .ic{color:var(--brass);width:28px;height:28px;margin-bottom:14px}
+.quote-lead p{margin:0 0 .85em;font-size:clamp(1.02rem,1.2vw,1.18rem);line-height:1.6}
+.quote-lead p:last-child{margin-bottom:0}
 br.sm-only{display:none}
 @media(max-width:767px){br.sm-only{display:inline}}
 
