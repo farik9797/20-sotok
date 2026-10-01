@@ -82,6 +82,7 @@
   const setMenu = (open) => {
     if (!menu) return;
     menu.classList.toggle('is-open', open);
+    menu.setAttribute('aria-hidden', String(!open)); // иначе открытое меню остаётся скрытым для скринридера
     document.body.classList.toggle('modal-open', open);
     burger && burger.setAttribute('aria-expanded', String(open));
   };
@@ -273,9 +274,10 @@
       const s = parseFloat(el.dataset.parallax) || 7;
       gsap.fromTo(el, { yPercent: -s }, { yPercent: s, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
-    // крупные номера секций слегка «въезжают» слева
+    // крупные номера секций слегка «въезжают» слева; на узких экранах сдвиг меньше — иначе цифра срезается полем
+    const numShift = window.matchMedia('(max-width: 767px)').matches ? -12 : -28;
     document.querySelectorAll('.section-index .num').forEach((el) => {
-      gsap.fromTo(el, { x: -28, opacity: 0.25 }, { x: 0, opacity: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 55%', scrub: 0.5 } });
+      gsap.fromTo(el, { x: numShift, opacity: 0.25 }, { x: 0, opacity: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 55%', scrub: 0.5 } });
     });
     // счётчики цифр (только целые числа без диапазонов)
     document.querySelectorAll('.spec-val, .stat .num').forEach((el) => {
