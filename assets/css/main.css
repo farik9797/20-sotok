@@ -431,6 +431,8 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 .nav-icon-call{background:var(--brass);border-color:var(--brass);color:var(--btn-ink)}
 .nav-icon-call:hover{background:var(--brass-2)}
 .nav-mobile .nav-burger{width:42px;height:42px}
+.nav-mobile .nav-icon .ic,.nav-mobile .nav-burger .ic,.nav-mobile .theme-toggle .ic{width:20px;height:20px}
+.nav-mobile .nav-icon svg:has(use[href^="#i-si-"]){width:18px;height:18px}
 .mobile-menu{overflow-y:auto}
 @media(max-width:1023px){.nav-inner{gap:12px}}
 @media(max-width:479px){.logo-full{height:30px}}
@@ -650,7 +652,7 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
   .nav .logo-full,.mobile-menu .logo-full{height:26px}
   .nav .logo,.mobile-menu .logo{gap:8px}
   .nav-mobile{gap:5px}
-  .nav-mobile .nav-icon,.nav-mobile .nav-burger{width:38px;height:38px}
+  .nav-mobile .nav-icon,.nav-mobile .nav-burger,.nav-mobile .theme-toggle{width:38px;height:38px}
 }
 
 /* показатели отдельным блоком под первым экраном */
