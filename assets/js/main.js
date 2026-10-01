@@ -109,6 +109,36 @@
   modal && modal.addEventListener('click', (e) => { if (e.target.closest('[data-quiz-close]')) closeQuiz(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeQuiz(); setMenu(false); } });
 
+  /* ---- короткие ролики с объектов: играют, только когда видны ---- */
+  const clips = document.querySelectorAll('video[data-clip]');
+  if (clips.length) {
+    if (reduce) {
+      clips.forEach((v) => v.setAttribute('controls', ''));
+    } else {
+      // play() сам догружает ролик: при preload="metadata" ждать canplay бессмысленно
+      const play = (v) => {
+        const p = v.play();
+        // если браузер запретил автозапуск — отдаём управление пользователю
+        p && p.catch(() => v.setAttribute('controls', ''));
+      };
+      const clipWatcher = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) play(entry.target);
+          else if (!entry.target.paused) entry.target.pause();
+        });
+      }, { rootMargin: '150px 0px', threshold: 0.2 });
+      clips.forEach((v) => clipWatcher.observe(v));
+      // пока вкладка скрыта, наблюдатель молчит — после возврата запускаем видимые ролики сами
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) return;
+        clips.forEach((v) => {
+          const r = v.getBoundingClientRect();
+          if (r.bottom > 0 && r.top < window.innerHeight) play(v);
+        });
+      });
+    }
+  }
+
   /* ---- слайдер «до/после» ---- */
   document.querySelectorAll('.ba').forEach((ba) => {
     const range = ba.querySelector('input[type=range]');
