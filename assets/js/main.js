@@ -111,6 +111,16 @@
 
   /* ---- короткие ролики с объектов: играют, только когда видны ---- */
   const clips = document.querySelectorAll('video[data-clip]');
+  // на телефоне берём облегчённый файл: атрибут media у <source> учитывают не все браузеры
+  if (clips.length && window.matchMedia('(max-width: 767px)').matches) {
+    clips.forEach((v) => {
+      const small = v.querySelector('source[media]');
+      if (!small) return;
+      if (v.currentSrc && v.currentSrc.indexOf(small.getAttribute('src')) !== -1) return;
+      v.querySelectorAll('source:not([media])').forEach((s) => s.remove());
+      v.load();
+    });
+  }
   if (clips.length) {
     if (reduce) {
       clips.forEach((v) => v.setAttribute('controls', ''));
