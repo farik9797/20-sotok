@@ -72,6 +72,7 @@ input,select,textarea{font:inherit;color:inherit}
 .quote-lead > .ic{color:var(--brass);width:28px;height:28px;margin-bottom:14px}
 .quote-lead p{margin:0 0 .85em;font-size:clamp(1.02rem,1.2vw,1.18rem);line-height:1.6}
 .quote-lead p:last-child{margin-bottom:0}
+.quote-lead .quote-key{font-family:var(--font-display);font-weight:300;letter-spacing:-.02em;line-height:1.25;font-size:clamp(1.3rem,1.9vw,1.75rem);margin-bottom:1em}
 br.sm-only{display:none}
 @media(max-width:767px){br.sm-only{display:inline}}
 
