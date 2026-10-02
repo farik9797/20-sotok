@@ -193,11 +193,23 @@
       if (!card) return;
       card.classList.add('is-zoomable');
       if (!card.dataset.cursorLabel) card.dataset.cursorLabel = 'Смотреть';
-      card.addEventListener('click', () => {
-        // на большом экране показываем полную версию, а не облегчённую мобильную
-        const full = card.querySelector('source:not([media])');
-        open((full && full.getAttribute('src')) || v.currentSrc, card.querySelector('.photo-cap')?.textContent.trim());
-      });
+    });
+
+    // слушаем на документе: лента перехватывает указатель при перетаскивании,
+    // и клик приходит на неё, а не на карточку
+    document.addEventListener('click', (e) => {
+      if (box.contains(e.target)) return;
+      let card = e.target.closest && e.target.closest('.photo.is-zoomable');
+      if (!card) {
+        const under = document.elementFromPoint(e.clientX, e.clientY);
+        card = under && under.closest ? under.closest('.photo.is-zoomable') : null;
+      }
+      if (!card) return;
+      const v = card.querySelector('video');
+      if (!v) return;
+      // в полном размере показываем версию для больших экранов, а не облегчённую мобильную
+      const full = card.querySelector('source:not([media])');
+      open((full && full.getAttribute('src')) || v.currentSrc, card.querySelector('.photo-cap')?.textContent.trim());
     });
 
     box.addEventListener('click', (e) => { if (e.target === box || e.target.closest('.lightbox-close')) close(); });
