@@ -697,7 +697,8 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 @media(max-width:767px){.swipe.swipe-sm > *{flex:0 0 46%}}
 
 /* ---------- просмотр ролика во весь экран ---------- */
-.photo.is-zoomable{cursor:zoom-in}
+html:not(.has-cursor) .photo.is-zoomable{cursor:pointer}
+html.has-cursor .photo.is-zoomable{cursor:none}
 .lightbox{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;
   padding:clamp(12px,3vw,48px);background:rgba(20,24,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   animation:qfade .25s var(--ease)}
