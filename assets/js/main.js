@@ -150,6 +150,60 @@
     }
   }
 
+  /* ---- просмотр ролика во весь экран ---- */
+  if (clips.length) {
+    const box = document.createElement('div');
+    box.className = 'lightbox';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', 'Просмотр видео');
+    box.innerHTML = '<button type="button" class="lightbox-close" aria-label="Закрыть"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button><div class="lightbox-cap"></div>';
+    document.body.appendChild(box);
+    const cap = box.querySelector('.lightbox-cap');
+    let shown = null;
+
+    const close = () => {
+      if (!shown) return;
+      shown.pause();
+      shown.remove();
+      shown = null;
+      box.classList.remove('is-open');
+      document.body.classList.remove('modal-open');
+    };
+    const open = (source, caption) => {
+      close();
+      const v = document.createElement('video');
+      v.src = source;
+      v.controls = true;
+      v.loop = true;
+      v.playsInline = true;
+      v.muted = true;            // в роликах нет звуковой дорожки
+      v.autoplay = true;
+      box.insertBefore(v, cap);
+      shown = v;
+      cap.textContent = caption || '';
+      box.classList.add('is-open');
+      document.body.classList.add('modal-open');
+      v.play().catch(() => {});
+      box.querySelector('.lightbox-close').focus();
+    };
+
+    clips.forEach((v) => {
+      const card = v.closest('.photo');
+      if (!card) return;
+      card.classList.add('is-zoomable');
+      if (!card.dataset.cursorLabel) card.dataset.cursorLabel = 'Смотреть';
+      card.addEventListener('click', () => {
+        // на большом экране показываем полную версию, а не облегчённую мобильную
+        const full = card.querySelector('source:not([media])');
+        open((full && full.getAttribute('src')) || v.currentSrc, card.querySelector('.photo-cap')?.textContent.trim());
+      });
+    });
+
+    box.addEventListener('click', (e) => { if (e.target === box || e.target.closest('.lightbox-close')) close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+  }
+
   /* ---- слайдер «до/после» ---- */
   document.querySelectorAll('.ba').forEach((ba) => {
     const range = ba.querySelector('input[type=range]');
