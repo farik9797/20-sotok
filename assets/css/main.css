@@ -660,6 +660,12 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
   .nav-mobile .nav-icon,.nav-mobile .nav-burger,.nav-mobile .theme-toggle{width:38px;height:38px}
 }
 
+/* стык секций на телефоне: нижняя линия списка дублирует границу блока, а отступ под ней великоват */
+@media(max-width:767px){
+  .section > .wrap > .hairline-b:last-child{border-bottom:0}
+  .section:has(> .wrap > .hairline-b:last-child){padding-bottom:44px}
+}
+
 /* показатели отдельным блоком под первым экраном */
 .specs{padding-block:clamp(26px,3.4vw,44px)}
 .specs .spec-strip{border-top:0}
