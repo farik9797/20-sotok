@@ -124,13 +124,14 @@
   }
   if (clips.length) {
     if (reduce) {
-      clips.forEach((v) => v.setAttribute('controls', ''));
+      // видео-мост фоновый: плеер на нём не показываем, остаётся постер
+      clips.forEach((v) => { if (!v.hasAttribute('data-most')) v.setAttribute('controls', ''); });
     } else {
       // play() сам догружает ролик: при preload="metadata" ждать canplay бессмысленно
       const play = (v) => {
         const p = v.play();
         // если браузер запретил автозапуск — отдаём управление пользователю
-        p && p.catch(() => v.setAttribute('controls', ''));
+        p && p.catch(() => { if (!v.hasAttribute('data-most')) v.setAttribute('controls', ''); });
       };
       const clipWatcher = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
