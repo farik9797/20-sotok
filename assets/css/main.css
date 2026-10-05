@@ -299,7 +299,7 @@ body.modal-open{overflow:hidden}
 .ba-lbl.l{left:14px}.ba-lbl.r{right:14px}
 
 /* ---------- кейсы ---------- */
-.case{border:1px solid var(--line);background:var(--ink-2);color:var(--stone-2);display:flex;flex-direction:column;height:100%;transition:border-color .25s}
+.case{border:1px solid var(--line);background:var(--ink-2);color:var(--stone-2);display:flex;flex-direction:column;align-self:stretch;transition:border-color .25s}
 .case-body{flex:1}
 [data-theme="light"] .case{color:var(--ink)}
 .case:hover{border-color:rgba(244,244,242,.4)}
