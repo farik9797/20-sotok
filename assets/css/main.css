@@ -152,6 +152,19 @@ br.sm-only{display:none}
 /* ---------- карточки преимуществ ---------- */
 .feature{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr auto;column-gap:16px;padding:34px 28px 38px;border-top:1px solid var(--line);position:relative;transition:background-color .3s var(--ease)}
 .feature:hover{background:rgba(244,244,242,.03)}
+/* карточка с видео на фоне: текст поверх кадра */
+.feature-video{overflow:hidden;isolation:isolate}
+/* кадр гасим фильтром, а не плотной заливкой: так остаётся видна фактура плитки */
+.feature-video .feature-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+  pointer-events:none;filter:brightness(.42) saturate(.9)}
+.feature-video::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(35,39,44,.5) 0%,rgba(35,39,44,.22) 40%,rgba(35,39,44,.3) 70%,rgba(35,39,44,.58) 100%)}
+.feature-video p,[data-theme="light"] .feature-video p{color:var(--stone-2)}
+.feature-video .h3,[data-theme="light"] .feature-video .h3{color:var(--stone-2)}
+/* светлая латунь: тёмная на кадре не дотягивает до 3:1 */
+.feature-video .ic-brass,[data-theme="light"] .feature-video .ic-brass{color:var(--brass-2)}
+.feature-video:hover{background:transparent}
+.feature-video .feature-bg::-webkit-media-controls,.feature-video .feature-bg::-webkit-media-controls-enclosure{display:none!important}
 .feature .num{grid-column:1;grid-row:1;font-size:2.6rem;color:var(--brass);margin:0}
 .feature .ic-lg{grid-column:2;grid-row:1;align-self:center}
 .feature .h3{grid-column:1/-1;grid-row:2;align-self:end;margin:38px 0 12px}
@@ -566,6 +579,7 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 .light .feature .num,.light .step .num,
 [data-theme="light"] .feature .num,[data-theme="light"] .step .num{color:var(--fir)}
 [data-theme="light"] .hero .step .num,[data-theme="light"] .cta-fir .step .num{color:var(--brass)}
+.feature-video .num,[data-theme="light"] .feature-video .num{color:var(--brass-2)}
 /* на узких экранах в шапке остаётся только знак — иначе надпись налезает на кнопки */
 @media(max-width:379px){
   .nav .logo-full,.mobile-menu .logo-full{display:none}
