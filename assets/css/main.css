@@ -158,7 +158,7 @@ br.sm-only{display:none}
 .feature-video .feature-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
   pointer-events:none;filter:brightness(.42) saturate(.9)}
 .feature-video::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(35,39,44,.5) 0%,rgba(35,39,44,.22) 40%,rgba(35,39,44,.3) 70%,rgba(35,39,44,.58) 100%)}
+  background:linear-gradient(180deg,rgba(35,39,44,.58) 0%,rgba(35,39,44,.22) 40%,rgba(35,39,44,.3) 70%,rgba(35,39,44,.58) 100%)}
 .feature-video p,[data-theme="light"] .feature-video p{color:var(--stone-2)}
 .feature-video .h3,[data-theme="light"] .feature-video .h3{color:var(--stone-2)}
 /* светлая латунь: тёмная на кадре не дотягивает до 3:1 */
