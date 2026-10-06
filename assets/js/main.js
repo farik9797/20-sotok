@@ -112,9 +112,10 @@
 
   /* ---- короткие ролики с объектов: играют, только когда видны ---- */
   const clips = document.querySelectorAll('video[data-clip]');
-  // на телефоне берём облегчённый файл: атрибут media у <source> учитывают не все браузеры
-  if (clips.length && window.matchMedia('(max-width: 767px)').matches) {
-    clips.forEach((v) => {
+  // на телефоне берём облегчённый файл: атрибут media у <source> учитывают не все браузеры.
+  // Касается и первых экранов — у них полная версия весит в три-четыре раза больше
+  if (window.matchMedia('(max-width: 767px)').matches) {
+    document.querySelectorAll('video').forEach((v) => {
       const small = v.querySelector('source[media]');
       if (!small) return;
       if (v.currentSrc && v.currentSrc.indexOf(small.getAttribute('src')) !== -1) return;
