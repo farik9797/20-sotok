@@ -71,7 +71,7 @@
         </div>
         <div class="field">
           <label for="${id}-phone">Телефон</label>
-          <input id="${id}-phone" name="${id}-phone" type="tel" inputmode="tel" placeholder="+375 (__) ___-__-__" required>
+          <input id="${id}-phone" name="${id}-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 (__) ___-__-__" required>
           <span class="field-err">Введите номер полностью: +375 (__) ___-__-__</span>
         </div>
         <label class="opt consent-opt mt-4" for="${id}-consent">

@@ -441,6 +441,8 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 .to-top:hover{background:var(--brass);border-color:var(--brass);color:var(--btn-ink)}
 .to-top .ic{width:20px;height:20px;rotate:180deg}
 @media(max-width:767px){.to-top{width:46px;height:46px}}
+/* пока висит уведомление о данных, кнопка «наверх» перекрывает «Понятно» — прячем её */
+body:has(.cookie-bar.is-open) .to-top,body:has(.cookie-bar.is-open) .to-top.is-visible{opacity:0;visibility:hidden;pointer-events:none}
 
 /* ---------- правки 22.09: мобильная шапка, хвойные акценты ---------- */
 .nav-mobile{display:flex;align-items:center;gap:6px}
@@ -696,6 +698,8 @@ html.cursor-text .cursor-dot,html.cursor-text .cursor-ring{opacity:0!important}
 @media(max-width:767px){
   .hero-sub{min-height:100svh;justify-content:flex-start}
   .hero-sub .hero-inner{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;gap:clamp(18px,3.2vh,30px);padding-block:96px 40px}
+  /* на телефоне рубрика уходит к верхней кромке, где скрим самый тонкий, — уплотняем верх */
+  .hero-sub .hero-shade{background:linear-gradient(180deg,rgba(42,47,53,.74) 0%,rgba(42,47,53,.66) 20%,rgba(42,47,53,.46) 46%,rgba(42,47,53,.82) 78%,var(--ink) 100%)}
   .hero-sub .hero-inner > .eyebrow{margin-bottom:auto}
   .hero-sub .h1{font-size:clamp(1.95rem,7.4vw,2.6rem);margin:0}
   .hero-sub .lead{font-size:1rem}
