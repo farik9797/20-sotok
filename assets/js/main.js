@@ -172,9 +172,16 @@
       box.classList.remove('is-open');
       document.body.classList.remove('modal-open');
     };
-    const open = (source, caption) => {
+    const open = (source, caption, ratio) => {
       close();
       const v = document.createElement('video');
+      // до загрузки метаданных video занимает 300×150 — резервируем место под кадр,
+      // иначе при открытии вёрстка подскакивает
+      if (ratio) {
+        v.style.aspectRatio = ratio;
+        v.style.width = '100%';
+        v.addEventListener('loadedmetadata', () => { v.style.aspectRatio = ''; v.style.width = ''; }, { once: true });
+      }
       v.src = source;
       v.controls = true;
       v.loop = true;
@@ -211,7 +218,8 @@
       if (!v) return;
       // в полном размере показываем версию для больших экранов, а не облегчённую мобильную
       const full = card.querySelector('source:not([media])');
-      open((full && full.getAttribute('src')) || v.currentSrc, card.querySelector('.photo-cap')?.textContent.trim());
+      const ratio = v.videoWidth && v.videoHeight ? v.videoWidth + ' / ' + v.videoHeight : '';
+      open((full && full.getAttribute('src')) || v.currentSrc, card.querySelector('.photo-cap')?.textContent.trim(), ratio);
     });
 
     box.addEventListener('click', (e) => { if (e.target === box || e.target.closest('.lightbox-close')) close(); });
