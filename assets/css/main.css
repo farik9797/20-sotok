@@ -190,7 +190,7 @@ br.sm-only{display:none}
 .photo img{width:100%;height:100%;object-fit:cover}
 .photo video{display:block;width:100%;height:100%;object-fit:cover;background:var(--ink-3)}
 .photo-cap{position:absolute;left:16px;bottom:14px;right:16px;display:flex;justify-content:space-between;gap:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,244,242,.85);font-weight:500}
-.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(42,47,53,.75));pointer-events:none}
+.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(42,47,53,.88));pointer-events:none}
 .photo-plain::after{display:none}
 .ph-note{position:absolute;top:14px;right:14px;z-index:2;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:6px 9px;background:rgba(184,134,11,.92);color:var(--btn-ink);font-weight:600}
 
