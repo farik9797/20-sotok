@@ -249,6 +249,28 @@ br.sm-only{display:none}
 .opt.is-checked .box .ic{opacity:1}
 .opt .opt-t{font-weight:500}
 .opt .opt-s{font-size:.85rem;color:var(--muted-dark);margin-left:auto;white-space:nowrap}
+/* длинные пояснения в опциях квиза не влезают в строку — уводим их под заголовок */
+.opt:has(.opt-s.wrap){flex-wrap:wrap}
+@media(max-width:639px){
+  .opt{flex-wrap:wrap;align-items:flex-start}
+  .opt .box{margin-top:2px}
+  .opt .opt-t{flex:1 1 0;min-width:0}
+  .opt .opt-s{white-space:normal;margin-left:38px;flex-basis:100%}
+}
+/* шаг «площадь»: ручной ввод под кнопками быстрого выбора */
+.quiz-exact{margin-top:22px;padding-top:20px;border-top:1px solid var(--line-dark)}
+.quiz-exact > label{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--muted-dark);margin-bottom:10px}
+.quiz-exact-row{display:flex;align-items:center;gap:12px;max-width:280px}
+.quiz-exact-row input{flex:1;min-width:0;min-height:56px;padding:0 18px;border:1px solid rgba(42,47,53,.35);background:var(--stone-2);border-radius:2px;transition:border-color .2s}
+.quiz-exact-row input:focus{border-color:var(--fir);outline:none}
+.quiz-exact-row input::placeholder{color:rgba(42,47,53,.4)}
+.quiz-exact-unit{font-size:.95rem;color:var(--muted-dark);flex:none}
+.quiz-exact.is-error input{border-color:#9B3B2E}
+.quiz-exact.is-error .field-err{display:block;margin-top:8px}
+/* две кнопки отправки: мессенджер выбирается самой кнопкой */
+.quiz-send{display:grid;gap:10px;margin-top:22px}
+@media(min-width:560px){.quiz-send{grid-template-columns:1fr 1fr}}
+.quiz-send .btn{width:100%}
 .opt:focus-within{outline:2px solid var(--brass);outline-offset:2px}
 .field{display:grid;gap:8px}
 .field label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--muted-dark)}

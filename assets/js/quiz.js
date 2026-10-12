@@ -2,73 +2,93 @@
    Монтируется в каждый элемент .quiz-mount. Шаги переключаются без перезагрузки. */
 (function () {
   const ROOT = location.pathname.includes('/uslugi/') ? '../' : '';
+  const STEPS = 5;
+
+  const DIRECTIONS = [
+    { v: 'Логойское / Витебское направление', s: 'Раубичи, Валерьяново, Боровляны' },
+    { v: 'Гродненское / Раковское направление', s: 'Тарасово, Ратомка, Хатежино' },
+    { v: 'Московское направление', s: 'Колодищи, Городище, Смолевичи' },
+    { v: 'Брестское / Слуцкое направление', s: 'Сеница, Прилуки, Щомыслица' },
+    { v: 'Другое направление в пределах Минского района', s: '' }
+  ];
   const AREAS = [
-    { v: 'до 10 соток', s: 'компактный участок' },
-    { v: '10–15 соток', s: 'типовой коттеджный' },
-    { v: 'более 15 соток', s: 'большая территория' }
+    { v: 'до 80 м²', s: 'отмостка и дорожки' },
+    { v: '80–150 м²', s: 'отмостка и парковка на 1–2 авто' },
+    { v: '150–300 м²', s: 'просторный двор и зоны отдыха' },
+    { v: 'более 300 м²', s: 'масштабное мощение' }
+  ];
+  const STYLES = [
+    { v: 'Крупноформатные плиты', s: 'минимализм, хай-тек' },
+    { v: 'Серый кирпичик', s: '' },
+    { v: '«Колормикс» или «Старый город»', s: 'современные градиенты' },
+    { v: 'Клинкерный кирпич или гранитная брусчатка', s: 'элитный формат' },
+    { v: 'Пока не определились', s: 'подскажем на выезде' }
   ];
   const SYSTEMS = [
-    { k: 'paving', v: 'Мощение парковки и дорожек' },
-    { k: 'lawn', v: 'Рулонный газон премиум' },
+    { k: 'drainage', v: 'Скрытый дренаж и ливневая канализация' },
     { k: 'irrigation', v: 'Автоматический полив' },
-    { k: 'drainage', v: 'Скрытый дренаж и ливнёвка' }
+    { k: 'lawn', v: 'Рулонный или посевной газон', s: 'с укладкой сетки от кротов' },
+    { k: 'light', v: 'Скрытая LED-подсветка в швах плитки' }
   ];
-  const PLACES = ['Минск', 'Минский район'];
 
   const ic = (n, cls) => `<svg class="ic ${cls || ''}"><use href="#i-${n}"/></svg>`;
+  const opt = (name, o, type) => `
+    <label class="opt ${type === 'radio' ? 'radio' : ''}"><input type="${type}" name="${name}" value="${o.v}"${o.k ? ` data-key="${o.k}"` : ''}>
+      <span class="box">${ic('check')}</span><span class="opt-t">${o.v}</span>${o.s ? `<span class="opt-s">${o.s}</span>` : ''}</label>`;
 
   function template(id, pre) {
     return `
     <div class="quiz-head">
       <div>
         <div class="eyebrow no-rule">Калькулятор бюджета</div>
-        <div class="quiz-stepnum tnum" style="font-size:.9rem;color:var(--muted-dark);margin-top:4px">Шаг <b data-cur>1</b> из 4 · около 1 минуты</div>
+        <div class="quiz-stepnum tnum" style="font-size:.9rem;color:var(--muted-dark);margin-top:4px">Шаг <b data-cur>1</b> из ${STEPS} · около минуты</div>
       </div>
       <button type="button" class="quiz-close" data-quiz-close aria-label="Закрыть">${ic('x')}</button>
     </div>
     <div class="quiz-progress"><i data-bar></i></div>
     <form class="quiz-body" novalidate>
-      <!-- шаг 1 -->
+      <!-- шаг 1 · локация -->
       <section class="quiz-step is-active" data-step="1">
-        <h3 class="quiz-q">Какая примерная площадь вашего участка?</h3>
-        <div class="grid gap-3">
-          ${AREAS.map((a, i) => `
-          <label class="opt radio"><input type="radio" name="${id}-area" value="${a.v}" ${i === 1 ? '' : ''}>
-            <span class="box">${ic('check')}</span><span class="opt-t">${a.v}</span><span class="opt-s">${a.s}</span></label>`).join('')}
-        </div>
+        <h3 class="quiz-q">Где расположен ваш участок?</h3>
+        <div class="grid gap-3">${DIRECTIONS.map((d) => opt(id + '-dir', d, 'radio')).join('')}</div>
         <div class="quiz-foot"><span></span><button type="button" class="btn btn-fir" data-next>Далее ${ic('arrow-right')}</button></div>
       </section>
-      <!-- шаг 2 -->
+      <!-- шаг 2 · площадь мощения -->
       <section class="quiz-step" data-step="2">
-        <h3 class="quiz-q">Какие системы необходимо интегрировать?</h3>
-        <p class="quiz-hint">Можно выбрать несколько — мы считаем комплекс одним договором.</p>
+        <h3 class="quiz-q">Укажите примерную площадь планируемого мощения</h3>
+        <p class="quiz-hint">Дорожки, парковка, отмостка.</p>
+        <div class="grid gap-3 md:grid-cols-2">${AREAS.map((a) => opt(id + '-area', a, 'radio')).join('')}</div>
+        <div class="quiz-exact">
+          <label for="${id}-exact">или введите точную площадь из вашего проекта</label>
+          <div class="quiz-exact-row">
+            <input id="${id}-exact" name="${id}-exact" type="text" inputmode="numeric" autocomplete="off" placeholder="например, 240" aria-describedby="${id}-exact-err">
+            <span class="quiz-exact-unit">м²</span>
+          </div>
+          <span class="field-err" id="${id}-exact-err">Выберите вариант выше или введите площадь числом</span>
+        </div>
+        <div class="quiz-foot"><button type="button" class="quiz-back" data-back>${ic('arrow-left')} Назад</button><button type="button" class="btn btn-fir" data-next>Далее ${ic('arrow-right')}</button></div>
+      </section>
+      <!-- шаг 3 · формат плитки -->
+      <section class="quiz-step" data-step="3">
+        <h3 class="quiz-q">Какой формат тротуарной плитки ближе к стилю вашего дома?</h3>
+        <div class="grid gap-3 md:grid-cols-2">${STYLES.map((s) => opt(id + '-style', s, 'radio')).join('')}</div>
+        <div class="quiz-foot"><button type="button" class="quiz-back" data-back>${ic('arrow-left')} Назад</button><button type="button" class="btn btn-fir" data-next>Далее ${ic('arrow-right')}</button></div>
+      </section>
+      <!-- шаг 4 · сопутствующие системы -->
+      <section class="quiz-step" data-step="4">
+        <h3 class="quiz-q">Какие сопутствующие системы нужно интегрировать на участке?</h3>
+        <p class="quiz-hint">Можно выбрать несколько или пропустить — считаем комплекс одним договором.</p>
         <div class="grid gap-3 md:grid-cols-2">
           ${SYSTEMS.map((s) => `
           <label class="opt"><input type="checkbox" name="${id}-sys" value="${s.v}" data-key="${s.k}" ${pre === s.k ? 'checked' : ''}>
-            <span class="box">${ic('check')}</span><span class="opt-t">${s.v}</span></label>`).join('')}
+            <span class="box">${ic('check')}</span><span class="opt-t">${s.v}</span>${s.s ? `<span class="opt-s">${s.s}</span>` : ''}</label>`).join('')}
         </div>
         <div class="quiz-foot"><button type="button" class="quiz-back" data-back>${ic('arrow-left')} Назад</button><button type="button" class="btn btn-fir" data-next>Далее ${ic('arrow-right')}</button></div>
       </section>
-      <!-- шаг 3 -->
-      <section class="quiz-step" data-step="3">
-        <h3 class="quiz-q">В каком населённом пункте или направлении находится объект?</h3>
-        <div class="field">
-          <label for="${id}-place">Населённый пункт</label>
-          <input id="${id}-place" name="${id}-place" type="text" placeholder="Например, Минский район, Юхновка" list="${id}-places" autocomplete="off">
-          <datalist id="${id}-places">${PLACES.map((p) => `<option value="${p}">`).join('')}</datalist>
-          <span class="field-err">Укажите населённый пункт или направление</span>
-        </div>
-        <div class="flex flex-wrap gap-2 mt-4">${PLACES.map((p) => `<button type="button" class="chip" data-place="${p}">${p}</button>`).join('')}</div>
-        <div class="quiz-foot"><button type="button" class="quiz-back" data-back>${ic('arrow-left')} Назад</button><button type="button" class="btn btn-fir" data-next>Далее ${ic('arrow-right')}</button></div>
-      </section>
-      <!-- шаг 4: захват -->
-      <section class="quiz-step" data-step="4">
-        <h3 class="quiz-q">Спасибо! Предварительный расчёт сметы под ваши параметры подготавливается.</h3>
-        <p class="quiz-hint">Куда вам удобнее отправить цифры и примеры похожих объектов?</p>
-        <div class="msg-toggle mb-5">
-          <label class="opt radio"><input type="radio" name="${id}-msg" value="Telegram" checked><span class="box">${ic('check')}</span>${ic('si-telegram')}<span class="opt-t">Telegram</span></label>
-          <label class="opt radio"><input type="radio" name="${id}-msg" value="Viber"><span class="box">${ic('check')}</span>${ic('si-viber')}<span class="opt-t">Viber</span></label>
-        </div>
+      <!-- шаг 5 · лид-форма -->
+      <section class="quiz-step" data-step="5">
+        <h3 class="quiz-q">Параметры приняты</h3>
+        <p class="quiz-hint">Евгений уже анализирует конфигурацию вашего участка для расчёта предварительного бюджета. Укажите номер — пришлём смету в удобный мессенджер.</p>
         <div class="field">
           <label for="${id}-phone">Телефон</label>
           <input id="${id}-phone" name="${id}-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 (__) ___-__-__" required>
@@ -80,14 +100,18 @@
           <span class="consent">Согласен на <a class="link" href="${ROOT}politika.html" target="_blank" rel="noopener">обработку персональных данных</a>. Без спама: один расчёт и примеры объектов.</span>
         </label>
         <span class="field-err consent-err">Отметьте согласие, чтобы отправить заявку</span>
-        <div class="quiz-foot"><button type="button" class="quiz-back" data-back>${ic('arrow-left')} Назад</button><button type="submit" class="btn btn-brass btn-lg">Получить расчёт ${ic('send')}</button></div>
+        <div class="quiz-send">
+          <button type="submit" class="btn btn-brass btn-lg" data-msg="Telegram">${ic('si-telegram')} Получить смету в Telegram</button>
+          <button type="submit" class="btn btn-ghost-dark btn-lg" data-msg="Viber">${ic('si-viber')} Получить в Viber</button>
+        </div>
+        <div class="quiz-foot"><button type="button" class="quiz-back" data-back>${ic('arrow-left')} Назад</button><span></span></div>
       </section>
       <!-- финал -->
-      <section class="quiz-step" data-step="5">
+      <section class="quiz-step" data-step="6">
         <div class="quiz-done">
           ${ic('badge-check')}
           <h3 class="quiz-q mt-4">Заявка принята</h3>
-          <p class="prose" style="color:var(--muted-dark)">Расчёт и примеры похожих объектов отправим в <b data-msg-name>Telegram</b> в течение рабочего дня. Если понадобится выезд инженера на участок, он бесплатный при заказе комплекса работ.</p>
+          <p class="prose" style="color:var(--muted-dark)">Предварительную смету и примеры похожих объектов отправим в <b data-msg-name>Telegram</b> в течение рабочего дня. Если понадобится выезд инженера на участок, он бесплатный при заказе комплекса работ.</p>
           <dl class="dl mt-6" style="font-size:.9rem" data-summary></dl>
         </div>
       </section>
@@ -105,13 +129,14 @@
     const cur = root.querySelector('[data-cur]');
     const stepnum = root.querySelector('.quiz-stepnum');
     let step = 1;
+    let msg = 'Telegram';
 
     const show = (n) => {
       step = n;
       steps.forEach((s) => s.classList.toggle('is-active', +s.dataset.step === n));
-      bar.style.width = Math.min(n, 4) / 4 * 100 + '%';
-      cur.textContent = Math.min(n, 4);
-      stepnum.style.visibility = n > 4 ? 'hidden' : '';
+      bar.style.width = Math.min(n, STEPS) / STEPS * 100 + '%';
+      cur.textContent = Math.min(n, STEPS);
+      stepnum.style.visibility = n > STEPS ? 'hidden' : '';
       const modal = root.closest('.quiz-modal-panel');
       if (modal) modal.scrollTop = 0;
     };
@@ -132,19 +157,36 @@
       sync();
     });
 
-    // чипы населённых пунктов
-    const place = root.querySelector(`#${id}-place`);
-    root.querySelectorAll('[data-place]').forEach((c) => c.addEventListener('click', () => { place.value = c.dataset.place; place.closest('.field').classList.remove('is-error'); }));
+    // шаг 2: быстрый выбор и точная площадь — взаимоисключающие
+    const exact = root.querySelector(`#${id}-exact`);
+    const areaInputs = root.querySelectorAll(`input[name="${id}-area"]`);
+    const clearExactError = () => exact.closest('.quiz-exact').classList.remove('is-error');
+    areaInputs.forEach((r) => r.addEventListener('change', () => { exact.value = ''; clearExactError(); }));
+    exact.addEventListener('input', () => {
+      exact.value = exact.value.replace(/\D+/g, '').slice(0, 5);
+      if (exact.value) areaInputs.forEach((r) => { r.checked = false; r.closest('.opt').classList.remove('is-checked'); });
+      clearExactError();
+    });
 
     // маска телефона
     const phone = root.querySelector(`#${id}-phone`);
     window.applyByMask && window.applyByMask(phone);
 
+    const areaValue = () => {
+      const picked = root.querySelector(`input[name="${id}-area"]:checked`);
+      if (picked) return picked.value;
+      return exact.value ? exact.value + ' м²' : '';
+    };
+
     const validate = (n) => {
-      if (n === 1) return !!root.querySelector(`input[name="${id}-area"]:checked`);
-      if (n === 2) return !!root.querySelector(`input[name="${id}-sys"]:checked`);
-      if (n === 3) { const ok = place.value.trim().length > 1; place.closest('.field').classList.toggle('is-error', !ok); return ok; }
-      return true;
+      if (n === 1) return !!root.querySelector(`input[name="${id}-dir"]:checked`);
+      if (n === 2) {
+        const ok = !!areaValue() && (!exact.value || +exact.value > 0);
+        exact.closest('.quiz-exact').classList.toggle('is-error', !ok);
+        return ok;
+      }
+      if (n === 3) return !!root.querySelector(`input[name="${id}-style"]:checked`);
+      return true; // шаг 4 можно пропустить
     };
 
     root.querySelectorAll('[data-next]').forEach((b) => b.addEventListener('click', () => {
@@ -152,6 +194,7 @@
       show(step + 1);
     }));
     root.querySelectorAll('[data-back]').forEach((b) => b.addEventListener('click', () => show(step - 1)));
+    root.querySelectorAll('[data-msg]').forEach((b) => b.addEventListener('click', () => { msg = b.dataset.msg; }));
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -163,17 +206,18 @@
       consent.closest('.opt').classList.toggle('is-error', !agreed);
       if (!ok) { phone.focus(); return; }
       if (!agreed) { consent.focus(); return; }
-      const msg = root.querySelector(`input[name="${id}-msg"]:checked`).value;
       root.querySelector('[data-msg-name]').textContent = msg;
-      const area = root.querySelector(`input[name="${id}-area"]:checked`).value;
+      const dir = root.querySelector(`input[name="${id}-dir"]:checked`).value;
+      const style = root.querySelector(`input[name="${id}-style"]:checked`).value;
       const sys = Array.from(root.querySelectorAll(`input[name="${id}-sys"]:checked`)).map((i) => i.value).join(', ');
       root.querySelector('[data-summary]').innerHTML = `
-        <div><dt>Участок</dt><dd>${area}</dd></div>
-        <div><dt>Системы</dt><dd>${sys}</dd></div>
-        <div><dt>Объект</dt><dd>${place.value.trim()}</dd></div>
+        <div><dt>Направление</dt><dd>${dir}</dd></div>
+        <div><dt>Площадь мощения</dt><dd>${areaValue()}</dd></div>
+        <div><dt>Формат плитки</dt><dd>${style}</dd></div>
+        <div><dt>Системы</dt><dd>${sys || 'только мощение'}</dd></div>
         <div><dt>Контакт</dt><dd>${msg} · ${phone.value}</dd></div>`;
       // В макете отправка не выполняется. Здесь будет POST в CRM / Telegram-бот.
-      show(5);
+      show(6);
     });
   }
 
