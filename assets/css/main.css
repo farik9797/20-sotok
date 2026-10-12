@@ -689,9 +689,11 @@ body:has(.cookie-bar.is-open) .to-top,body:has(.cookie-bar.is-open) .to-top.is-v
   .footer p.flex{display:block}
   .footer p.flex .ic{display:inline-block;vertical-align:-4px;margin-right:6px}
   .footer .legal{justify-content:center;text-align:center}
-  .footer li a{display:inline-block;padding:6px 10px}
-  .footer ul{gap:2px}
-  .footer .legal a,.footer a[href^="tel:"],.footer a[href^="mailto:"]{display:inline-block;padding:5px 0}
+  .footer li a{display:inline-block;padding:10.5px 12px}
+  .footer ul{gap:0}
+  .footer .legal a,.footer a[href^="tel:"],.footer a[href^="mailto:"]{display:inline-block;padding:11px 0}
+  .footer a[href^="tel:"]{padding:6px 0}
+  .footer .legal a{padding:12px 0}
   .footer .legal > div{width:100%}
 }
 
