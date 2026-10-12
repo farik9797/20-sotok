@@ -254,9 +254,11 @@
   /* ---- маска телефона РБ: +375 (__) ___-__-__ ---- */
   window.applyByMask = function (input) {
     const fmt = (v) => {
-      let d = v.replace(/\D/g, '');
+      // поле всегда начинается с литерала «+375», иначе эти цифры съедают код оператора
+      let d = v.replace(/^\+?375/, '').replace(/\D/g, '');
       if (d.startsWith('375')) d = d.slice(3);
       else if (d.startsWith('80')) d = d.slice(2);
+      else if (d.startsWith('0')) d = d.slice(1);
       d = d.slice(0, 9);
       let out = '+375';
       if (d.length > 0) out += ' (' + d.slice(0, 2);
