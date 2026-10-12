@@ -250,7 +250,7 @@ br.sm-only{display:none}
 .opt .opt-t{font-weight:500;flex:1 1 0;min-width:0}
 /* пояснение всегда отдельной строкой под заголовком: в две колонки оно иначе
    распирает карточку и режет заголовок на «80–/150/м²» */
-.opt .opt-s{font-size:.85rem;color:var(--muted-dark);flex:0 0 calc(100% - 38px);margin-left:38px;white-space:normal}
+.opt .opt-s{font-size:.78rem;font-style:italic;color:var(--muted-dark);flex:0 0 calc(100% - 38px);margin-left:38px;white-space:normal}
 /* шаг «площадь»: ручной ввод под кнопками быстрого выбора */
 .quiz-exact{margin-top:22px;padding-top:20px;border-top:1px solid var(--line-dark)}
 .quiz-exact > label{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--muted-dark);margin-bottom:10px}
@@ -794,22 +794,22 @@ html.has-cursor .photo.is-zoomable{cursor:none}
 /* низкие экраны (альбомная ориентация, маленькие ноутбуки): прячем пояснения под
    заголовками опций — иначе пять карточек не умещаются и появляется прокрутка */
 @media(max-height:759px){
-  .quiz-modal-panel .opt .opt-s{display:none}
-  .quiz-modal-panel .quiz-step:has(.opt) .quiz-hint{display:none}
   .quiz-modal-panel .quiz-head{padding:14px 28px}
   .quiz-modal-panel .quiz-body{padding:20px 28px 18px}
   .quiz-modal-panel .quiz-q{font-size:1.28rem;margin-bottom:14px}
-  .quiz-modal-panel .opt{min-height:52px;padding:11px 16px}
+  .quiz-modal-panel .opt{min-height:48px;padding:9px 16px;gap:2px 16px}
+  .quiz-modal-panel .opt .opt-s{line-height:1.25}
   .quiz-modal-panel .quiz-foot{margin-top:16px}
   .quiz-modal-panel .quiz-exact{margin-top:14px;padding-top:14px}
   .quiz-modal-panel .quiz-exact-row input{min-height:48px}
 }
 /* совсем низкие экраны — телефон в альбомной ориентации */
 @media(max-height:479px){
+  .quiz-modal-panel .quiz-step:has(.opt) .quiz-hint{display:none}
   .quiz-modal-panel .quiz-head{padding:10px 24px}
   .quiz-modal-panel .quiz-body{padding:14px 24px}
   .quiz-modal-panel .quiz-q{font-size:1.15rem;margin-bottom:10px}
-  .quiz-modal-panel .opt{min-height:46px;padding:8px 14px}
+  .quiz-modal-panel .opt{min-height:46px;padding:7px 14px;gap:0 14px}
   .quiz-modal-panel .quiz-foot{margin-top:12px}
   .quiz-modal-panel .btn-lg{min-height:48px}
   .quiz-modal-panel .field input,.quiz-modal-panel .quiz-exact-row input{min-height:46px}
@@ -825,6 +825,8 @@ html.has-cursor .photo.is-zoomable{cursor:none}
   .quiz-modal-panel .quiz-step > .grid{gap:8px}
   /* узкий и низкий экран (телефон лёжа) — варианты в две колонки, иначе пять строк не влезают */
   @media(max-width:767px){.quiz-modal-panel .quiz-step > .grid{grid-template-columns:1fr 1fr}}
+  /* телефон лёжа: панель широкая, а высоты нет — раскладываем варианты в три колонки */
+  @media(min-width:900px){.quiz-modal-panel .quiz-step > .grid{grid-template-columns:repeat(3,1fr)}}
 }
 /* телефон лёжа: в шапке остаётся только счётчик шагов */
 @media(max-height:399px){
