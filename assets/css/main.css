@@ -479,6 +479,9 @@ body:has(.cookie-bar.is-open) .to-top,body:has(.cookie-bar.is-open) .to-top.is-v
 .nav-mobile .nav-burger{width:42px;height:42px}
 .nav-mobile .nav-icon .ic,.nav-mobile .nav-burger .ic,.nav-mobile .theme-toggle .ic{width:20px;height:20px}
 .nav-mobile .nav-icon svg:has(use[href^="#i-si-"]){width:18px;height:18px}
+/* палец попадает в 44px, а иконки остаются прежнего размера */
+.nav-mobile .nav-icon,.nav-mobile .nav-burger,.nav-mobile .theme-toggle{position:relative}
+.nav-mobile .nav-icon::after,.nav-mobile .nav-burger::after,.nav-mobile .theme-toggle::after{content:"";position:absolute;inset:-2px -1px}
 .mobile-menu{overflow-y:auto}
 @media(max-width:1023px){.nav-inner{gap:12px}}
 @media(max-width:479px){.logo-full{height:30px}}
@@ -684,6 +687,9 @@ body:has(.cookie-bar.is-open) .to-top,body:has(.cookie-bar.is-open) .to-top.is-v
   .footer p.flex{display:block}
   .footer p.flex .ic{display:inline-block;vertical-align:-4px;margin-right:6px}
   .footer .legal{justify-content:center;text-align:center}
+  .footer li a{display:inline-block;padding:6px 10px}
+  .footer ul{gap:2px}
+  .footer .legal a,.footer a[href^="tel:"],.footer a[href^="mailto:"]{display:inline-block;padding:5px 0}
   .footer .legal > div{width:100%}
 }
 
@@ -702,6 +708,7 @@ body:has(.cookie-bar.is-open) .to-top,body:has(.cookie-bar.is-open) .to-top.is-v
   .nav .logo,.mobile-menu .logo{gap:8px}
   .nav-mobile{gap:5px}
   .nav-mobile .nav-icon,.nav-mobile .nav-burger,.nav-mobile .theme-toggle{width:38px;height:38px}
+  .nav-mobile .nav-icon::after,.nav-mobile .nav-burger::after,.nav-mobile .theme-toggle::after{inset:-4px -2px}
 }
 
 /* стык секций на телефоне: нижняя линия списка дублирует границу блока, а отступ под ней великоват */
