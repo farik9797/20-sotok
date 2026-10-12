@@ -9,7 +9,7 @@
     { v: 'Гродненское / Раковское направление', s: 'Тарасово, Ратомка, Хатежино' },
     { v: 'Московское направление', s: 'Колодищи, Городище, Смолевичи' },
     { v: 'Брестское / Слуцкое направление', s: 'Сеница, Прилуки, Щомыслица' },
-    { v: 'Другое направление в пределах Минского района', s: '' }
+    { v: 'Другое направление', s: 'в пределах Минского района', val: 'Другое направление в пределах Минского района' }
   ];
   const AREAS = [
     { v: 'до 80 м²', s: 'отмостка и дорожки' },
@@ -33,7 +33,7 @@
 
   const ic = (n, cls) => `<svg class="ic ${cls || ''}"><use href="#i-${n}"/></svg>`;
   const opt = (name, o, type) => `
-    <label class="opt ${type === 'radio' ? 'radio' : ''}"><input type="${type}" name="${name}" value="${o.v}"${o.k ? ` data-key="${o.k}"` : ''}>
+    <label class="opt ${type === 'radio' ? 'radio' : ''}"><input type="${type}" name="${name}" value="${o.val || o.v}"${o.k ? ` data-key="${o.k}"` : ''}>
       <span class="box">${ic('check')}</span><span class="opt-t">${o.v}</span>${o.s ? `<span class="opt-s">${o.s}</span>` : ''}</label>`;
 
   function template(id, pre) {
