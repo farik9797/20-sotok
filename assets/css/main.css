@@ -481,6 +481,8 @@ body:has(.cookie-bar.is-open) .to-top,body:has(.cookie-bar.is-open) .to-top.is-v
 .nav-mobile .nav-icon svg:has(use[href^="#i-si-"]){width:18px;height:18px}
 /* палец попадает в 44px, а иконки остаются прежнего размера */
 .nav-mobile .nav-icon,.nav-mobile .nav-burger,.nav-mobile .theme-toggle{position:relative}
+.nav .logo{position:relative}
+.nav .logo::after{content:"";position:absolute;inset:-9px 0}
 .nav-mobile .nav-icon::after,.nav-mobile .nav-burger::after,.nav-mobile .theme-toggle::after{content:"";position:absolute;inset:-2px -1px}
 .mobile-menu{overflow-y:auto}
 @media(max-width:1023px){.nav-inner{gap:12px}}
