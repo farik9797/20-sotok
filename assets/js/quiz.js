@@ -50,7 +50,7 @@
       <!-- шаг 1 · локация -->
       <section class="quiz-step is-active" data-step="1">
         <h3 class="quiz-q">Где расположен ваш участок?</h3>
-        <div class="grid gap-3">${DIRECTIONS.map((d) => opt(id + '-dir', d, 'radio')).join('')}</div>
+        <div class="grid gap-3 md:grid-cols-2">${DIRECTIONS.map((d) => opt(id + '-dir', d, 'radio')).join('')}</div>
         <div class="quiz-foot"><span></span><button type="button" class="btn btn-fir" data-next>Далее ${ic('arrow-right')}</button></div>
       </section>
       <!-- шаг 2 · площадь мощения -->
