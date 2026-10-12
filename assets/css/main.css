@@ -238,7 +238,7 @@ br.sm-only{display:none}
 @keyframes qfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .quiz-q{font-family:var(--font-display);font-weight:400;font-size:clamp(1.35rem,2vw,1.8rem);letter-spacing:-.02em;line-height:1.2;margin:0 0 22px}
 .quiz-hint{font-size:.9rem;color:var(--muted-dark);margin:-12px 0 22px}
-.opt{display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid var(--line-dark);cursor:pointer;transition:border-color .2s,background-color .2s;background:rgba(244,244,242,.45);min-height:64px;user-select:none}
+.opt{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;padding:18px 20px;border:1px solid var(--line-dark);cursor:pointer;transition:border-color .2s,background-color .2s;background:rgba(244,244,242,.45);min-height:64px;user-select:none}
 .opt:hover{border-color:rgba(42,47,53,.5)}
 .opt input{position:absolute;opacity:0;pointer-events:none}
 .opt .box{width:22px;height:22px;border:1px solid rgba(42,47,53,.45);display:grid;place-items:center;flex:none;transition:background-color .2s,border-color .2s}
@@ -247,16 +247,10 @@ br.sm-only{display:none}
 .opt.is-checked{border-color:var(--fir);background:rgba(43,66,54,.08)}
 .opt.is-checked .box{background:var(--fir);border-color:var(--fir)}
 .opt.is-checked .box .ic{opacity:1}
-.opt .opt-t{font-weight:500}
-.opt .opt-s{font-size:.85rem;color:var(--muted-dark);margin-left:auto;white-space:nowrap}
-/* длинные пояснения в опциях квиза не влезают в строку — уводим их под заголовок */
-.opt:has(.opt-s.wrap){flex-wrap:wrap}
-@media(max-width:639px){
-  .opt{flex-wrap:wrap;align-items:flex-start}
-  .opt .box{margin-top:2px}
-  .opt .opt-t{flex:1 1 0;min-width:0}
-  .opt .opt-s{white-space:normal;margin-left:38px;flex-basis:100%}
-}
+.opt .opt-t{font-weight:500;flex:1 1 0;min-width:0}
+/* пояснение всегда отдельной строкой под заголовком: в две колонки оно иначе
+   распирает карточку и режет заголовок на «80–/150/м²» */
+.opt .opt-s{font-size:.85rem;color:var(--muted-dark);flex:0 0 calc(100% - 38px);margin-left:38px;white-space:normal}
 /* шаг «площадь»: ручной ввод под кнопками быстрого выбора */
 .quiz-exact{margin-top:22px;padding-top:20px;border-top:1px solid var(--line-dark)}
 .quiz-exact > label{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--muted-dark);margin-bottom:10px}
