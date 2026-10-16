@@ -526,6 +526,21 @@ body:has(.cookie-bar.is-open) .to-top,body:has(.cookie-bar.is-open) .to-top.is-v
 .svc-tag{color:var(--stone-2)}
 .cmp .win{color:var(--stone-2);font-weight:600;box-shadow:inset 2px 0 0 var(--brass)}
 .light .cmp .win,[data-theme="light"] .cmp .win{color:var(--ink);box-shadow:inset 2px 0 0 var(--fir)}
+/* сравнение на телефоне: вместо таблицы с боковой прокруткой — карточка на строку */
+@media(max-width:767px){
+  .cmp,.cmp tbody,.cmp tr,.cmp td{display:block;width:auto}
+  .cmp thead{display:none}
+  .cmp tr{border:1px solid var(--line-dark);padding:18px;margin-bottom:12px;background:rgba(244,244,242,.55)}
+  .cmp tr:last-child{margin-bottom:0}
+  .cmp td{padding:0;border:0}
+  .cmp td:first-child{width:auto;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:14px}
+  .cmp td[data-th]{position:relative;padding-left:14px;margin-top:14px}
+  .cmp td[data-th]::before{content:attr(data-th);display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+    font-weight:500;color:var(--muted-dark);margin-bottom:4px}
+  .cmp td[data-th]:not(.win){opacity:.8}
+  .cmp .win,.light .cmp .win,[data-theme="light"] .cmp .win{box-shadow:inset 2px 0 0 var(--fir)}
+  .cmp td[data-th]:not(.win){box-shadow:inset 2px 0 0 var(--line-dark)}
+}
 
 /* ============================================================
    СВЕТЛАЯ ТЕМА — [data-theme="light"] на <html>
