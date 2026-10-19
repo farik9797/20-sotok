@@ -57,6 +57,9 @@ input,select,textarea{font:inherit;color:inherit}
 .light .hairline,[data-theme="light"] .hairline{border-color:var(--line-dark)}
 .muted{color:var(--muted)}
 .hairline{border-top:1px solid var(--line)}
+/* выноска с рамкой, которая видна и на тёмной, и на светлой секции */
+.note-box{border:1px solid var(--line)}
+.light .note-box,[data-theme="light"] .note-box{border-color:var(--line-dark)}
 .hairline-b{border-bottom:1px solid var(--line)}
 .light .hairline-b,[data-theme="light"] .hairline-b{border-color:var(--line-dark)}
 
