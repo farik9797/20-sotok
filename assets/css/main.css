@@ -406,6 +406,8 @@ blockquote footer{font-size:.85rem;color:var(--muted);margin-top:14px}
 .light .eq:hover,[data-theme="light"] .eq:hover{border-color:rgba(42,47,53,.5)}
 .light .eq p,[data-theme="light"] .eq p{color:var(--muted-dark)}
 .light .incl,[data-theme="light"] .incl{border-color:var(--line-dark)}
+.light .step,[data-theme="light"] .step{border-color:var(--line-dark)}
+.light .step p,[data-theme="light"] .step p{color:var(--muted-dark)}
 .light .incl .num,.light .incl p,[data-theme="light"] .incl .num,[data-theme="light"] .incl p{color:var(--muted-dark)}
 
 /* ---------- дизайнерский плейсхолдер для фото ---------- */
