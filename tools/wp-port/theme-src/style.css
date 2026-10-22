@@ -1,0 +1,10 @@
+/*
+Theme Name: 20 соток
+Theme URI: https://20sotok.by/
+Description: Тема студии инженерного благоустройства «20 соток». Порт согласованного статического макета 1:1; шаблоны собираются скриптом tools/wp-port/build_theme.py. Контент — через Secure Custom Fields.
+Version: {{VERSION}}
+Requires at least: 6.4
+Requires PHP: 7.4
+Text Domain: sotok20
+*/
+/* Стили темы — в assets/css/main.css и assets/css/tailwind.css (подключаются из inc/setup.php). */

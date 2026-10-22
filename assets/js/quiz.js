@@ -97,7 +97,7 @@
         <label class="opt consent-opt mt-4" for="${id}-consent">
           <input id="${id}-consent" name="${id}-consent" type="checkbox">
           <span class="box">${ic('check')}</span>
-          <span class="consent">Согласен на <a class="link" href="${ROOT}politika.html" target="_blank" rel="noopener">обработку персональных данных</a>. Без спама: один расчёт и примеры объектов.</span>
+          <span class="consent">Согласен на <a class="link" href="${window.S20 ? window.S20.privacy : ROOT + 'politika.html'}" target="_blank" rel="noopener">обработку персональных данных</a>. Без спама: один расчёт и примеры объектов.</span>
         </label>
         <span class="field-err consent-err">Отметьте согласие, чтобы отправить заявку</span>
         <div class="quiz-send">

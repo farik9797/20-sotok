@@ -36,7 +36,7 @@
     bar.setAttribute('role', 'region');
     bar.setAttribute('aria-label', 'Уведомление об использовании данных браузера');
     bar.innerHTML = '<p>Сайт сохраняет в браузере только технические настройки — выбранную тему и то, что вы закрыли это уведомление. ' +
-      'Рекламных и аналитических куки здесь нет. Подробнее — в <a class="link" href="' + root + 'politika.html">политике конфиденциальности</a>.</p>' +
+      'Рекламных и аналитических куки здесь нет. Подробнее — в <a class="link" href="' + (window.S20 ? window.S20.privacy : root + 'politika.html') + '">политике конфиденциальности</a>.</p>' +
       '<button type="button" class="btn btn-brass" data-cookie-ok>Понятно</button>';
     document.body.appendChild(bar);
     requestAnimationFrame(() => bar.classList.add('is-open'));
@@ -339,8 +339,11 @@
     // остальные блоки: мягкий подъём при скролле
     document.querySelectorAll('[data-reveal]').forEach((el) => {
       const children = el.dataset.reveal === 'stagger' ? Array.from(el.children) : [el];
+      // карточки, стоящие в один ряд, поднимать по очереди нельзя: пока идёт анимация,
+      // ряд выглядит перекошенным — им оставляем только проявление
+      const oneRow = children.length > 1 && children.every((c) => Math.abs(c.offsetTop - children[0].offsetTop) < 2);
       gsap.from(children, {
-        y: 34, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.1,
+        y: oneRow ? 0 : 34, opacity: 0, duration: oneRow ? 0.7 : 1, ease: 'power3.out', stagger: oneRow ? 0.06 : 0.1,
         scrollTrigger: { trigger: el, start: 'top 86%', once: true }
       });
     });

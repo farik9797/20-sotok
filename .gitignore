@@ -10,3 +10,13 @@ password.md
 
 # React-версия сайта живёт в отдельном репозитории
 app/
+
+# бэкапы с хостинга: внутри configuration.php с паролями БД
+backup/
+
+# локальный WordPress для проверки темы (ядро, база SQLite)
+.wp-local/
+
+# тема WordPress: картинки и видео копирует сборщик из assets/ макета
+wp-theme/sotok20/assets/img/
+wp-theme/sotok20/assets/video/
