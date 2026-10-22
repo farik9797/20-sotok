@@ -236,6 +236,45 @@ def wp_install(url, remote_dir, public=False):
         print('установочный скрипт удалён с сервера')
 
 
+# ---------- переключение основного домена ----------
+ROOT_DIR = '/www/20sotok.by'
+KEEP_IN_ROOT = {'.well-known', 'googlef134e039bc4ec49b.html', 'yandex_21e67eed46eb77d6.html', 'new'}   # подтверждения Google/Яндекса и SSL
+
+
+def remote_entries(path):
+    out = lftp(['cls -1a %s' % path], quiet=True)
+    names = [l.rstrip('/').split('/')[-1] for l in out.splitlines() if l.strip()]
+    return [n for n in names if n not in ('.', '..')]
+
+
+def wp_promote(archive='/joomla-archive-2026-10-22', dry=False):
+    """Joomla из корня — в архив вне www, WordPress из /new/ — в корень. Только переименования: быстро и обратимо."""
+    joomla = [n for n in remote_entries(ROOT_DIR) if n not in KEEP_IN_ROOT]
+    wp = remote_entries(ROOT_DIR + '/new')
+    plan = ['mkdir -p %s' % archive]
+    plan += ['mv %s/%s %s/%s' % (ROOT_DIR, n, archive, n) for n in joomla]
+    plan += ['mv %s/new/%s %s/%s' % (ROOT_DIR, n, ROOT_DIR, n) for n in wp]
+    plan += ['rmdir %s/new' % ROOT_DIR]
+    log = PROJECT / 'backup' / 'promote-plan.txt'
+    log.write_text('\n'.join(plan) + '\n', encoding='utf-8')
+    print('в архив: %d записей Joomla; в корень: %d записей WordPress; план — %s' % (len(joomla), len(wp), log.relative_to(PROJECT)))
+    if dry:
+        return
+    lftp(plan, quiet=True)
+    # адреса и среда для корня домена
+    ht = get_text(ROOT_DIR + '/.htaccess')
+    ht = ht.replace('RewriteBase /new/', 'RewriteBase /').replace('RewriteRule . /new/index.php [L]', 'RewriteRule . /index.php [L]')
+    ht = ht.replace('RewriteRule ^index\\.php$ - [L]\n',
+                    'RewriteRule ^index\\.php$ - [L]\n'
+                    '# адреса старого сайта на Joomla → главная\n'
+                    'RewriteCond %{QUERY_STRING} (^|&)option=com_ [NC]\nRewriteRule ^index\\.php$ /? [R=301,L]\n'
+                    'RewriteRule ^sitemap\\.xml$ /wp-sitemap.xml [R=301,L]\n', 1)
+    put_text(ROOT_DIR + '/.htaccess', ht)
+    cfg = get_text(ROOT_DIR + '/wp-config.php').replace("define('WP_ENVIRONMENT_TYPE', 'staging');", "define('WP_ENVIRONMENT_TYPE', 'production');")
+    put_text(ROOT_DIR + '/wp-config.php', cfg)
+    print('готово: WordPress в корне, .htaccess и wp-config переключены на основной домен')
+
+
 if __name__ == '__main__':
     cmd, *args = sys.argv[1:] or ['help']
     if cmd == 'ls':
@@ -248,6 +287,8 @@ if __name__ == '__main__':
         # deploy.py wp-bundle <среда> [папка] [раздел-БД-в-password.md] [ip-для-установки]
         wp_bundle(args[0] if args else 'staging', args[1] if len(args) > 1 else '/',
                   args[2] if len(args) > 2 else 'БД WordPress', args[3] if len(args) > 3 else None)
+    elif cmd == 'wp-promote':
+        wp_promote(dry=bool(args and args[0] == 'dry'))
     elif cmd == 'wp-upload':
         wp_upload(args[0])
     elif cmd == 'wp-install':

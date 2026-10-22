@@ -197,6 +197,9 @@
   **Установку проходит заказчик/Farrukh сам** через стандартную форму `…/new/wp-admin/install.php` (свой логин и пароль администратора). `install.php` открыт только с IP 93.188.86.71 (`wp-admin/.htaccess`), `setup-config.php` закрыт — чужой не перехватит установку. Сразу после установки mu-плагин `s20-setup.php` один раз ставит тему, SCF, 11 страниц с шаблонами, главную, ЧПУ (через `$wp_rewrite->set_permalink_structure()` + сброс `rewrite_rules` — иначе правила собираются по старой схеме и все адреса открывают главную) и удаляет себя. Сценарий проверен локально POST-ом формы установки на чистом WP.
   **Антибот hoster.by** («Секундочку…», Imunify WebShield) пропускает только браузеры: curl, Python, headless Chrome получают заглушку. Обходить его подменой User-Agent для автотестов не стал — для сверки 1:1 на хостинге нужен живой браузер или временное отключение защиты в панели.
 
+- **Порядок переезда согласован (22.10):** сначала старый сайт → `old.20sotok.by` (под паролем, noindex), потом новый WordPress — в корень 20sotok.by. Поддомена пока нет: в панели вместо него создан сайт `20-sotok.by` (через дефис, папка `/www/20-sotok.by` с заглушкой хостинга, DNS у домена нет) — для переезда не используется.
+  Готово к запуску: `deploy.py old-upload` + `old-protect` (как только появится `/www/old.20sotok.by`); `deploy.py wp-promote` — Joomla из корня в `/joomla-archive-2026-10-22` (вне www, только переименования, план в `backup/promote-plan.txt`: 31 запись Joomla, 21 — WordPress), WordPress из `/new/` в корень, `.htaccess` на `/` (+301 со старых `index.php?option=com_…` и `/sitemap.xml` → `/wp-sitemap.xml`), `WP_ENVIRONMENT_TYPE=production`. В корне остаются `.well-known`, `googlef134e039bc4ec49b.html`, `yandex_21e67eed46eb77d6.html` — подтверждения Google/Яндекса.
+
 
 ## Открытые вопросы
 - Есть ли у Telegram студии username (сейчас ссылка по номеру телефона).
