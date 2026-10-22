@@ -30,14 +30,14 @@
       <a href="<?php echo s20_url('kontakty'); ?>"<?php s20_nav('kontakty'); ?>>Контакты</a>
     </nav>
     <div class="nav-cta">
-      <a href="tel:+375445173050" class="nav-phone">+375 (44) 517-30-50</a>
+      <a href="<?php echo esc_html(s20_c('tel')); ?>" class="nav-phone"><?php echo esc_html(s20_c('phone')); ?></a>
       <button type="button" class="btn btn-brass" data-quiz-open>Рассчитать бюджет</button>
       <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Включить светлую тему"><svg class="ic ic-sun" aria-hidden="true"><use href="#i-sun"/></svg><svg class="ic ic-moon" aria-hidden="true"><use href="#i-moon"/></svg></button>
     </div>
     <div class="nav-mobile">
-      <a href="tel:+375445173050" class="nav-icon nav-icon-call" aria-label="Позвонить"><svg class="ic " aria-hidden="true"><use href="#i-phone"/></svg></a>
-      <a href="https://t.me/+375445173050" class="nav-icon" target="_blank" rel="noopener" aria-label="Написать в Telegram"><svg class="ic " aria-hidden="true"><use href="#i-si-telegram"/></svg></a>
-      <a href="viber://chat?number=%2B375445173050" class="nav-icon" aria-label="Написать в Viber"><svg class="ic " aria-hidden="true"><use href="#i-si-viber"/></svg></a>
+      <a href="<?php echo esc_html(s20_c('tel')); ?>" class="nav-icon nav-icon-call" aria-label="Позвонить"><svg class="ic " aria-hidden="true"><use href="#i-phone"/></svg></a>
+      <a href="<?php echo esc_html(s20_c('telegram')); ?>" class="nav-icon" target="_blank" rel="noopener" aria-label="Написать в Telegram"><svg class="ic " aria-hidden="true"><use href="#i-si-telegram"/></svg></a>
+      <a href="<?php echo esc_html(s20_c('viber')); ?>" class="nav-icon" aria-label="Написать в Viber"><svg class="ic " aria-hidden="true"><use href="#i-si-viber"/></svg></a>
       <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Включить светлую тему"><svg class="ic ic-sun" aria-hidden="true"><use href="#i-sun"/></svg><svg class="ic ic-moon" aria-hidden="true"><use href="#i-moon"/></svg></button><button type="button" class="nav-burger" data-menu-open aria-label="Открыть меню" aria-expanded="false"><svg class="ic " aria-hidden="true"><use href="#i-menu"/></svg></button>
     </div>
   </div>
@@ -46,9 +46,9 @@
   <div class="flex items-center justify-between" style="height:84px">
     <a href="<?php echo s20_url(''); ?>" class="logo"><img class="logo-full logo-light" src="<?php echo S20_A; ?>logo/logo.svg" alt="20 соток — инженерное благоустройство" width="140" height="34"><img class="logo-full logo-dark" src="<?php echo S20_A; ?>logo/logo-dark.svg" alt="" aria-hidden="true" width="140" height="34"></a>
     <div class="nav-mobile">
-      <a href="tel:+375445173050" class="nav-icon nav-icon-call" aria-label="Позвонить"><svg class="ic " aria-hidden="true"><use href="#i-phone"/></svg></a>
-      <a href="https://t.me/+375445173050" class="nav-icon" target="_blank" rel="noopener" aria-label="Написать в Telegram"><svg class="ic " aria-hidden="true"><use href="#i-si-telegram"/></svg></a>
-      <a href="viber://chat?number=%2B375445173050" class="nav-icon" aria-label="Написать в Viber"><svg class="ic " aria-hidden="true"><use href="#i-si-viber"/></svg></a>
+      <a href="<?php echo esc_html(s20_c('tel')); ?>" class="nav-icon nav-icon-call" aria-label="Позвонить"><svg class="ic " aria-hidden="true"><use href="#i-phone"/></svg></a>
+      <a href="<?php echo esc_html(s20_c('telegram')); ?>" class="nav-icon" target="_blank" rel="noopener" aria-label="Написать в Telegram"><svg class="ic " aria-hidden="true"><use href="#i-si-telegram"/></svg></a>
+      <a href="<?php echo esc_html(s20_c('viber')); ?>" class="nav-icon" aria-label="Написать в Viber"><svg class="ic " aria-hidden="true"><use href="#i-si-viber"/></svg></a>
       <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Включить светлую тему"><svg class="ic ic-sun" aria-hidden="true"><use href="#i-sun"/></svg><svg class="ic ic-moon" aria-hidden="true"><use href="#i-moon"/></svg></button><button type="button" class="nav-burger" data-menu-close aria-label="Закрыть меню"><svg class="ic " aria-hidden="true"><use href="#i-x"/></svg></button>
     </div>
   </div>

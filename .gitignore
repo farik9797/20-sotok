@@ -20,3 +20,6 @@ backup/
 # тема WordPress: картинки и видео копирует сборщик из assets/ макета
 wp-theme/sotok20/assets/img/
 wp-theme/sotok20/assets/video/
+
+# собранный комплект WordPress для выкладки: внутри wp-config.php с паролем БД
+.deploy/

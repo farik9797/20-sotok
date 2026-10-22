@@ -24,22 +24,22 @@
           <li><a href="<?php echo s20_url('blog'); ?>">Полезно знать</a></li>
           <li><a href="<?php echo s20_url('o-kompanii'); ?>">О компании</a></li>
           <li><a href="<?php echo s20_url('kontakty'); ?>">Контакты</a></li>
-          <li><a href="https://www.instagram.com/20sotok.by/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="<?php echo esc_html(s20_c('instagram')); ?>" target="_blank" rel="noopener">Instagram</a></li>
         </ul>
       </div>
       <div class="lg:col-span-4">
         <h5>Связаться</h5>
-        <a href="tel:+375445173050" class="font-display text-2xl font-light tracking-tight">+375 (44) 517-30-50</a>
-        <p class="muted mt-2 text-[.9rem]">Ежедневно 9:00–20:00 · <a href="mailto:by20sotok@gmail.com" class="underline decoration-brass/60 underline-offset-4">by20sotok@gmail.com</a></p>
+        <a href="<?php echo esc_html(s20_c('tel')); ?>" class="font-display text-2xl font-light tracking-tight"><?php echo esc_html(s20_c('phone')); ?></a>
+        <p class="muted mt-2 text-[.9rem]"><?php echo esc_html(s20_c('hours')); ?> · <a href="mailto:<?php echo esc_html(s20_c('email')); ?>" class="underline decoration-brass/60 underline-offset-4"><?php echo esc_html(s20_c('email')); ?></a></p>
         <div class="grid gap-3 mt-6 sm:grid-cols-2 lg:grid-cols-1 lg:w-max">
-          <a class="msg-btn" href="https://t.me/+375445173050" target="_blank" rel="noopener"><svg class="ic " aria-hidden="true"><use href="#i-si-telegram"/></svg> Написать в Telegram</a>
-          <a class="msg-btn" href="viber://chat?number=%2B375445173050"><svg class="ic " aria-hidden="true"><use href="#i-si-viber"/></svg> Написать в Viber</a>
+          <a class="msg-btn" href="<?php echo esc_html(s20_c('telegram')); ?>" target="_blank" rel="noopener"><svg class="ic " aria-hidden="true"><use href="#i-si-telegram"/></svg> Написать в Telegram</a>
+          <a class="msg-btn" href="<?php echo esc_html(s20_c('viber')); ?>"><svg class="ic " aria-hidden="true"><use href="#i-si-viber"/></svg> Написать в Viber</a>
         </div>
         <p class="muted mt-6 text-[.9rem]">Выезд инженера на объект — бесплатно при заказе комплекса работ.</p>
       </div>
     </div>
     <div class="hairline mt-14 pt-8 flex flex-wrap gap-x-10 gap-y-3 justify-between legal">
-      <div>ИП Денисов Евгений Игоревич · УНП 193435021<br>Офис: г. Минск, ул. Козыревская, 15, офис 604</div>
+      <div><?php echo esc_html(s20_c('company')); ?> · УНП <?php echo esc_html(s20_c('unp')); ?><br>Офис: <?php echo esc_html(s20_c('office')); ?></div>
       <div>© 2026 Студия инженерного благоустройства «20 соток» · <a href="<?php echo s20_url('politika'); ?>" class="underline underline-offset-4">Политика конфиденциальности</a></div>
     </div>
   </div>

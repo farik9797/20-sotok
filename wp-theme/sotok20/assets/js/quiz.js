@@ -87,6 +87,7 @@
       </section>
       <!-- шаг 5 · лид-форма -->
       <section class="quiz-step" data-step="5">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <h3 class="quiz-q">Параметры приняты</h3>
         <p class="quiz-hint">Евгений уже анализирует конфигурацию вашего участка для расчёта предварительного бюджета. Укажите номер — пришлём смету в удобный мессенджер.</p>
         <div class="field">
@@ -113,6 +114,7 @@
           <h3 class="quiz-q mt-4">Заявка принята</h3>
           <p class="prose" style="color:var(--muted-dark)">Предварительную смету и примеры похожих объектов отправим в <b data-msg-name>Telegram</b> в течение рабочего дня. Если понадобится выезд инженера на участок, он бесплатный при заказе комплекса работ.</p>
           <dl class="dl mt-6" style="font-size:.9rem" data-summary></dl>
+          <p class="prose mt-4" style="color:#9B3B2E" data-send-fail hidden>Не получилось отправить заявку автоматически. Позвоните нам: <a class="link" href="${window.S20 && window.S20.tel ? window.S20.tel : 'tel:+375445173050'}">${window.S20 && window.S20.phone ? window.S20.phone : '+375 (44) 517-30-50'}</a></p>
         </div>
       </section>
     </form>`;
@@ -120,6 +122,7 @@
 
   function mount(root, idx) {
     const id = 'q' + idx;
+    const started = Date.now();
     root.innerHTML = template(id, root.dataset.preselect);
     // крестик закрытия нужен только в модальном окне, во встроенном блоке его убираем
     if (!root.closest('.quiz-modal')) root.querySelector('.quiz-close').remove();
@@ -216,7 +219,16 @@
         <div><dt>Формат плитки</dt><dd>${style}</dd></div>
         <div><dt>Системы</dt><dd>${sys || 'только мощение'}</dd></div>
         <div><dt>Контакт</dt><dd>${msg} · ${phone.value}</dd></div>`;
-      // В макете отправка не выполняется. Здесь будет POST в CRM / Telegram-бот.
+      // В WordPress заявка уходит на сервер (почта, «Заявки» в админке, Telegram); в статическом макете — только экран «Спасибо»
+      if (window.S20 && window.S20.lead) {
+        fetch(window.S20.lead, {
+          method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ direction: dir, area: areaValue(), style, systems: sys, phone: phone.value, messenger: msg,
+            consent: agreed, page: location.href, elapsed: Math.round((Date.now() - started) / 1000),
+            website: (root.querySelector('input[name="website"]') || {}).value || '' })
+        }).then((r) => { if (!r.ok) throw new Error(r.status); })
+          .catch(() => { const n = root.querySelector('[data-send-fail]'); if (n) n.hidden = false; });
+      }
       show(6);
     });
   }

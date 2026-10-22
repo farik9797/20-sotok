@@ -42,8 +42,8 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script('gsap-scrolltrigger', S20_A . 'js/vendor/ScrollTrigger.min.js', ['gsap'], '3.12.5', true);
     wp_enqueue_script('s20-main', S20_A . 'js/main.js', ['gsap', 'gsap-scrolltrigger'], S20_VER, true);
     wp_enqueue_script('s20-quiz', S20_A . 'js/quiz.js', ['s20-main'], S20_VER, true);
-    // адрес политики для уведомления о cookie и согласия в квизе
-    wp_add_inline_script('s20-main', 'window.S20=' . wp_json_encode(['privacy' => home_url('/politika/')]) . ';', 'before');
+    // адрес политики (cookie, согласие в квизе) и адрес приёма заявок квиза
+    wp_add_inline_script('s20-main', 'window.S20=' . wp_json_encode(['privacy' => home_url('/politika/'), 'lead' => rest_url('s20/v1/lead'), 'phone' => s20_c('phone'), 'tel' => s20_c('tel')]) . ';', 'before');
 }, 100);
 add_action('wp_footer', function () { wp_dequeue_style('core-block-supports'); }, 1);
 

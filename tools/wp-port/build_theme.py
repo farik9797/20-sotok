@@ -16,6 +16,9 @@ import shutil
 import subprocess
 import sys
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import fields  # noqa: E402
+
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 TOOLS = pathlib.Path(__file__).resolve().parent
 OUT = ROOT / 'wp-theme' / 'sotok20'
@@ -35,6 +38,11 @@ PAGES = [
     ('kontakty.html',       'kontakty',       'page-kontakty.php',   'kontakty'),
     ('politika.html',       'politika',       'page-politika.php',   ''),
 ]
+TITLES = {'index.html': 'Главная', 'o-kompanii.html': 'О компании', 'uslugi.html': 'Услуги',
+          'uslugi/plitka.html': 'Услуги — тротуарная плитка', 'uslugi/gazon.html': 'Услуги — газон',
+          'uslugi/poliv.html': 'Услуги — автополив и освещение', 'uslugi/drenazh.html': 'Услуги — дренаж',
+          'proekty.html': 'Проекты', 'blog.html': 'Полезно знать', 'kontakty.html': 'Контакты',
+          'politika.html': 'Политика конфиденциальности'}
 NAV_KEYS = {'index': 'home', 'o-kompanii': 'o-kompanii', 'uslugi': 'uslugi',
             'proekty': 'proekty', 'blog': 'blog', 'kontakty': 'kontakty'}
 
@@ -132,6 +140,19 @@ def php_array(value, indent=1):
     return "'" + str(value).replace('\\', '\\\\').replace("'", "\\'") + "'"
 
 
+def php_value(v, indent=1):
+    pad, end = '    ' * indent, '    ' * (indent - 1)
+    if isinstance(v, dict):
+        return '[\n' + ''.join('%s%s => %s,\n' % (pad, php_value(k), php_value(x, indent + 1)) for k, x in v.items()) + end + ']'
+    if isinstance(v, list):
+        return '[\n' + ''.join('%s%s,\n' % (pad, php_value(x, indent + 1)) for x in v) + end + ']'
+    if isinstance(v, bool):
+        return 'true' if v else 'false'
+    if isinstance(v, int):
+        return str(v)
+    return "'" + str(v).replace('\\', '\\\\').replace("'", "\\'") + "'"
+
+
 def build():
     if OUT.exists():
         for child in OUT.iterdir():
@@ -167,7 +188,7 @@ def build():
         + theme_script + '\n'
         '</head>\n<body class="grain">\n<?php wp_body_open(); ?>\n'
         + base['sprite'] + '\n\n'
-        + rewrite_urls(nav_php(base['chrome'])) + '\n'
+        + fields.contacts_php(rewrite_urls(nav_php(base['chrome']))) + '\n'
     )
     write('header.php', header_php)
 
@@ -175,22 +196,32 @@ def build():
     tail = re.sub(r'data-preselect="[^"]*"', 'data-preselect="<?php echo esc_attr(s20_preselect()); ?>"', base['tail'])
     footer_php = (
         '<?php\n/* Подвал: собирается из макета скриптом tools/wp-port/build_theme.py — правки вносить в макет. */\n?>'
-        + rewrite_urls(base['footer']) + tail + '<?php wp_footer(); ?>\n</body>\n</html>\n'
+        + fields.contacts_php(rewrite_urls(base['footer'])) + tail + '<?php wp_footer(); ?>\n</body>\n</html>\n'
     )
     write('footer.php', footer_php)
 
     # --- шаблоны страниц ---
     seo = {}
+    stats = []
     for src, path, template, _nav in PAGES:
         p = parts[src]
         pre = re.search(r'data-preselect="([^"]*)"', p['tail']).group(1)
-        body = rewrite_urls(p['body'])
-        tpl = ('<?php\n/* %s — собрано из макета %s скриптом tools/wp-port/build_theme.py. */\n'
-               "get_header();\n?>" % (template, src)
+        key = 'home' if template == 'front-page.php' else template[5:-4].replace('-', '_')
+        marked, flist = fields.extract(key, p['body'])
+        body = fields.markers_to_php(fields.contacts_php(rewrite_urls(marked)))
+        name = '' if template == 'front-page.php' else 'Template Name: %s\n' % TITLES[src]
+        tpl = ('<?php\n/*\n%s%s — собрано из макета %s скриптом tools/wp-port/build_theme.py.\n*/\n'
+               "get_header();\n?>" % (name, template, src)
                + body
                + ("<?php s20_set_preselect('%s'); get_footer();\n" % pre))
         write(template, tpl)
         seo[path] = seo_from_head(p['head'])
+        location = ({'param': 'page_type', 'operator': '==', 'value': 'front_page'} if template == 'front-page.php'
+                    else {'param': 'page_template', 'operator': '==', 'value': template})
+        group = {'title': TITLES[src], 'template': template, 'location': location, 'fields': flist}
+        write('inc/fields/%s.php' % key, '<?php\n/* Поля страницы «%s» — сгенерировано из макета. */\nreturn %s;\n'
+              % (TITLES[src], php_value(group)))
+        stats.append((src, sum(1 for f in flist if f['type'] == 'text'), sum(1 for f in flist if f['type'] == 'image')))
 
     write('inc/seo-defaults.php',
           '<?php\n/* SEO по умолчанию — снято с макета. Переопределяется полями страницы «SEO». */\n'
@@ -225,6 +256,9 @@ def build():
 
     print('тема собрана:', OUT.relative_to(ROOT))
     print('шаблонов страниц:', len(PAGES))
+    for src, t, i in stats:
+        print('  %-22s полей: текст %3d, картинки %2d' % (src, t, i))
+    print('  всего полей:', sum(t + i for _, t, i in stats))
 
 
 if __name__ == '__main__':
