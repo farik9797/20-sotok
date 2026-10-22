@@ -141,8 +141,9 @@ def old_protect(user='20sotok'):
 
 
 # ---------- WordPress ----------
-def wp_bundle(env):
-    db = section('БД WordPress')
+def wp_bundle(env, base='/', db_title='БД WordPress', install_ip=None):
+    """base — папка сайта от корня домена ('/' или '/new/'); install_ip — с какого адреса разрешена установка."""
+    db = section(db_title)
     if BUNDLE.exists():
         shutil.rmtree(BUNDLE)
     BUNDLE.parent.mkdir(parents=True, exist_ok=True)
@@ -160,9 +161,12 @@ def wp_bundle(env):
     for p in ('akismet', 'hello.php'):
         target = content / 'plugins' / p
         shutil.rmtree(target) if target.is_dir() else target.unlink(missing_ok=True)
-    defaults = sorted(d.name for d in (content / 'themes').iterdir() if d.is_dir() and d.name.startswith('twenty'))
+    # оставляем одну, самую свежую тему по умолчанию как запасную (имена — словами: twentytwentyfive и т. п.)
+    order = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+    year = lambda n: next((i for i, w in enumerate(order) if n.endswith('twenty' + w)), -1)
+    defaults = sorted((d.name for d in (content / 'themes').iterdir() if d.is_dir() and d.name.startswith('twenty')), key=year)
     for d in defaults[:-1]:
-        shutil.rmtree(content / 'themes' / d)                        # оставляем одну тему по умолчанию как запасную
+        shutil.rmtree(content / 'themes' / d)
     shutil.copytree(THEME, content / 'themes' / 'sotok20', ignore=shutil.ignore_patterns('.DS_Store'))
     print('скачиваю Secure Custom Fields…')
     with urllib.request.urlopen('https://downloads.wordpress.org/plugin/secure-custom-fields.latest-stable.zip', timeout=120) as r:
@@ -184,15 +188,26 @@ def wp_bundle(env):
         "if (!defined('ABSPATH')) define('ABSPATH', __DIR__ . '/');\nrequire_once ABSPATH . 'wp-settings.php';\n"
         % (esc(db['База']), esc(db['Пользователь']), esc(db['Пароль']), esc(db.get('Хост', 'localhost')), salts, env),
         encoding='utf-8')
+    joomla = ('# адреса старого сайта на Joomla → главная\n'
+              'RewriteCond %{QUERY_STRING} (^|&)option=com_ [NC]\nRewriteRule ^index\\.php$ /? [R=301,L]\n') if base == '/' else ''
     (BUNDLE / '.htaccess').write_text(
-        '# BEGIN WordPress\n<IfModule mod_rewrite.c>\nRewriteEngine On\nRewriteBase /\n'
-        'RewriteRule ^index\\.php$ - [L]\n'
-        '# адреса старого сайта на Joomla → главная\n'
-        'RewriteCond %{QUERY_STRING} (^|&)option=com_ [NC]\nRewriteRule ^index\\.php$ /? [R=301,L]\n'
-        'RewriteCond %{REQUEST_FILENAME} !-f\nRewriteCond %{REQUEST_FILENAME} !-d\nRewriteRule . /index.php [L]\n'
+        '# BEGIN WordPress\n<IfModule mod_rewrite.c>\nRewriteEngine On\nRewriteBase %s\n'
+        'RewriteRule ^index\\.php$ - [L]\n%s'
+        'RewriteCond %%{REQUEST_FILENAME} !-f\nRewriteCond %%{REQUEST_FILENAME} !-d\nRewriteRule . %sindex.php [L]\n'
         '</IfModule>\n# END WordPress\n\n'
         '# защита служебных файлов\n<FilesMatch "^(wp-config\\.php|readme\\.html|license\\.txt|xmlrpc\\.php)$">\nRequire all denied\n</FilesMatch>\n'
-        'Options -Indexes\n', encoding='utf-8')
+        'Options -Indexes\n' % (base, joomla, base), encoding='utf-8')
+    # установка WordPress открыта только с указанного адреса — чужой не перехватит установку
+    if install_ip:
+        (BUNDLE / 'wp-admin' / '.htaccess').write_text(
+            '<Files "install.php">\nRequire ip %s\n</Files>\n<Files "setup-config.php">\nRequire all denied\n</Files>\n' % install_ip,
+            encoding='utf-8')
+    # одноразовая настройка сразу после установки: тема, плагин, страницы, главная
+    mu = BUNDLE / 'wp-content' / 'mu-plugins'
+    mu.mkdir(exist_ok=True)
+    tpl = (pathlib.Path(__file__).parent / 's20-setup-mu.php').read_text(encoding='utf-8')
+    (mu / 's20-setup.php').write_text(
+        tpl.replace('%PAGES%', base64.b64encode(json.dumps(PAGES, ensure_ascii=False).encode()).decode()), encoding='utf-8')
     n = sum(1 for _ in BUNDLE.rglob('*') if _.is_file())
     print('комплект готов: %s (%d файлов)' % (BUNDLE.relative_to(PROJECT), n))
 
@@ -230,7 +245,9 @@ if __name__ == '__main__':
     elif cmd == 'old-protect':
         old_protect()
     elif cmd == 'wp-bundle':
-        wp_bundle(args[0] if args else 'staging')
+        # deploy.py wp-bundle <среда> [папка] [раздел-БД-в-password.md] [ip-для-установки]
+        wp_bundle(args[0] if args else 'staging', args[1] if len(args) > 1 else '/',
+                  args[2] if len(args) > 2 else 'БД WordPress', args[3] if len(args) > 3 else None)
     elif cmd == 'wp-upload':
         wp_upload(args[0])
     elif cmd == 'wp-install':
