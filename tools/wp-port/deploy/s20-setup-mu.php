@@ -52,4 +52,13 @@ add_action('init', function () {
     update_option('s20_setup_log', implode('; ', $log));
 
     @unlink(__FILE__);                                    // одноразовый: после настройки больше не нужен
+
+    // тема сменилась посреди запроса: её functions.php в нём не загружен, и шаблоны упадут —
+    // страницу строим заново отдельным запросом (wp_safe_redirect пустит только на свой домен)
+    if (isset($_SERVER['REQUEST_METHOD'], $_SERVER['HTTP_HOST'], $_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_METHOD'] === 'GET'
+        && !wp_doing_ajax() && !wp_doing_cron() && !is_admin()) {
+        nocache_headers();
+        wp_safe_redirect((is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+        exit;
+    }
 }, 1);
