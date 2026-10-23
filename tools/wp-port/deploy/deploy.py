@@ -125,7 +125,7 @@ def old_protect(user='20sotok'):
     put_text(OLD_DIR + '/configuration.php', cfg)
     # 2. пароль на вход (Basic) — файл паролей вне корня сайта
     password = secrets.token_urlsafe(12)
-    line = subprocess.run(['htpasswd', '-nbB', user, password], capture_output=True, text=True, check=True).stdout.strip()
+    line = subprocess.run(['htpasswd', '-nbm', user, password], capture_output=True, text=True, check=True).stdout.strip()
     put_text('/.htpasswd-old', line + '\n')
     ht = get_text(OLD_DIR + '/.htaccess')
     ht = re.sub(r'# s20-protect-start.*?# s20-protect-end\n', '', ht, flags=re.S)
@@ -188,15 +188,18 @@ def wp_bundle(env, base='/', db_title='БД WordPress', install_ip=None):
         "if (!defined('ABSPATH')) define('ABSPATH', __DIR__ . '/');\nrequire_once ABSPATH . 'wp-settings.php';\n"
         % (esc(db['База']), esc(db['Пользователь']), esc(db['Пароль']), esc(db.get('Хост', 'localhost')), salts, env),
         encoding='utf-8')
-    joomla = ('# адреса старого сайта на Joomla → главная\n'
-              'RewriteCond %{QUERY_STRING} (^|&)option=com_ [NC]\nRewriteRule ^index\\.php$ /? [R=301,L]\n') if base == '/' else ''
+    # отдельным блоком перед блоком WordPress (его WordPress перезаписывает, а «index.php → стоп» сработал бы раньше)
+    joomla = ('# BEGIN s20 redirects\n<IfModule mod_rewrite.c>\nRewriteEngine On\n'
+              '# адреса старого сайта на Joomla → главная\n'
+              'RewriteCond %{QUERY_STRING} (^|&)option=com_ [NC]\nRewriteRule ^(index\\.php)?$ https://%{HTTP_HOST}/? [R=301,L]\n'
+              '</IfModule>\n# END s20 redirects\n\n') if base == '/' else ''
     (BUNDLE / '.htaccess').write_text(
-        '# BEGIN WordPress\n<IfModule mod_rewrite.c>\nRewriteEngine On\nRewriteBase %s\n'
-        'RewriteRule ^index\\.php$ - [L]\n%s'
+        '%s# BEGIN WordPress\n<IfModule mod_rewrite.c>\nRewriteEngine On\nRewriteBase %s\n'
+        'RewriteRule ^index\\.php$ - [L]\n'
         'RewriteCond %%{REQUEST_FILENAME} !-f\nRewriteCond %%{REQUEST_FILENAME} !-d\nRewriteRule . %sindex.php [L]\n'
         '</IfModule>\n# END WordPress\n\n'
         '# защита служебных файлов\n<FilesMatch "^(wp-config\\.php|readme\\.html|license\\.txt|xmlrpc\\.php)$">\nRequire all denied\n</FilesMatch>\n'
-        'Options -Indexes\n' % (base, joomla, base), encoding='utf-8')
+        'Options -Indexes\n' % (joomla, base, base), encoding='utf-8')
     # установка WordPress открыта только с указанного адреса — чужой не перехватит установку
     if install_ip:
         (BUNDLE / 'wp-admin' / '.htaccess').write_text(
@@ -264,11 +267,13 @@ def wp_promote(archive='/joomla-archive-2026-10-22', dry=False):
     # адреса и среда для корня домена
     ht = get_text(ROOT_DIR + '/.htaccess')
     ht = ht.replace('RewriteBase /new/', 'RewriteBase /').replace('RewriteRule . /new/index.php [L]', 'RewriteRule . /index.php [L]')
-    ht = ht.replace('RewriteRule ^index\\.php$ - [L]\n',
-                    'RewriteRule ^index\\.php$ - [L]\n'
-                    '# адреса старого сайта на Joomla → главная\n'
-                    'RewriteCond %{QUERY_STRING} (^|&)option=com_ [NC]\nRewriteRule ^index\\.php$ /? [R=301,L]\n'
-                    'RewriteRule ^sitemap\\.xml$ /wp-sitemap.xml [R=301,L]\n', 1)
+    # свой блок перед блоком WordPress: его WordPress перезаписывает при установке и сохранении ЧПУ,
+    # а правило «index.php → стоп» в нём сработало бы раньше редиректа; https — явно: за nginx хостинга Apache видит http
+    ht = ('# BEGIN s20 redirects\n<IfModule mod_rewrite.c>\nRewriteEngine On\n'
+          '# адреса старого сайта на Joomla → главная\n'
+          'RewriteCond %{QUERY_STRING} (^|&)option=com_ [NC]\nRewriteRule ^(index\\.php)?$ https://%{HTTP_HOST}/? [R=301,L]\n'
+          'RewriteRule ^sitemap\\.xml$ https://%{HTTP_HOST}/wp-sitemap.xml [R=301,L]\n'
+          '</IfModule>\n# END s20 redirects\n\n') + ht
     put_text(ROOT_DIR + '/.htaccess', ht)
     cfg = get_text(ROOT_DIR + '/wp-config.php').replace("define('WP_ENVIRONMENT_TYPE', 'staging');", "define('WP_ENVIRONMENT_TYPE', 'production');")
     put_text(ROOT_DIR + '/wp-config.php', cfg)

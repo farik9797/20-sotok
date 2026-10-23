@@ -342,8 +342,13 @@
       // карточки, стоящие в один ряд, поднимать по очереди нельзя: пока идёт анимация,
       // ряд выглядит перекошенным — им оставляем только проявление
       const oneRow = children.length > 1 && children.every((c) => Math.abs(c.offsetTop - children[0].offsetTop) < 2);
+      // у карточек в CSS плавный transform для подъёма при наведении: пока он включён, ScrollTrigger при пересчёте
+      // читает недоехавшее значение и карточка остаётся ниже ряда. На время появления переход выключаем,
+      // а после — убираем свои стили, чтобы снова работал подъём из CSS
+      gsap.set(children, { transition: 'none' });
       gsap.from(children, {
         y: oneRow ? 0 : 34, opacity: 0, duration: oneRow ? 0.7 : 1, ease: 'power3.out', stagger: oneRow ? 0.06 : 0.1,
+        clearProps: 'transform,transition',
         scrollTrigger: { trigger: el, start: 'top 86%', once: true }
       });
     });

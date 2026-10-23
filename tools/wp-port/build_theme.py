@@ -22,7 +22,7 @@ import fields  # noqa: E402
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 TOOLS = pathlib.Path(__file__).resolve().parent
 OUT = ROOT / 'wp-theme' / 'sotok20'
-THEME_VERSION = '1.0.0'
+THEME_VERSION = '1.0.1'
 
 # статический файл → путь страницы в WP, шаблон, пункт меню, сюжет квиза
 PAGES = [
