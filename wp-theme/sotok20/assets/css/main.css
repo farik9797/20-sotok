@@ -784,6 +784,13 @@ body:has(.cookie-bar.is-open) .to-top,body:has(.cookie-bar.is-open) .to-top.is-v
 .most video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.88) saturate(.95)}
 .most video::-webkit-media-controls,.most video::-webkit-media-controls-enclosure{display:none!important}
 .most video{pointer-events:none}
+/* ролики без панели управления: iOS (например, в режиме энергосбережения) рисует поверх свою кнопку запуска.
+   Правила по одному — непонятный браузеру псевдоэлемент отменил бы весь список */
+video:not([controls])::-webkit-media-controls{display:none!important}
+video:not([controls])::-webkit-media-controls-enclosure{display:none!important}
+video:not([controls])::-webkit-media-controls-panel{display:none!important}
+video:not([controls])::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
+video:not([controls])::-webkit-media-controls-overlay-play-button{display:none!important}
 .most::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,47,53,.5) 0%,rgba(42,47,53,.12) 28%,rgba(42,47,53,.7) 62%,rgba(42,47,53,.9) 100%);pointer-events:none}
 .most-cap{position:absolute;left:0;right:0;bottom:clamp(20px,4vh,48px);z-index:1;color:var(--stone-2);pointer-events:none}
 .most-cap p{margin:10px 0 0;max-width:46ch;font-size:clamp(1rem,1.25vw,1.22rem);line-height:1.5;color:rgba(244,244,242,.88)}

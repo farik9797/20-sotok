@@ -129,11 +129,23 @@
       clips.forEach((v) => { if (!v.hasAttribute('data-most')) v.setAttribute('controls', ''); });
     } else {
       // play() сам догружает ролик: при preload="metadata" ждать canplay бессмысленно
+      let blocked = false;
       const play = (v) => {
         const p = v.play();
-        // если браузер запретил автозапуск — отдаём управление пользователю
-        p && p.catch(() => { if (!v.hasAttribute('data-most')) v.setAttribute('controls', ''); });
+        // автозапуск запрещён (iPhone в режиме энергосбережения): панель управления не показываем,
+        // остаётся постер — ролики запустятся от касания страницы
+        p && p.catch(() => { blocked = true; });
       };
+      const onScreen = (v) => { const r = v.getBoundingClientRect(); return r.bottom > 0 && r.top < window.innerHeight; };
+      document.querySelectorAll('video[autoplay]').forEach(play);
+      // касание — жест пользователя, после него iOS разрешает запуск: включаем ролики, которые сейчас на экране
+      const wake = () => {
+        if (!blocked) return;
+        blocked = false;
+        document.querySelectorAll('video[autoplay], video[data-clip]').forEach((v) => { if (v.paused && onScreen(v)) play(v); });
+      };
+      document.addEventListener('touchend', wake, { passive: true });
+      document.addEventListener('click', wake);
       const clipWatcher = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) play(entry.target);

@@ -140,6 +140,46 @@ def old_protect(user='20sotok'):
     print('configuration.php, .htaccess, .htpasswd и robots.txt обновлены; пароль записан в password.md')
 
 
+NEW_OLD_DIR = '/www/20-sotok.by'
+
+
+def old_move(archive='/archive-2026-10-23', dry=False):
+    """Старый сайт с old.20sotok.by — на 20-sotok.by: открыт для всех, но не индексируется.
+    Только переименования; заглушка хостинга и служебные файлы поддомена — в архив вне www."""
+    src = [n for n in remote_entries(OLD_DIR) if n not in ('.well-known', 'error_log')]
+    have = remote_entries(NEW_OLD_DIR)
+    clash = sorted(set(src) & set(have) - {'index.html'})
+    if clash or set(have) - {'index.html', '.well-known'}:
+        sys.exit('в %s уже есть файлы, перенос остановлен: %s' % (NEW_OLD_DIR, ', '.join(sorted(have))))
+    plan = ['mkdir -p %s/20-sotok.by-stub %s/old.20sotok.by' % (archive, archive)]
+    plan += ['mv %s/index.html %s/20-sotok.by-stub/index.html' % (NEW_OLD_DIR, archive)] if 'index.html' in have else []
+    plan += ['mv %s/%s %s/%s' % (OLD_DIR, n, NEW_OLD_DIR, n) for n in src]
+    plan += ['mv %s/error_log %s/old.20sotok.by/error_log' % (OLD_DIR, archive)] if 'error_log' in remote_entries(OLD_DIR) else []
+    log = PROJECT / 'backup' / 'old-move-plan.txt'
+    log.write_text('\n'.join(plan) + '\n', encoding='utf-8')
+    print('на 20-sotok.by: %d записей старого сайта; план — %s' % (len(src), log.relative_to(PROJECT)))
+    if dry:
+        return
+    lftp(plan, quiet=True)
+    cfg = get_text(NEW_OLD_DIR + '/configuration.php')
+    cfg = re.sub(r"(public \$log_path = ')[^']*'", r"\1%s/www/20-sotok.by/administrator/logs'" % HOME, cfg)
+    cfg = re.sub(r"(public \$tmp_path = ')[^']*'", r"\1%s/www/20-sotok.by/tmp'" % HOME, cfg)
+    cfg = re.sub(r"(public \$live_site = ')[^']*'", r"\1https://20-sotok.by'", cfg)
+    put_text(NEW_OLD_DIR + '/configuration.php', cfg)
+    # вместо пароля — только запрет индексации: копия не должна спорить в поиске с новым 20sotok.by
+    ht = get_text(NEW_OLD_DIR + '/.htaccess')
+    ht = re.sub(r'# s20-protect-start.*?# s20-protect-end\n', '', ht, flags=re.S)
+    block = ('# s20-noindex-start — старый сайт: открыт для всех, но не индексируется\n'
+             '<IfModule mod_headers.c>\nHeader always set X-Robots-Tag "noindex, nofollow"\n</IfModule>\n'
+             '# s20-noindex-end\n')
+    put_text(NEW_OLD_DIR + '/.htaccess', block + ht)
+    # обход разрешён, иначе поисковики не увидят noindex; адреса основного домена убраны
+    robots = (BACKUP / 'robots.txt').read_text(encoding='utf-8')
+    robots = re.sub(r'^(Host|Sitemap):.*\n?', '', robots, flags=re.M)
+    put_text(NEW_OLD_DIR + '/robots.txt', robots)
+    print('готово: старый сайт в %s, configuration.php, .htaccess и robots.txt под 20-sotok.by' % NEW_OLD_DIR)
+
+
 # ---------- WordPress ----------
 def wp_bundle(env, base='/', db_title='БД WordPress', install_ip=None):
     """base — папка сайта от корня домена ('/' или '/new/'); install_ip — с какого адреса разрешена установка."""
@@ -288,6 +328,8 @@ if __name__ == '__main__':
         old_upload()
     elif cmd == 'old-protect':
         old_protect()
+    elif cmd == 'old-move':
+        old_move(dry=bool(args and args[0] == 'dry'))
     elif cmd == 'wp-bundle':
         # deploy.py wp-bundle <среда> [папка] [раздел-БД-в-password.md] [ip-для-установки]
         wp_bundle(args[0] if args else 'staging', args[1] if len(args) > 1 else '/',
