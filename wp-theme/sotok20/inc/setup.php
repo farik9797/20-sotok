@@ -51,6 +51,7 @@ add_action('wp_footer', function () { wp_dequeue_style('core-block-supports'); }
 add_filter('xmlrpc_enabled', '__return_false');
 add_filter('comments_open', '__return_false', 20);
 add_filter('pings_open', '__return_false', 20);
+// приоритет 1 — раньше redirect_canonical: иначе ?author=1 успевает перенаправить на /author/<логин>/
 add_action('template_redirect', function () {
     if (is_feed() || is_author() || is_attachment() || is_search() || (is_archive() && !is_post_type_archive())) {
         global $wp_query;
@@ -58,6 +59,14 @@ add_action('template_redirect', function () {
         status_header(404);
         nocache_headers();
     }
+}, 1);
+// список пользователей в REST раскрывает логин администратора — посетителям он не нужен
+add_filter('rest_endpoints', function ($endpoints) {
+    if (is_user_logged_in()) return $endpoints;
+    foreach (array_keys($endpoints) as $route) {
+        if (strpos($route, '/wp/v2/users') === 0) unset($endpoints[$route]);
+    }
+    return $endpoints;
 });
 // страницы собраны шаблонами и полями: блочный редактор для них не нужен
 add_action('init', function () { remove_post_type_support('page', 'editor'); remove_post_type_support('page', 'comments'); });
