@@ -191,7 +191,7 @@ return [
             'tab' => 'Направления работ',
             'tab_no' => 3,
             'label' => 'Картинка: Укладка тротуарной плитки и мощение',
-            'default' => 'img/svc-paving-dvor.jpg',
+            'default' => 'img/svc-paving-yuhnovka.jpg',
             'alt' => 'Укладка тротуарной плитки и мощение',
         ],
         [
