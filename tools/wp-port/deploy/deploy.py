@@ -180,6 +180,18 @@ def old_move(archive='/archive-2026-10-23', dry=False):
     print('готово: старый сайт в %s, configuration.php, .htaccess и robots.txt под 20-sotok.by' % NEW_OLD_DIR)
 
 
+def old_admin_ip(ips):
+    """Админка Joomla на 20-sotok.by — только с указанных IP (сайт открыт всем, а Joomla 3.9 без обновлений)."""
+    path = NEW_OLD_DIR + '/administrator/.htaccess'
+    have = '.htaccess' in remote_entries(NEW_OLD_DIR + '/administrator')
+    ht = get_text(path) if have else ''
+    ht = re.sub(r'# s20-ip-start.*?# s20-ip-end\n', '', ht, flags=re.S)
+    block = ('# s20-ip-start — админка старого сайта только с этих IP\n'
+             '<IfModule mod_authz_core.c>\nRequire ip %s\n</IfModule>\n# s20-ip-end\n' % ' '.join(ips))
+    put_text(path, block + ht)
+    print('админка Joomla открыта только для:', ', '.join(ips))
+
+
 # ---------- WordPress ----------
 def wp_bundle(env, base='/', db_title='БД WordPress', install_ip=None):
     """base — папка сайта от корня домена ('/' или '/new/'); install_ip — с какого адреса разрешена установка."""
@@ -330,6 +342,9 @@ if __name__ == '__main__':
         old_protect()
     elif cmd == 'old-move':
         old_move(dry=bool(args and args[0] == 'dry'))
+    elif cmd == 'old-admin-ip':
+        # deploy.py old-admin-ip <ip> [ip …]
+        old_admin_ip(args or sys.exit('укажите IP'))
     elif cmd == 'wp-bundle':
         # deploy.py wp-bundle <среда> [папка] [раздел-БД-в-password.md] [ip-для-установки]
         wp_bundle(args[0] if args else 'staging', args[1] if len(args) > 1 else '/',
