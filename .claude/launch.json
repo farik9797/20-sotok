@@ -8,6 +8,12 @@
       "port": 8020
     },
     {
+      "name": "wp-local",
+      "runtimeExecutable": "php",
+      "runtimeArgs": ["-S", "127.0.0.1:8031", "-t", ".wp-local/wordpress", ".wp-local/router.php"],
+      "port": 8031
+    },
+    {
       "name": "app",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["--prefix", "app", "run", "dev", "--", "--port", "5173", "--strictPort"],
