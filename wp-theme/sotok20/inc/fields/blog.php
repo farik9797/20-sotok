@@ -163,8 +163,8 @@ return [
             'type' => 'image',
             'tab' => 'Инженерные секреты: на чём опасно экономить при подготовке грунта',
             'tab_no' => 2,
-            'label' => 'Картинка: img/svc-paving-yuhnovka.jpg',
-            'default' => 'img/svc-paving-yuhnovka.jpg',
+            'label' => 'Картинка: img/svc-paving-krupnoformat.jpg',
+            'default' => 'img/svc-paving-krupnoformat.jpg',
             'alt' => '',
         ],
         [
