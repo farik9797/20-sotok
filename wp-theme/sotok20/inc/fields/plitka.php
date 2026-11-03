@@ -14,8 +14,8 @@ return [
             'type' => 'image',
             'tab' => 'Услуга 01 · Мощение',
             'tab_no' => 1,
-            'label' => 'Картинка: img/hero-svc-paving-obekt.jpg',
-            'default' => 'img/hero-svc-paving-obekt.jpg',
+            'label' => 'Картинка: img/hero-svc-paving-krupnoformat.jpg',
+            'default' => 'img/hero-svc-paving-krupnoformat.jpg',
             'alt' => '',
         ],
         [
