@@ -40,7 +40,7 @@
     </div>
     <div class="hairline mt-14 pt-8 flex flex-wrap gap-x-10 gap-y-3 justify-between legal">
       <div><?php echo esc_html(s20_c('company')); ?> · УНП <?php echo esc_html(s20_c('unp')); ?><br>Офис: <?php echo esc_html(s20_c('office')); ?></div>
-      <div>© 2026 Студия инженерного благоустройства «20 соток» · <a href="<?php echo s20_url('politika'); ?>" class="underline underline-offset-4">Политика конфиденциальности</a></div>
+      <div>© 2026 Студия инженерного благоустройства «20 соток» · <a href="<?php echo s20_url('politika'); ?>" class="underline underline-offset-4">Политика конфиденциальности</a><br>Разработка сайта — <a href="https://iprod-group.by/" target="_blank" rel="noopener" class="underline underline-offset-4">iprod-group</a></div>
     </div>
   </div>
 </footer>
