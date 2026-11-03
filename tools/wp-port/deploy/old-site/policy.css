@@ -1,0 +1,28 @@
+/* s20-policy-start — политика конфиденциальности: ссылка у формы, всплывающее окно, страница /politika.html */
+.s20-policy-link{color:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.s20-policy-link:hover,.s20-policy-link:focus{color:inherit;text-decoration-thickness:2px}
+.s20-policy-link:focus-visible,.s20-policy-close:focus-visible{outline:2px solid #e2ac02;outline-offset:2px}
+html.s20-policy-open{overflow:hidden}
+.s20-policy-dialog{width:calc(100% - 32px);max-width:760px;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);padding:0;border:0;background:#fff;box-shadow:0 20px 60px rgba(0,0,0,.35);overflow:hidden}
+.s20-policy-dialog[open]{display:flex;flex-direction:column;animation:s20-policy-in .2s ease-out}
+.s20-policy-dialog::backdrop{background:rgba(17,17,17,.6)}
+.s20-policy-box{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:40px 48px}
+.s20-policy-close{position:absolute;top:8px;right:8px;z-index:1;display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;background:#fff;color:#333;font-size:20px;line-height:1;cursor:pointer;transition:color .2s}
+.s20-policy-close:hover{color:#e2ac02}
+@keyframes s20-policy-in{from{opacity:0;transform:translateY(12px)}}
+@media (prefers-reduced-motion:reduce){.s20-policy-dialog[open]{animation:none}}
+@media (max-width:575px){.s20-policy-box{padding:56px 20px 24px}}
+.s20-policy{font-family:Manrope,sans-serif;font-size:15px;line-height:1.65;color:#666}
+.s20-policy h1,.s20-policy h2{font-family:Manrope,sans-serif;font-weight:700;color:#333;text-transform:none;letter-spacing:normal}
+.s20-policy h1{margin:0 0 8px;padding-right:40px;font-size:28px;line-height:1.2}
+.s20-policy h2{margin:28px 0 8px;font-size:18px;line-height:1.3}
+.s20-policy h2 span{margin-right:10px;color:#e2ac02}
+.s20-policy p,.s20-policy ul{margin:0 0 10px}
+.s20-policy ul{padding-left:20px}
+.s20-policy .s20-policy-lead{margin-bottom:24px}
+.s20-policy a{color:#333;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.s20-policy .s20-nowrap{white-space:nowrap}
+.s20-policy a:hover{color:#e2ac02}
+.s20-policy .s20-policy-date{margin-top:24px;font-size:14px}
+@media (max-width:575px){.s20-policy h1{font-size:24px}}
+/* s20-policy-end */

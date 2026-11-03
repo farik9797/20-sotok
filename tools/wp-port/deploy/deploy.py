@@ -7,6 +7,7 @@
   deploy.py ls <путь>                     — список файлов на сервере
   deploy.py old-upload                    — старый сайт (Joomla) из бэкапа → /www/old.20sotok.by
   deploy.py old-protect                   — пути в configuration.php, пароль на вход, noindex
+  deploy.py old-policy                    — 20-sotok.by: /politika.html и всплывающее окно политики у формы
   deploy.py wp-bundle <среда>             — собрать WordPress + тему + плагин + wp-config (staging|production)
   deploy.py wp-upload <папка-на-сервере>  — залить собранный комплект
   deploy.py wp-install <адрес> <папка>    — первичная установка: администратор, страницы, шаблоны, главная
@@ -192,6 +193,26 @@ def old_admin_ip(ips):
     print('админка Joomla открыта только для:', ', '.join(ips))
 
 
+OLD_SITE = pathlib.Path(__file__).resolve().parent / 'old-site'
+
+
+def old_policy():
+    """Политика конфиденциальности на 20-sotok.by: страница /politika.html и всплывающее окно по ссылке у формы."""
+    tpl = NEW_OLD_DIR + '/templates/shaper_helixultimate'
+    keep = PROJECT / 'backup' / 'old-policy-2026-10-27'
+    keep.mkdir(parents=True, exist_ok=True)
+    for rel, src in (('/js/custom.js', 'policy.js'), ('/css/custom.css', 'policy.css')):
+        cur = get_text(tpl + rel)
+        orig = keep / pathlib.Path(rel).name
+        if not orig.exists():
+            orig.write_text(cur, encoding='utf-8')
+        # повторный запуск заменяет блок, а не дописывает второй
+        cur = re.sub(r'\s*/\* s20-policy-start.*?/\* s20-policy-end \*/\n?', '', cur, flags=re.S)
+        put_text(tpl + rel, cur.rstrip('\n') + '\n\n' + (OLD_SITE / src).read_text(encoding='utf-8'))
+    put_text(NEW_OLD_DIR + '/politika.html', (OLD_SITE / 'politika.html').read_text(encoding='utf-8'))
+    print('политика выложена: /politika.html, блоки s20-policy в custom.js и custom.css; оригиналы в', keep)
+
+
 # ---------- WordPress ----------
 def wp_bundle(env, base='/', db_title='БД WordPress', install_ip=None):
     """base — папка сайта от корня домена ('/' или '/new/'); install_ip — с какого адреса разрешена установка."""
@@ -345,6 +366,8 @@ if __name__ == '__main__':
     elif cmd == 'old-admin-ip':
         # deploy.py old-admin-ip <ip> [ip …]
         old_admin_ip(args or sys.exit('укажите IP'))
+    elif cmd == 'old-policy':
+        old_policy()
     elif cmd == 'wp-bundle':
         # deploy.py wp-bundle <среда> [папка] [раздел-БД-в-password.md] [ip-для-установки]
         wp_bundle(args[0] if args else 'staging', args[1] if len(args) > 1 else '/',
