@@ -20,6 +20,12 @@
       "port": 8040
     },
     {
+      "name": "laravel-bundle",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "cd .deploy/laravel-test/laravel-20sotok/public && exec php -S 127.0.0.1:8050 ../vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php"],
+      "port": 8050
+    },
+    {
       "name": "app",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["--prefix", "app", "run", "dev", "--", "--port", "5173", "--strictPort"],
