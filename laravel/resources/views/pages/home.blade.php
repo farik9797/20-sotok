@@ -3,9 +3,9 @@
 <!-- 01 · Первый экран -->
 <section class="hero">
   <div class="hero-media">
-    <video autoplay muted loop playsinline poster="{{ s20_a() }}img/hero.jpg" aria-hidden="true">
-      <source src="{{ s20_a() }}video/hero-sm.mp4" type="video/mp4" media="(max-width: 767px)">
-      <source src="{{ s20_a() }}video/hero.mp4" type="video/mp4">
+    <video autoplay muted loop playsinline poster="{{ s20_a() }}img/hero-dim.jpg" aria-hidden="true">
+      <source src="{{ s20_a() }}video/hero-dim-sm.mp4" type="video/mp4" media="(max-width: 767px)">
+      <source src="{{ s20_a() }}video/hero-dim.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-shade"></div>
@@ -43,9 +43,9 @@
 
 <!-- Видео-мост -->
 <section class="most" id="rabota-v-kadre" aria-label="Работы студии в видео">
-  <video data-clip data-most muted loop playsinline preload="metadata" poster="{{ s20_a() }}img/real/poster-most.webp" aria-label="Автополив на газоне, мощёная дорожка и вид с воздуха на готовый участок с подсветкой">
-    <source src="{{ s20_a() }}video/most-sm.mp4" type="video/mp4" media="(max-width: 767px)">
-    <source src="{{ s20_a() }}video/most.mp4" type="video/mp4">
+  <video data-clip data-most muted loop playsinline preload="metadata" poster="{{ s20_a() }}img/real/poster-most-dim.webp" aria-label="Автополив на газоне, мощёная дорожка и вид с воздуха на готовый участок с подсветкой">
+    <source src="{{ s20_a() }}video/most-dim-sm.mp4" type="video/mp4" media="(max-width: 767px)">
+    <source src="{{ s20_a() }}video/most-dim.mp4" type="video/mp4">
   </video>
   <div class="most-cap"><div class="wrap"><span class="eyebrow">{!! s20_t('home_s03_01') !!}</span><p>{!! s20_t('home_s03_02') !!}</p></div></div>
 </section>
@@ -62,9 +62,9 @@
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-4 hairline-b" data-reveal="stagger">
 <article class="feature feature-video">
-  <video class="feature-bg" data-clip data-most muted loop playsinline preload="metadata" poster="{{ s20_a() }}img/real/poster-card-niveliry.webp" aria-hidden="true">
-    <source src="{{ s20_a() }}video/card-niveliry-sm.mp4" type="video/mp4" media="(max-width: 767px)">
-    <source src="{{ s20_a() }}video/card-niveliry.mp4" type="video/mp4">
+  <video class="feature-bg" data-clip data-most muted loop playsinline preload="metadata" poster="{{ s20_a() }}img/real/poster-card-niveliry-dim.webp" aria-hidden="true">
+    <source src="{{ s20_a() }}video/card-niveliry-dim-sm.mp4" type="video/mp4" media="(max-width: 767px)">
+    <source src="{{ s20_a() }}video/card-niveliry-dim.mp4" type="video/mp4">
   </video>
   <div class="num">01</div>
   <svg class="ic ic-lg ic-brass" aria-hidden="true"><use href="#i-scan-line"/></svg>
@@ -72,9 +72,9 @@
   <p>{!! s20_t('home_s04_05') !!}</p>
 </article>
 <article class="feature feature-video">
-  <video class="feature-bg" data-clip data-most muted loop playsinline preload="metadata" poster="{{ s20_a() }}img/real/poster-card-kompleks.webp" aria-hidden="true">
-    <source src="{{ s20_a() }}video/card-kompleks-sm.mp4" type="video/mp4" media="(max-width: 767px)">
-    <source src="{{ s20_a() }}video/card-kompleks.mp4" type="video/mp4">
+  <video class="feature-bg" data-clip data-most muted loop playsinline preload="metadata" poster="{{ s20_a() }}img/real/poster-card-kompleks-dim.webp" aria-hidden="true">
+    <source src="{{ s20_a() }}video/card-kompleks-dim-sm.mp4" type="video/mp4" media="(max-width: 767px)">
+    <source src="{{ s20_a() }}video/card-kompleks-dim.mp4" type="video/mp4">
   </video>
   <div class="num">02</div>
   <svg class="ic ic-lg ic-brass" aria-hidden="true"><use href="#i-file-check-2"/></svg>
@@ -82,9 +82,9 @@
   <p>{!! s20_t('home_s04_07') !!}</p>
 </article>
 <article class="feature feature-video">
-  <video class="feature-bg" data-clip data-most muted loop playsinline preload="metadata" poster="{{ s20_a() }}img/real/poster-card-ukladka.webp" aria-hidden="true">
-    <source src="{{ s20_a() }}video/card-ukladka-sm.mp4" type="video/mp4" media="(max-width: 767px)">
-    <source src="{{ s20_a() }}video/card-ukladka.mp4" type="video/mp4">
+  <video class="feature-bg" data-clip data-most muted loop playsinline preload="metadata" poster="{{ s20_a() }}img/real/poster-card-ukladka-dim.webp" aria-hidden="true">
+    <source src="{{ s20_a() }}video/card-ukladka-dim-sm.mp4" type="video/mp4" media="(max-width: 767px)">
+    <source src="{{ s20_a() }}video/card-ukladka-dim.mp4" type="video/mp4">
   </video>
   <div class="num">03</div>
   <svg class="ic ic-lg ic-brass" aria-hidden="true"><use href="#i-video"/></svg>
@@ -92,9 +92,9 @@
   <p>{!! s20_t('home_s04_09') !!}</p>
 </article>
 <article class="feature feature-video">
-  <video class="feature-bg" data-clip data-most muted loop playsinline preload="metadata" poster="{{ s20_a() }}img/real/poster-card-dom.webp" aria-hidden="true">
-    <source src="{{ s20_a() }}video/card-dom-sm.mp4" type="video/mp4" media="(max-width: 767px)">
-    <source src="{{ s20_a() }}video/card-dom.mp4" type="video/mp4">
+  <video class="feature-bg" data-clip data-most muted loop playsinline preload="metadata" poster="{{ s20_a() }}img/real/poster-card-dom-dim.webp" aria-hidden="true">
+    <source src="{{ s20_a() }}video/card-dom-dim-sm.mp4" type="video/mp4" media="(max-width: 767px)">
+    <source src="{{ s20_a() }}video/card-dom-dim.mp4" type="video/mp4">
   </video>
   <div class="num">04</div>
   <svg class="ic ic-lg ic-brass" aria-hidden="true"><use href="#i-lock"/></svg>

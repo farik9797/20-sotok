@@ -9,9 +9,9 @@ get_header();
 
 <section class="hero-sub">
   <div class="hero-media">
-    <video autoplay muted loop playsinline poster="<?php echo S20_A; ?>img/real/hero-uslugi.webp" aria-hidden="true">
-      <source src="<?php echo S20_A; ?>video/hero-uslugi-sm.mp4" type="video/mp4" media="(max-width: 767px)">
-      <source src="<?php echo S20_A; ?>video/hero-uslugi.mp4" type="video/mp4">
+    <video autoplay muted loop playsinline poster="<?php echo S20_A; ?>img/real/hero-uslugi-dim.webp" aria-hidden="true">
+      <source src="<?php echo S20_A; ?>video/hero-uslugi-dim-sm.mp4" type="video/mp4" media="(max-width: 767px)">
+      <source src="<?php echo S20_A; ?>video/hero-uslugi-dim.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-shade"></div>

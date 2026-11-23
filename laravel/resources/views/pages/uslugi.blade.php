@@ -3,9 +3,9 @@
 
 <section class="hero-sub">
   <div class="hero-media">
-    <video autoplay muted loop playsinline poster="{{ s20_a() }}img/real/hero-uslugi.webp" aria-hidden="true">
-      <source src="{{ s20_a() }}video/hero-uslugi-sm.mp4" type="video/mp4" media="(max-width: 767px)">
-      <source src="{{ s20_a() }}video/hero-uslugi.mp4" type="video/mp4">
+    <video autoplay muted loop playsinline poster="{{ s20_a() }}img/real/hero-uslugi-dim.webp" aria-hidden="true">
+      <source src="{{ s20_a() }}video/hero-uslugi-dim-sm.mp4" type="video/mp4" media="(max-width: 767px)">
+      <source src="{{ s20_a() }}video/hero-uslugi-dim.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-shade"></div>

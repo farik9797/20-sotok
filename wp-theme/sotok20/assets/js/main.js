@@ -123,7 +123,9 @@
       v.load();
     });
   }
-  if (clips.length) {
+  // первые экраны (autoplay) и ролики с объектов: играют, только когда видны
+  const vids = document.querySelectorAll('video[autoplay], video[data-clip]');
+  if (vids.length) {
     if (reduce) {
       // видео-мост фоновый: плеер на нём не показываем, остаётся постер
       clips.forEach((v) => { if (!v.hasAttribute('data-most')) v.setAttribute('controls', ''); });
@@ -133,34 +135,49 @@
       const play = (v) => {
         const p = v.play();
         // автозапуск запрещён (iPhone в режиме энергосбережения): панель управления не показываем,
-        // остаётся постер — ролики запустятся от касания страницы
-        p && p.catch(() => { blocked = true; });
+        // остаётся постер — ролики запустятся от касания страницы.
+        // AbortError (play прервали паузой при быстрой прокрутке) запретом не считаем
+        p && p.catch((e) => { if (e && e.name === 'NotAllowedError') blocked = true; });
       };
-      const onScreen = (v) => { const r = v.getBoundingClientRect(); return r.bottom > 0 && r.top < window.innerHeight; };
-      document.querySelectorAll('video[autoplay]').forEach(play);
+      // на телефоне одновременно играет один ролик — ближайший к центру экрана: несколько роликов сразу
+      // (первый экран + карточки) слабые телефоны не вытягивают. На ПК играют все видимые
+      const phone = window.matchMedia('(max-width: 767px)');
+      const inView = new Set();
+      let current = null;
+      const away = (v) => { const r = v.getBoundingClientRect(); return Math.hypot(r.left + r.width / 2 - window.innerWidth / 2, r.top + r.height / 2 - window.innerHeight / 2); };
+      const sync = () => {
+        if (phone.matches) {
+          let best = null, bestD = Infinity;
+          inView.forEach((v) => { const d = away(v); if (d < bestD) { bestD = d; best = v; } });
+          // запас 10 % высоты экрана: на границе между двумя роликами не переключаемся туда-сюда
+          if (current && current !== best && inView.has(current) && away(current) - bestD < window.innerHeight * 0.1) best = current;
+          current = best;
+        }
+        vids.forEach((v) => {
+          const on = phone.matches ? v === current : inView.has(v);
+          if (!on) { if (!v.paused) v.pause(); } else if (v.paused && !blocked) play(v);
+        });
+      };
+      let queued = false;
+      const queue = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; sync(); }); } };
+      const watcher = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => { if (entry.isIntersecting) inView.add(entry.target); else inView.delete(entry.target); });
+        sync();
+      }, { rootMargin: '150px 0px', threshold: 0.2 });
+      vids.forEach((v) => watcher.observe(v));
+      // на телефоне ближайший к центру ролик меняется и без пересечения границ — пересчитываем при прокрутке
+      // (capture — чтобы ловить и горизонтальную прокрутку ленты)
+      document.addEventListener('scroll', () => { if (phone.matches) queue(); }, { passive: true, capture: true });
       // касание — жест пользователя, после него iOS разрешает запуск: включаем ролики, которые сейчас на экране
       const wake = () => {
         if (!blocked) return;
         blocked = false;
-        document.querySelectorAll('video[autoplay], video[data-clip]').forEach((v) => { if (v.paused && onScreen(v)) play(v); });
+        sync();
       };
       document.addEventListener('touchend', wake, { passive: true });
       document.addEventListener('click', wake);
-      const clipWatcher = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) play(entry.target);
-          else if (!entry.target.paused) entry.target.pause();
-        });
-      }, { rootMargin: '150px 0px', threshold: 0.2 });
-      clips.forEach((v) => clipWatcher.observe(v));
       // пока вкладка скрыта, наблюдатель молчит — после возврата запускаем видимые ролики сами
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) return;
-        clips.forEach((v) => {
-          const r = v.getBoundingClientRect();
-          if (r.bottom > 0 && r.top < window.innerHeight) play(v);
-        });
-      });
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) sync(); });
     }
   }
 

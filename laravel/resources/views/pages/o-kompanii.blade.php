@@ -2,9 +2,9 @@
 
 <section class="hero-sub">
   <div class="hero-media">
-    <video autoplay muted loop playsinline poster="{{ s20_a() }}img/real/hero-o-kompanii.webp" aria-hidden="true">
-      <source src="{{ s20_a() }}video/hero-o-kompanii-sm.mp4" type="video/mp4" media="(max-width: 767px)">
-      <source src="{{ s20_a() }}video/hero-o-kompanii.mp4" type="video/mp4">
+    <video autoplay muted loop playsinline poster="{{ s20_a() }}img/real/hero-o-kompanii-dim.webp" aria-hidden="true">
+      <source src="{{ s20_a() }}video/hero-o-kompanii-dim-sm.mp4" type="video/mp4" media="(max-width: 767px)">
+      <source src="{{ s20_a() }}video/hero-o-kompanii-dim.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-shade"></div>
