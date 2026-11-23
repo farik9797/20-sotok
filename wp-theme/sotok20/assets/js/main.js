@@ -153,13 +153,17 @@
           if (current && current !== best && inView.has(current) && away(current) - bestD < window.innerHeight * 0.1) best = current;
           current = best;
         }
+        // открыт просмотр во весь экран, квиз или меню (у body класс modal-open) — фоновые ролики стоят:
+        // под затемнением их не видно, а телефон декодирует второе видео
+        const hold = document.body.classList.contains('modal-open');
         vids.forEach((v) => {
-          const on = phone.matches ? v === current : inView.has(v);
+          const on = !hold && (phone.matches ? v === current : inView.has(v));
           if (!on) { if (!v.paused) v.pause(); } else if (v.paused && !blocked) play(v);
         });
       };
       let queued = false;
       const queue = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; sync(); }); } };
+      new MutationObserver(queue).observe(document.body, { attributes: true, attributeFilter: ['class'] });
       const watcher = new IntersectionObserver((entries) => {
         entries.forEach((entry) => { if (entry.isIntersecting) inView.add(entry.target); else inView.delete(entry.target); });
         sync();

@@ -734,13 +734,15 @@ body:has(.cookie-bar.is-open) .to-top,body:has(.cookie-bar.is-open) .to-top.is-v
   .hero-main .h1{margin:0}
   .hero-main > .grid{margin-top:0;gap:clamp(16px,2.6vh,26px)}
 }
-/* шапка на телефоне: надпись «20 соток» возвращается, кнопки чуть компактнее */
+/* шапка на телефоне: надпись «20 соток» возвращается, кнопки 40 px с зазором 4 px —
+   вместе с невидимым краем ::after палец попадает в 44×46 (Apple и Google советуют от 44).
+   Крупнее не влезает: на 380 px между надписью и кнопками остаётся 17 px при минимуме 12 */
 @media(max-width:559px){
   .nav .logo-full,.mobile-menu .logo-full{height:26px}
   .nav .logo,.mobile-menu .logo{gap:8px}
-  .nav-mobile{gap:5px}
-  .nav-mobile .nav-icon,.nav-mobile .nav-burger,.nav-mobile .theme-toggle{width:38px;height:38px}
-  .nav-mobile .nav-icon::after,.nav-mobile .nav-burger::after,.nav-mobile .theme-toggle::after{inset:-4px -2px}
+  .nav-mobile{gap:4px}
+  .nav-mobile .nav-icon,.nav-mobile .nav-burger,.nav-mobile .theme-toggle{width:40px;height:40px}
+  .nav-mobile .nav-icon::after,.nav-mobile .nav-burger::after,.nav-mobile .theme-toggle::after{inset:-3px -2px}
 }
 
 /* стык секций на телефоне: нижняя линия списка дублирует границу блока, а отступ под ней великоват */
