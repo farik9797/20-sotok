@@ -9,7 +9,7 @@ password.md
 .playwright-mcp/
 
 # React-версия сайта живёт в отдельном репозитории
-app/
+/app/
 
 # бэкапы с хостинга: внутри configuration.php с паролями БД
 backup/
