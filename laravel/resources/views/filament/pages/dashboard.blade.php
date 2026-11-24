@@ -16,7 +16,8 @@
         ['url' => $leadsUrl, 'kicker' => 'Заявки', 'title' => 'Все заявки', 'sub' => $total.' '.$plural($total, 'заявка', 'заявки', 'заявок').' в базе', 'icon' => Heroicon::OutlinedInboxArrowDown],
     ];
     $cards = array_slice(array_merge(
-        array_map(fn ($l) => ['url' => $l['url'], 'kicker' => $l['when'], 'title' => $l['phone'], 'sub' => $l['what'], 'side' => $l['messenger']], $recent),
+        // мессенджер — в строку со временем: справа он отнимал место у номера, и номер обрезался
+        array_map(fn ($l) => ['url' => $l['url'], 'kicker' => $l['when'].($l['messenger'] !== '—' ? ' · '.$l['messenger'] : ''), 'title' => $l['phone'], 'sub' => $l['what'], 'side' => null, 'icon' => Heroicon::OutlinedChevronRight], $recent),
         array_map(fn ($q) => $q + ['side' => null], $quick),
     ), 0, 3);
 @endphp

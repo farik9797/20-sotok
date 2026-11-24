@@ -23,7 +23,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 class AdminPanelProvider extends PanelProvider
 {
     // меняется вместе со стилем «стекла» — сбрасывает кеш браузера
-    private const GLASS_VERSION = '4';
+    private const GLASS_VERSION = '5';
 
     public function panel(Panel $panel): Panel
     {

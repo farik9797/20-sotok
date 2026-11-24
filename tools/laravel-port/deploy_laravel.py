@@ -72,7 +72,7 @@ def bundle():
     key = 'base64:' + base64.b64encode(secrets.token_bytes(32)).decode()
     env = (SRC / '.env.example').read_text(encoding='utf-8')
     for k, v in [('APP_NAME', '"20 соток"'), ('APP_ENV', 'staging'), ('APP_KEY', key), ('APP_DEBUG', 'false'),
-                 ('APP_URL', URL), ('APP_LOCALE', 'ru'), ('APP_FALLBACK_LOCALE', 'ru'), ('LOG_LEVEL', 'debug'),
+                 ('APP_URL', URL), ('APP_LOCALE', 'ru'), ('APP_FALLBACK_LOCALE', 'en'), ('LOG_LEVEL', 'debug'),
                  ('MAIL_MAILER', 'log')]:
         env, n = re.subn(r'^#?\s*%s=.*$' % k, '%s=%s' % (k, v), env, flags=re.M)
         if not n:
