@@ -23,6 +23,10 @@
 
 <div class="s20-dash">
     <header class="s20-head">
+        {{-- на телефоне и планшете меню открывается отсюда: кнопка Filament на сводке скрыта --}}
+        <button type="button" class="s20-menu" x-data x-on:click="$store.sidebar.open()" aria-controls="fi-main-sidebar" aria-label="Открыть меню">
+            <x-filament::icon :icon="Heroicon::OutlinedBars3" />
+        </button>
         <div class="s20-hello">
             <span class="s20-hello-hi">Добро пожаловать</span>
             <span class="s20-hello-who">{{ $user }}</span>

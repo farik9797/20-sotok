@@ -58,6 +58,8 @@ class LeadResource extends Resource
     {
         return $table
             ->defaultSort('created_at', 'desc')
+            // на телефоне строка складывается в карточку: колонки не уходят за край экрана
+            ->stackedOnMobile()
             ->columns([
                 TextColumn::make('phone')->label('Телефон · мессенджер')
                     ->formatStateUsing(fn (Lead $record) => $record->phone.' · '.$record->messenger)->searchable(),

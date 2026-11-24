@@ -23,7 +23,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 class AdminPanelProvider extends PanelProvider
 {
     // меняется вместе со стилем «стекла» — сбрасывает кеш браузера
-    private const GLASS_VERSION = '3';
+    private const GLASS_VERSION = '4';
 
     public function panel(Panel $panel): Panel
     {
@@ -85,6 +85,14 @@ class AdminPanelProvider extends PanelProvider
                     if (localStorage.getItem('filament:sidebar:desktop_open') === null) localStorage.setItem('filament:sidebar:desktop_open', 'false');
                     if (localStorage.getItem('filament:sidebar:open') === null) localStorage.setItem('filament:sidebar:open', 'false');
                 } catch (e) {}
+                // телефон: вертикальные вкладки стоят строкой с прокруткой — держим активную на виду
+                document.addEventListener('DOMContentLoaded', () => {
+                    if (!window.matchMedia('(max-width: 767px)').matches) return;
+                    const show = () => document.querySelectorAll('.fi-sc-tabs.fi-vertical > .fi-tabs .fi-tabs-item.fi-active')
+                        .forEach((el) => el.scrollIntoView({ block: 'nearest', inline: 'center' }));
+                    setTimeout(show, 300);
+                    document.addEventListener('click', (e) => { if (e.target.closest('.fi-sc-tabs.fi-vertical .fi-tabs-item')) setTimeout(show, 60); });
+                });
             </script>
             HTML;
     }

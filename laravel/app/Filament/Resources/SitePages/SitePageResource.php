@@ -41,6 +41,8 @@ class SitePageResource extends Resource
     {
         return $table
             ->defaultSort('sort')
+            // на телефоне строка складывается в карточку: колонки не уходят за край экрана
+            ->stackedOnMobile()
             ->paginated(false)
             ->columns([
                 TextColumn::make('title')->label('Страница'),

@@ -391,6 +391,59 @@ body.fi-body::after {
 }
 @media (max-width: 420px) { .s20-dash { --u: calc(100vw / 430); } }
 
+/* ---------- телефон и планшет: админка ---------- */
+/* кнопка меню (верхней полосы нет): её контейнер — прозрачная полоса во всю ширину,
+   без этого она перехватывала нажатия по всему, что прокручивается под ней */
+@media (max-width: 63.99rem) {
+  .fi-layout-sidebar-toggle-btn-ctn { pointer-events: none; }
+  .fi-layout-sidebar-toggle-btn { pointer-events: auto; }
+  /* на сводке своя кнопка меню — в строке с иконками, отдельная строка не нужна */
+  body:has(.s20-dash) .fi-layout-sidebar-toggle-btn-ctn { display: none; }
+  .s20-head { flex-wrap: wrap; row-gap: calc(18 * var(--u)); }
+  .s20-menu { order: 0; }
+  .s20-tools { order: 1; margin-left: auto; }
+  .s20-hello { order: 2; width: 100%; }
+}
+.s20-menu { display: none; }
+@media (max-width: 63.99rem) {
+  .s20-menu {
+    display: grid; place-items: center; flex: none; cursor: pointer;
+    width: calc(52 * var(--u)); height: calc(52 * var(--u)); border: 0; border-radius: 50%;
+    background: rgba(255, 255, 255, .15); color: #fff;
+    -webkit-backdrop-filter: blur(16px) saturate(115%); backdrop-filter: blur(16px) saturate(115%);
+    animation: s20-popIn .58s var(--e-out) .24s both;
+  }
+  .s20-menu .fi-icon { width: calc(24 * var(--u)); height: calc(24 * var(--u)); }
+}
+@media (max-width: 860px) and (min-width: 421px) { .s20-dash { padding-top: 14px; } }
+
+@media (max-width: 767px) {
+  /* iOS увеличивает страницу при фокусе на поле со шрифтом меньше 16 px */
+  .fi-input, .fi-select-input, .fi-input-wrp input, .fi-input-wrp textarea, .fi-input-wrp select, .fi-fo-textarea { font-size: 16px !important; }
+  /* пальцем — от 44 px */
+  .fi-btn { min-height: 44px; }
+  .fi-ta-actions .fi-link { min-height: 40px; padding-inline: 4px; }
+  .fi-checkbox-input { width: 20px; height: 20px; }
+  .fi-tabs-item { min-height: 40px; }
+  .fi-dropdown-list-item { min-height: 44px; }
+  .fi-modal-close-btn { width: 40px; height: 40px; }
+  /* вертикальные вкладки Filament стоят рядом с полями на любой ширине — на телефоне поля уходили за край.
+     Список вкладок — строкой с прокруткой над полями */
+  .fi-sc-tabs.fi-vertical { flex-direction: column; }
+  .fi-sc-tabs.fi-vertical > .fi-tabs {
+    flex-direction: row; width: auto; max-width: none; overflow-x: auto;
+    border-inline-end-width: 0 !important; border-bottom: 1px solid rgba(255, 255, 255, .12);
+    padding: 10px; gap: 6px; scrollbar-width: none;
+  }
+  .fi-sc-tabs.fi-vertical > .fi-tabs::-webkit-scrollbar { display: none; }
+  .fi-sc-tabs.fi-vertical > .fi-tabs .fi-tabs-item { flex: none; width: auto; }
+  .fi-sc-tabs.fi-vertical > .fi-sc-tabs-tab.fi-active { margin-inline-start: 0; margin-top: 0; }
+  /* подписи колонок в карточках таблиц (stackedOnMobile) */
+  .fi-ta-row .fi-ta-cell-label, .fi-ta-cell [class*="label"] { color: rgba(255, 255, 255, .7) !important; }
+  /* вход: карточка не во всю ширину, со стеклом по краям */
+  .fi-simple-main { margin-inline: 16px; width: auto; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .s20-card::after, .fi-simple-main::after { display: none; }
